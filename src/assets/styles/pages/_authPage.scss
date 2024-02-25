@@ -1,0 +1,96 @@
+.auth-page {
+    height: rem(712px);
+
+    >img {
+        object-fit: none;
+        max-width: fit-content;
+        width: rem(413px);
+        height: rem(604px);
+
+    }
+
+    .login-cards {
+        width: 413px;
+        height: 604px;
+
+
+
+        >* {
+            width: rem(268px);
+        }
+
+        .login-card {
+            width: 350px;
+            height: 401px;
+            justify-content: space-evenly;
+            border: 1px solid rgb(219, 219, 219);
+
+            button {
+                color: white;
+                font-size: 14px;
+                width: rem(258px);
+                height: rem(30px);
+                cursor: pointer;
+                border: none;
+            }
+
+            section {
+                flex-grow: 1;
+
+            }
+
+            img {
+                width: 175px;
+                margin-bottom: 20px;
+                margin-top: 20px;
+                margin: auto;
+                cursor: pointer;
+                margin-top: rem(20px);
+                // height: 55px;
+                // max-width: fit-content;
+                // max-height: fit-content;
+                // margin-left: 20px;
+                // margin-right: 20px;
+            }
+
+            .login-details {
+                flex-grow: 1;
+                justify-content: space-evenly;
+                // margin-bottom: 20px;
+
+                input {
+                    width: rem(258px);
+                    height: rem(30px);
+                    background-color: #E8F0FE;
+                    border: 1px solid rgb(219, 219, 219);
+                    border-radius: 3px;
+                }
+            }
+        }
+
+        .switch-to-card {
+            border: 1px solid rgb(219, 219, 219);
+            width: 350px;
+            height: 63px;
+
+            .sign-up-btn {
+                color: $primary-btn-clr;
+            }
+        }
+    }
+}
+
+.google-emoji {
+    max-width: 20px;
+    margin-top: 0 !important;
+    margin-right: 5px !important;
+}
+
+.get-app-imgs {
+    >* {
+        max-width: rem(134px);
+        max-height: rem(40px);
+        margin-left: rem(5px);
+        margin-right: rem(5px);
+    }
+}

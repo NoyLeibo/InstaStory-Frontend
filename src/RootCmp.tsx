@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import routes from "./routes";
 import { Routemodel } from "./models/route.model";
-
+import './assets/styles/main.scss'
 
 function RootCmp() {
   return (
