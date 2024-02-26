@@ -1,17 +1,27 @@
 import { useEffect, useState } from "react";
 import { LoginInputs } from "../cmps/LoginInputs";
 import { SignUpInputs } from "../cmps/SignUpInputs.tsx";
-
+import { userService } from '../services/user.service.ts'
 
 export function AuthPage() {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [loginOrSignUp, setLoginOrSignUp] = useState('login')
+    const [users, setUsers] = useState<any[]>([])
+
+    // useEffect(() => {
+    //     console.log(loginOrSignUp)
+    // }, [loginOrSignUp])
 
     useEffect(() => {
-        console.log(loginOrSignUp);
+        loadUsers()
+    }, [])
 
-    }, [loginOrSignUp])
+    async function loadUsers() {
+        const users = await userService.getUsers()
+        setUsers(users)
+    }
+    console.log(users)
 
     // function checkIfInvalidMail(email: string): boolean {
     //     return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);

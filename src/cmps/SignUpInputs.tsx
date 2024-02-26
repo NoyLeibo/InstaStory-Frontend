@@ -1,5 +1,5 @@
 
-interface SignupInputsProps {
+interface SignUpInputsProps {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
     userName: string;
     setUserName: React.Dispatch<React.SetStateAction<string>>;
@@ -8,7 +8,7 @@ interface SignupInputsProps {
     setLoginOrSignUp: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignUpInputs({ setLoginOrSignUp, handleSubmit, userName, setUserName, password, setPassword }: SignupInputsProps) {
+export function SignUpInputs({ setLoginOrSignUp, handleSubmit, userName, setUserName, password, setPassword }: SignUpInputsProps) {
     return (
         <section className="flex column fs14">
             <form className="login-details flex column align-center" onSubmit={handleSubmit}>
