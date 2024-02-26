@@ -4,10 +4,11 @@ import { User } from "../models/user.model";
 export const userData: User[] = [
     {
         _id: 'u102',
-        username: 'AnnaS',
-        password: 'annapass',
-        fullname: 'Anna Smith',
+        username: 'NoyLeibo',
+        password: '123123',
+        fullname: 'Noy Leibovich',
         imgUrl: '../../img/faces/anna.png',
+        bio: '',
         following: [],
         followers: [
             {
@@ -25,6 +26,7 @@ export const userData: User[] = [
         password: 'michael123',
         fullname: 'Michael Brown',
         imgUrl: '../../img/faces/michael.png',
+        bio: '',
         following: [],
         followers: [
             {
@@ -42,6 +44,7 @@ export const userData: User[] = [
         password: 'chrispass',
         fullname: 'Chris Johnson',
         imgUrl: '../../img/faces/chris.png',
+        bio: '',
         following: [
             {
                 _id: 'u110',
@@ -59,6 +62,7 @@ export const userData: User[] = [
         password: 'linda123',
         fullname: 'Linda Gates',
         imgUrl: '../../img/faces/linda.png',
+        bio: '',
         following: [
             {
                 _id: 'u112',
@@ -76,6 +80,7 @@ export const userData: User[] = [
         password: 'davidpass',
         fullname: 'David Lee',
         imgUrl: '../../img/faces/david.png',
+        bio: '',
         following: [
             {
                 _id: 'u114',
@@ -95,6 +100,7 @@ export const userData: User[] = [
         password: 'emilypass',
         fullname: 'Emily',
         imgUrl: '../../img/faces/emily.png',
+        bio: '',
         following: [
             {
                 _id: 'u102',
@@ -112,6 +118,7 @@ export const userData: User[] = [
         password: 'john123',
         fullname: 'John',
         imgUrl: '../../img/faces/john.png',
+        bio: '',
         following: [],
         followers: [],
         savedStoryIds: ['s102', 's104'],
@@ -122,6 +129,7 @@ export const userData: User[] = [
         password: 'alice123',
         fullname: 'Alice',
         imgUrl: '../../img/faces/alice.png',
+        bio: '',
         following: [],
         followers: [
             {
@@ -139,6 +147,7 @@ export const userData: User[] = [
         password: 'sarahpass',
         fullname: 'Sarah',
         imgUrl: '../../img/faces/sarah.png',
+        bio: '',
         following: [
             {
                 _id: 'u104',
@@ -156,6 +165,7 @@ export const userData: User[] = [
         password: 'mikepass',
         fullname: 'Mike',
         imgUrl: '../../img/faces/mike.png',
+        bio: '',
         following: [],
         followers: [],
         savedStoryIds: ['s104'],
@@ -166,6 +176,7 @@ export const userData: User[] = [
         password: 'kevinpass',
         fullname: 'Kevin',
         imgUrl: '../../img/faces/kevin.png',
+        bio: '',
         following: [
             {
                 _id: 'u105',
@@ -183,6 +194,7 @@ export const userData: User[] = [
         password: 'grace123',
         fullname: 'Grace',
         imgUrl: '../../img/faces/grace.png',
+        bio: '',
         following: [],
         followers: [],
         savedStoryIds: ['s105'],
@@ -193,6 +205,7 @@ export const userData: User[] = [
         password: 'emmapass',
         fullname: 'Emma',
         imgUrl: '../../img/faces/emma.png',
+        bio: '',
         following: [
             {
                 _id: 'u106',

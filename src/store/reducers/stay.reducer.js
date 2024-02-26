@@ -1,5 +1,5 @@
 import { MdOutlineIron } from "react-icons/md";
-import { stayService } from "../services/stay.service";
+import { stayService } from "../../services/stay.service";
 
 export const SET_STAYS = "SET_STAYS";
 export const REMOVE_STAY = "REMOVE_STAY";

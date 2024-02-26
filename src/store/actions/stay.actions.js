@@ -1,7 +1,7 @@
-import { stayService } from "../services/stay.service.js";
-import { userService } from "../services/user.service.js";
-import { store } from "./store.js";
-import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js";
+import { stayService } from "../../services/stay.service.js";
+import { userService } from "../../services/user.service.js";
+import { store } from "../store.js";
+import { showSuccessMsg, showErrorMsg } from "../../services/event-bus.service.js";
 import {
   ADD_STAY,
   ADD_TO_CART,
@@ -14,9 +14,9 @@ import {
   SET_IS_LOADING,
   // SET_SELECTED_DATES,
   // SET_GUESTS_NUMBER,
-} from "./stay.reducer.js";
-import { SET_SCORE, SET_USERS } from "./user.reducer.js";
-import { SET_FILTER_BY } from "./stay.reducer.js";
+} from "../reducers/stay.reducer.js";
+import { SET_SCORE, SET_USERS } from "../reducers/user.reducer.js";
+import { SET_FILTER_BY } from "../reducers/stay.reducer.js";
 
 // Action Creators:
 export function getActionRemoveStay(stayId) {

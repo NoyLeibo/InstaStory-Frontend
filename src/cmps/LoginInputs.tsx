@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 interface LoginInputsProps {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -10,6 +10,12 @@ interface LoginInputsProps {
 }
 
 export function LoginInputs({ setLoginOrSignUp, handleSubmit, userName, setUserName, password, setPassword }: LoginInputsProps) {
+
+    useEffect(() => {
+        setUserName('')
+        setPassword('')
+    }, [])
+
     return (
         <section className="flex column fs14">
             <form className="login-details flex column align-center" onSubmit={handleSubmit}>

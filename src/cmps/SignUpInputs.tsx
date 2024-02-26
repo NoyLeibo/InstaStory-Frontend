@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 
 interface SignUpInputsProps {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -9,6 +10,15 @@ interface SignUpInputsProps {
 }
 
 export function SignUpInputs({ setLoginOrSignUp, handleSubmit, userName, setUserName, password, setPassword }: SignUpInputsProps) {
+
+    useEffect(() => {
+        setUserName('')
+        setPassword('')
+    }, [])
+    // function checkIfInvalidMail(email: string): boolean {
+    //     return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    // }
+
     return (
         <section className="flex column fs14">
             <form className="login-details flex column align-center" onSubmit={handleSubmit}>

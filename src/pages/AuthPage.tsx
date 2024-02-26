@@ -1,39 +1,42 @@
 import { useEffect, useState } from "react";
 import { LoginInputs } from "../cmps/LoginInputs";
 import { SignUpInputs } from "../cmps/SignUpInputs.tsx";
-import { userService } from '../services/user.service.ts'
+// import { userService } from '../services/user.service.ts'
+import { loadUsers, login } from "../store/actions/user.actions.ts";
+import { useSelector } from 'react-redux'
+import { RootState } from "../models/user.model.ts";
+import { useNavigate } from "react-router";
+
 
 export function AuthPage() {
-    const [userName, setUserName] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [loginOrSignUp, setLoginOrSignUp] = useState('login')
     const [users, setUsers] = useState<any[]>([])
+    const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
+    let navigate = useNavigate();
 
-    // useEffect(() => {
-    //     console.log(loginOrSignUp)
-    // }, [loginOrSignUp])
+    useEffect(() => {
+        console.log('loggedInUser: ', loggedInUser)
+        if (loggedInUser) navigate('/')
+    }, [])
 
     useEffect(() => {
         loadUsers()
-    }, [])
-
-    async function loadUsers() {
-        const users = await userService.getUsers()
         setUsers(users)
-    }
-    console.log(users)
-
-    // function checkIfInvalidMail(email: string): boolean {
-    //     return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    // }
+    }, [])
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        // if checkIfInvalidMail(userName){
-        //     alert('')
-        // }
-        console.log('Logging in with:', userName, password);
+        try {
+
+            if (await login({ username, password })) navigate('/')
+        }
+        catch (err) {
+            console.log('cannot login ', err);
+        }
     }
+
     return (
         <section className="auth-page flex row align-center justify-center">
             <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864012/auth_synw53.png" />
@@ -41,9 +44,9 @@ export function AuthPage() {
                 <div className="login-card flex column align-center">
                     <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
                     {loginOrSignUp === 'login' ?
-                        <LoginInputs setLoginOrSignUp={setLoginOrSignUp} setUserName={setUserName} userName={userName} setPassword={setPassword} password={password} handleSubmit={handleSubmit} />
+                        <LoginInputs setLoginOrSignUp={setLoginOrSignUp} setUserName={setUsername} userName={username} setPassword={setPassword} password={password} handleSubmit={handleSubmit} />
                         :
-                        <SignUpInputs setLoginOrSignUp={setLoginOrSignUp} setUserName={setUserName} userName={userName} setPassword={setPassword} password={password} handleSubmit={handleSubmit} />
+                        <SignUpInputs setLoginOrSignUp={setLoginOrSignUp} setUserName={setUsername} userName={username} setPassword={setPassword} password={password} handleSubmit={handleSubmit} />
                     }
                 </div>
                 <div>
