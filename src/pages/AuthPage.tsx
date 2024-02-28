@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import { LoginInputs } from "../cmps/LoginInputs";
 import { SignUpInputs } from "../cmps/SignUpInputs.tsx";
 // import { userService } from '../services/user.service.ts'
-import { loadUsers, login } from "../store/actions/user.actions.ts";
+import { loadUsers } from "../store/actions/user.actions.ts";
 import { useSelector } from 'react-redux'
 import { RootState } from "../models/user.model.ts";
 import { useNavigate } from "react-router";
 
 
 export function AuthPage() {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+
     const [loginOrSignUp, setLoginOrSignUp] = useState('login')
     const [users, setUsers] = useState<any[]>([])
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
@@ -26,17 +25,6 @@ export function AuthPage() {
         setUsers(users)
     }, [])
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        try {
-
-            if (await login({ username, password })) navigate('/')
-        }
-        catch (err) {
-            console.log('cannot login ', err);
-        }
-    }
-
     return (
         <section className="auth-page flex row align-center justify-center">
             <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864012/auth_synw53.png" />
@@ -44,9 +32,9 @@ export function AuthPage() {
                 <div className="login-card flex column align-center">
                     <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
                     {loginOrSignUp === 'login' ?
-                        <LoginInputs setLoginOrSignUp={setLoginOrSignUp} setUserName={setUsername} userName={username} setPassword={setPassword} password={password} handleSubmit={handleSubmit} />
+                        <LoginInputs setLoginOrSignUp={setLoginOrSignUp} />
                         :
-                        <SignUpInputs setLoginOrSignUp={setLoginOrSignUp} setUserName={setUsername} userName={username} setPassword={setPassword} password={password} handleSubmit={handleSubmit} />
+                        <SignUpInputs setLoginOrSignUp={setLoginOrSignUp} />
                     }
                 </div>
                 <div>
