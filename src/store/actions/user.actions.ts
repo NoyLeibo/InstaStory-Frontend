@@ -4,8 +4,9 @@
 // import { LOADING_DONE, LOADING_START } from "./system.reducer.js";
 
 import { store } from "../store.ts";
-import { SET_USERS } from "../reducers/user.reducer.ts";
+import { SET_USER, SET_USERS } from "../reducers/user.reducer.ts";
 import { userService } from "../../services/user.service.ts";
+import { User, emptyUser } from "../../models/user.model.ts";
 
 export async function loadUsers() {
   try {
@@ -18,6 +19,41 @@ export async function loadUsers() {
     // store.dispatch({ type: LOADING_DONE });
   }
 }
+
+export async function signup(credentials: emptyUser) {
+  try {
+    await userService.signup(credentials); // Assuming this returns a User object
+    store.dispatch({ type: SET_USERS, users: [] }); // Wrap user in an array
+    login(credentials)
+    // Alternatively, introduce and use an ADD_USER action if adding a single user
+    // store.dispatch({ type: ADD_USER, user }); // Requires updating the reducer to handle this action
+  } catch (err) {
+    console.log('Cannot signup', err);
+    throw err;
+  }
+}
+
+function isCompleteUser(user: any): user is User {
+  return user && typeof user._id === 'string'; // Implement additional checks as needed
+}
+
+export async function login(credentials: { username: string, password: string }) {
+  try {
+    const user = await userService.login(credentials);
+    if (isCompleteUser(user)) {
+      store.dispatch({ type: SET_USER, user: user });
+      console.log('Logging in with:', user);
+      return true;
+    } else {
+      // Handle incomplete user object
+      console.log('Incomplete user object');
+    }
+  } catch (err) {
+    console.log("Cannot login", err);
+    throw err;
+  }
+}
+
 
 // try {
 //     const stays = await userService.getUsers();
@@ -35,24 +71,6 @@ export async function loadUsers() {
 //   }
 // }
 
-type credentialsProps = {
-  username: string,
-  password: string
-}
-
-export async function login(credentials: credentialsProps) {
-  try {
-    const user = await userService.login(credentials);
-    if (user) {
-      console.log('Logging in with:', user);
-      // socketService.login(user);
-      return true;
-    }
-  } catch (err) {
-    console.log("Cannot login", err);
-    throw err;
-  }
-}
 
 // export async function signup(credentials) {
 //   try {

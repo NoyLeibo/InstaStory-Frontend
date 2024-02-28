@@ -1,21 +1,36 @@
 
 export interface User {
-    _id: string
+    _id: string | undefined
     username: string
-    password: string
+    password?: string
     fullname: string
     bio: string
-    imgUrl: string
+    imgUrl: string | null;
     following: Array<{ _id: string; fullname: string; username: string; imgUrl: string }>
     followers: Array<{ _id: string; fullname: string; username: string; imgUrl: string }>
     savedStoryIds: string[]
+    email?: string;
+
 }
 
-interface UserState {
-    onlineUser: User; // Assuming 'User' is an interface representing your user model
-    // other user-related properties
+export interface emptyUser {
+    _id?: string;
+    username: string;
+    password: string;
+    fullname: string;
+    bio: string;
+    imgUrl: string | null;
+    following?: Array<{ _id: string; fullname: string; username: string; imgUrl: string }>
+    followers?: Array<{ _id: string; fullname: string; username: string; imgUrl: string }>
+    savedStoryIds?: string[];
+    email?: string;
 }
 
+interface UserModuleState {
+    onlineUser: User | null;
+    // Include other state properties of userModule here if there are any
+}
 export interface RootState {
-    userModule: UserState;
+    userModule: UserModuleState;
+    // Define other modules in the root state here
 }

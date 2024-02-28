@@ -11,30 +11,35 @@ import { useNavigate } from "react-router";
 export function AuthPage() {
 
     const [loginOrSignUp, setLoginOrSignUp] = useState('login')
-    const [users, setUsers] = useState<any[]>([])
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
     let navigate = useNavigate();
 
     useEffect(() => {
-        console.log('loggedInUser: ', loggedInUser)
-        if (loggedInUser) navigate('/')
+        if (loggedInUser) {
+            navigate('/')
+            console.log('loggedInUser: ', loggedInUser)
+        }
     }, [])
 
     useEffect(() => {
         loadUsers()
-        setUsers(users)
     }, [])
+    useEffect(() => {
+        console.log(loggedInUser);
+    }, [loggedInUser])
 
     return (
         <section className="auth-page flex row align-center justify-center">
             <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864012/auth_synw53.png" />
-            <div className="login-cards flex column align-center justify-center">
+            <div className="login-cards flex column align-center justify-center ">
                 <div className="login-card flex column align-center">
                     <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
                     {loginOrSignUp === 'login' ?
-                        <LoginInputs setLoginOrSignUp={setLoginOrSignUp} />
+                        <LoginInputs setLoginOrSignUp={setLoginOrSignUp} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />
                         :
-                        <SignUpInputs setLoginOrSignUp={setLoginOrSignUp} />
+                        <SignUpInputs setLoginOrSignUp={setLoginOrSignUp} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />
                     }
                 </div>
                 <div>

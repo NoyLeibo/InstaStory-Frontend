@@ -15,7 +15,7 @@ $clGreyLighter: #F7F7F7;
 
 // Breakpoints
 $mobile-breakpoint: 502px;
-$narrow-breakpoint: 665px;
+$narrow-breakpoint: 768px;
 $normal-breakpoint: 1048px;
 $wide-breakpoint: 1280px;
 
@@ -32,6 +32,10 @@ $mouse-x: 92;
 $mouse-y: 73;
 $ig-secondary-text: rgb(115, 115, 115);
 $primary-btn-clr: #0095F6;
+$input-border-color: #555;
+$focus-border-color: #2196f3;
+$label-color: rgba(255, 255, 255, 0.5);
+$label-focus-color: #2196f3;
 
 :root {
   --main-layout-width: 2360px;

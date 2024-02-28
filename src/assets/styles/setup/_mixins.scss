@@ -7,7 +7,7 @@
 }
 
 @mixin for-narrow-layout {
-    @media (min-width: calc(#{$narrow-breakpoint} + 80px)) {
+    @media (max-width: calc(#{$narrow-breakpoint})) {
         @content;
     }
 }

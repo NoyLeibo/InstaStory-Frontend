@@ -1,4 +1,4 @@
-import { User } from "../models/user.model.ts";
+import { User, emptyUser } from "../models/user.model.ts";
 import { storageService } from "./async-storage.service.ts";
 import { userData } from "./userData.ts";
 
@@ -11,9 +11,10 @@ _createUsers()
 export const userService = {
     login,
     // logout,
-    // signup,
+    signup,
     getLoggedinUser,
-    // saveLocalUser,
+    saveLocalUser,
+    createEmptyUser,
     getUsers,
     // getById,
     // remove,
@@ -64,10 +65,21 @@ interface UserCredentials {
 async function login(userCred: UserCredentials) {
     const users: User[] = await storageService.query('user');
     const user = users.find((user) => user.username === userCred.username && user.password === userCred.password);
+
     if (user) return saveLocalUser(user);
 }
 
-function saveLocalUser(user: User) {
+
+async function signup(userCred: User | emptyUser) {
+    await storageService.post("user", userCred);
+
+    // login({userCred.username, userCred.password})
+    return
+
+    // await storageService.post("user", userCred);
+}
+
+function saveLocalUser(user: User | emptyUser) {
     const userForSession = {
         _id: user._id,
         username: user.username,
@@ -78,10 +90,7 @@ function saveLocalUser(user: User) {
         followers: user.followers,
         savedStoryIds: user.savedStoryIds,
     }
-    sessionStorage.setItem(
-        STORAGE_KEY_LOGGEDIN_USER,
-        JSON.stringify(userForSession)
-    )
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(userForSession))
     return userForSession
 }
 

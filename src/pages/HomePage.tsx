@@ -9,8 +9,8 @@ export function HomePage() {
 
     useEffect(() => {
         console.log('loggedInUser: ', loggedInUser)
-        if (!loggedInUser) navigate('/auth')
-    }, [loggedInUser])
+        if (loggedInUser === null) navigate('/auth')
+    }, [])
 
 
     return (
