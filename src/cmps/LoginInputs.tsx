@@ -1,20 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { login } from "../store/actions/user.actions";
+import { useNavigate } from "react-router";
 
 interface LoginInputsProps {
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-    userName: string;
-    setUserName: React.Dispatch<React.SetStateAction<string>>;
-    password: string;
-    setPassword: React.Dispatch<React.SetStateAction<string>>;
     setLoginOrSignUp: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function LoginInputs({ setLoginOrSignUp, handleSubmit, userName, setUserName, password, setPassword }: LoginInputsProps) {
+export function LoginInputs({ setLoginOrSignUp }: LoginInputsProps) {
+    let navigate = useNavigate();
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
     useEffect(() => {
-        setUserName('')
+        setUsername('')
         setPassword('')
     }, [])
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        try {
+            if (await login({ username, password })) navigate('/')
+        }
+        catch (err) {
+            console.log('cannot login ', err);
+        }
+    }
 
     return (
         <section className="flex column fs14">
@@ -24,8 +34,8 @@ export function LoginInputs({ setLoginOrSignUp, handleSubmit, userName, setUserN
                     placeholder='Username'
                     type="text"
                     name="username"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     minLength={3}
                     maxLength={10}
                 />
