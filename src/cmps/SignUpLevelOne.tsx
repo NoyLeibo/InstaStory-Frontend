@@ -10,10 +10,9 @@ interface SignUpLevelOneProps {
     email: string
     password: string
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-    setLoginOrSignUp: React.Dispatch<React.SetStateAction<string>>
 }
 
-export function SignUpLevelOne({ setUsername, setFullname, setEmail, setPassword, username, fullname, email, password, handleSubmit, setLoginOrSignUp }: SignUpLevelOneProps) {
+export function SignUpLevelOne({ setUsername, setFullname, setEmail, setPassword, username, fullname, email, password, handleSubmit }: SignUpLevelOneProps) {
 
     return (
         <section className="flex column fs14">
@@ -66,9 +65,7 @@ export function SignUpLevelOne({ setUsername, setFullname, setEmail, setPassword
                 </div>
                 <div className="text-center flex row align-center justify-center"><img className="google-emoji" src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708892195/google_od0mhr.png" /> Log in with Google</div>
             </form>
-            <div className="switch-to-card flex row justify-center align-center">
-                <span>have an account? <span className="sign-up-btn pointer" onClick={() => setLoginOrSignUp('login')}>Log in</span></span>
-            </div>
+
         </section >
 
     )

@@ -18,8 +18,8 @@ function RootCmp() {
                 key={route.path}
                 path={route.path}
                 element={route.element}
-              />))
-            }
+              />
+            ))}
           </Routes>
         </Router>
       </Provider>

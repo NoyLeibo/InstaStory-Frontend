@@ -5,12 +5,11 @@ import { uploadService } from '../services/upload.service';
 import { userService } from "../services/user.service.ts";
 import { RootState, emptyUser } from "../models/user.model.ts";
 import { useNavigate } from "react-router";
-import { loadUsers, login, signup } from "../store/actions/user.actions.ts";
+import { loadUsers, login } from "../store/actions/user.actions.ts";
 import { useSelector } from "react-redux";
 // import { login } from "../store/actions/user.actions.ts";
 
 interface SignUpInputsProps {
-    setLoginOrSignUp: React.Dispatch<React.SetStateAction<string>>
     username: string
     setUsername: React.Dispatch<React.SetStateAction<string>>;
     password: string
@@ -18,7 +17,7 @@ interface SignUpInputsProps {
 }
 
 
-export function SignUpInputs({ setLoginOrSignUp, username, setPassword, setUsername, password }: SignUpInputsProps) {
+export function SignUpInputs({ username, setPassword, setUsername, password }: SignUpInputsProps) {
     const [fullname, setFullname] = useState('')
     const [email, setEmail] = useState('')
     const [registerLevel, setRegisterLevel] = useState(1)
@@ -41,32 +40,6 @@ export function SignUpInputs({ setLoginOrSignUp, username, setPassword, setUsern
         return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     }
 
-    // const handleSubmitRegister = (event: React.FormEvent<HTMLFormElement>) => {
-    //     event.preventDefault();
-    //     let newUserDetails: emptyUser = userService.createEmptyUser()
-
-    //     if (bio && imgData.imgUrl && !isUploading) {
-    //         newUserDetails = { ...newUserDetails, bio, imgUrl: imgData.imgUrl, password, username, email, fullname }
-    //         // console.log(newUserDetails);
-    //         console.log('----------------------------------------------------------------------------------------');
-
-    //         // שמירה של המשתמש
-    //         signup(newUserDetails) // ON LOCALSTORAGE
-    //         // userService.saveLocalUser(newUserDetails)
-
-    //         // שמירה בSOTRE של המשתמש 
-    //         loadUsers()
-
-    //         // התחברות למשתמש
-    //         userService.login({ username, password }) // מחבר את המשתמש ל SESSION - STORAGE
-
-
-    //         // if (loggedInUser) {
-    //         navigate('/')
-    //         // }
-    //     }
-    // };
-
     const handleSubmitRegister = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -76,15 +49,11 @@ export function SignUpInputs({ setLoginOrSignUp, username, setPassword, setUsern
             await userService.signup(newUserDetails)
             await loadUsers()
             if (await login({ username, password })) navigate('/')
-
-            // const loginResponse = await userService.login({ username: newUserDetails.username, password: newUserDetails.password });
         } catch (error) {
             console.error('Signup or login failed:', error);
-            // Handle error, e.g., show an error message to the user
         }
         if (loggedInUser) navigate('/'); // Navigate to the homepage or dashboard on successful login
-
-    };
+    }
 
 
 
@@ -100,11 +69,9 @@ export function SignUpInputs({ setLoginOrSignUp, username, setPassword, setUsern
         if (files && files.length > 0) {
             setIsUploading(true);
             const file = files[0];
-
             try {
                 const uploadResponse = await uploadService.uploadImg(file);
                 console.log('Upload response:', uploadResponse); // Log the entire response for debugging
-
                 if (uploadResponse.secure_url) {
                     setImgData({
                         ...imgData,
@@ -125,7 +92,7 @@ export function SignUpInputs({ setLoginOrSignUp, username, setPassword, setUsern
 
     return (
         registerLevel === 1 ? (
-            <SignUpLevelOne setLoginOrSignUp={setLoginOrSignUp} handleSubmit={handleSubmit} password={password} setPassword={setPassword} email={email} setEmail={setEmail} fullname={fullname} setFullname={setFullname} username={username} setUsername={setUsername} />
+            <SignUpLevelOne handleSubmit={handleSubmit} password={password} setPassword={setPassword} email={email} setEmail={setEmail} fullname={fullname} setFullname={setFullname} username={username} setUsername={setUsername} />
         ) : (
             <SignUpLevelTwo handleSubmitRegister={handleSubmitRegister} bio={bio} setBio={setBio} onUpload={onUpload} isUploading={isUploading} imgData={imgData} />
         )

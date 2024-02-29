@@ -63,7 +63,7 @@ interface UserCredentials {
 }
 
 async function login(userCred: UserCredentials) {
-    const users: User[] = await storageService.query('user');
+    const users: User[] | any[] = await storageService.query('user');
     const user = users.find((user) => user.username === userCred.username && user.password === userCred.password);
 
     if (user) return saveLocalUser(user);

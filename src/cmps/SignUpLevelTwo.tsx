@@ -40,7 +40,7 @@ export function SignUpLevelTwo({ onUpload, isUploading, imgData, bio, setBio, ha
             {imgData.imgUrl && !isUploading && (
                 <div className="upload-preview flex align-center space-between">
                     <img className="profile-img" src={imgData.imgUrl} alt="Uploaded" />
-                    <button className='signup-btn' type="submit" disabled={!bio}>Sign up</button>
+                    <button className='signup-btn' type="submit">Sign up</button>
                 </div>
             )}
         </form>

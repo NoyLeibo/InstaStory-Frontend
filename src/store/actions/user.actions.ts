@@ -4,32 +4,37 @@
 // import { LOADING_DONE, LOADING_START } from "./system.reducer.js";
 
 import { store } from "../store.ts";
-import { SET_USER, SET_USERS } from "../reducers/user.reducer.ts";
+import { LOADING_DONE, LOADING_START, SET_USER, SET_USERS } from "../reducers/user.reducer.ts";
 import { userService } from "../../services/user.service.ts";
 import { User, emptyUser } from "../../models/user.model.ts";
 
 export async function loadUsers() {
   try {
-    // store.dispatch({ type: LOADING_START });
     const users = await userService.getUsers()
     store.dispatch({ type: SET_USERS, users });
   } catch (err) {
     console.log("UserActions: err in loadUsers", err);
-  } finally {
-    // store.dispatch({ type: LOADING_DONE });
   }
 }
 
 export async function signup(credentials: emptyUser) {
   try {
-    await userService.signup(credentials); // Assuming this returns a User object
-    store.dispatch({ type: SET_USERS, users: [] }); // Wrap user in an array
+    store.dispatch({ type: LOADING_START });
+
+    await userService.signup(credentials)
+    await loadUsers()
     login(credentials)
+    store.dispatch({ type: SET_USERS, users: [] }); // Wrap user in an array
+    // login(credentials)
     // Alternatively, introduce and use an ADD_USER action if adding a single user
     // store.dispatch({ type: ADD_USER, user }); // Requires updating the reducer to handle this action
+
   } catch (err) {
     console.log('Cannot signup', err);
     throw err;
+  }
+  finally {
+    store.dispatch({ type: LOADING_DONE });
   }
 }
 
@@ -39,6 +44,8 @@ function isCompleteUser(user: any): user is User {
 
 export async function login(credentials: { username: string, password: string }) {
   try {
+    store.dispatch({ type: LOADING_START });
+
     const user = await userService.login(credentials);
     if (isCompleteUser(user)) {
       store.dispatch({ type: SET_USER, user: user });
@@ -51,6 +58,9 @@ export async function login(credentials: { username: string, password: string })
   } catch (err) {
     console.log("Cannot login", err);
     throw err;
+  }
+  finally {
+    store.dispatch({ type: LOADING_DONE });
   }
 }
 

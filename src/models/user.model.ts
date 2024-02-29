@@ -25,12 +25,12 @@ export interface emptyUser {
     savedStoryIds?: string[];
     email?: string;
 }
-
 interface UserModuleState {
     onlineUser: User | null;
+    isLoadingPage: boolean; // Move isLoadingPage inside UserModuleState
     // Include other state properties of userModule here if there are any
 }
+
 export interface RootState {
     userModule: UserModuleState;
-    // Define other modules in the root state here
 }

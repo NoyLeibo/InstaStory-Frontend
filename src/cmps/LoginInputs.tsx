@@ -1,20 +1,17 @@
 import React, { useEffect } from "react";
 import { login } from "../store/actions/user.actions";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { RootState } from "../models/user.model";
+
 
 interface LoginInputsProps {
-    setLoginOrSignUp: React.Dispatch<React.SetStateAction<string>>;
     username: string
     setUsername: React.Dispatch<React.SetStateAction<string>>;
     password: string
     setPassword: React.Dispatch<React.SetStateAction<string>>
 }
 
-export function LoginInputs({ setLoginOrSignUp, username, setPassword, setUsername, password }: LoginInputsProps) {
+export function LoginInputs({ username, setPassword, setUsername, password }: LoginInputsProps) {
     let navigate = useNavigate();
-    const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
 
     useEffect(() => {
         setUsername('')
@@ -28,13 +25,6 @@ export function LoginInputs({ setLoginOrSignUp, username, setPassword, setUserna
         }
         catch (err) {
             console.log('cannot login ', err);
-        }
-
-        console.log('---------------------------------------------------');
-        console.log(loggedInUser);
-        console.log('---------------------------------------------------');
-        if (loggedInUser) {
-            navigate('/')
         }
     }
 
@@ -69,9 +59,6 @@ export function LoginInputs({ setLoginOrSignUp, username, setPassword, setUserna
                 </div>
                 <div className="text-center flex row align-center justify-center"><img className="google-emoji" src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708892195/google_od0mhr.png" /> Log in with Google</div>
             </form>
-            <div className="switch-to-card flex row justify-center align-center">
-                <span>Don't have an account? <span className="sign-up-btn pointer" onClick={() => setLoginOrSignUp('signUp')}>Sign up</span></span>
-            </div>
         </section>
     );
 }

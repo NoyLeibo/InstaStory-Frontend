@@ -4,11 +4,15 @@ import { userService } from '../../services/user.service.ts'
 export const REMOVE_USER = 'REMOVE_USER'
 export const SET_USERS = 'SET_USERS'
 export const SET_USER = 'SET_USER'
+export const SET_LOADING = 'SET_LOADING'
+export const LOADING_START = 'LOADING_START'
+export const LOADING_DONE = 'LOADING_DONE'
 
 
 const initialState = {
     onlineUser: userService.getLoggedinUser(),
     users: [],
+    isLoadingPage: false,
 }
 
 export function userReducer(state: UserState = initialState, action: UserAction): UserState {
@@ -27,6 +31,12 @@ export function userReducer(state: UserState = initialState, action: UserAction)
         case SET_USERS:
             newState = { ...state, users: action.users };
             break;
+        case LOADING_START:
+            newState = { ...state, isLoadingPage: true };
+            break;
+        case LOADING_DONE:
+            newState = { ...state, isLoadingPage: false };
+            break;
         default:
     }
 
@@ -40,9 +50,12 @@ export function userReducer(state: UserState = initialState, action: UserAction)
 interface UserState {
     onlineUser: User | null;
     users: User[];
+    isLoadingPage: boolean
 }
 
 type UserAction =
     | { type: typeof REMOVE_USER; userId: string }
     | { type: typeof SET_USERS; users: User[] }
     | { type: typeof SET_USER; user: User }
+    | { type: typeof LOADING_START }
+    | { type: typeof LOADING_DONE }

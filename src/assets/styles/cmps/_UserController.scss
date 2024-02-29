@@ -1,0 +1,39 @@
+.user-controller {
+    height: 100vh;
+    width: 21vw;
+    border-right: 1px solid rgb(219, 219, 219);
+    padding: 32px;
+
+    img {
+        color: rgb(245, 245, 245);
+        fill: rgb(245, 245, 245);
+        height: 60px;
+        width: 150px;
+    }
+
+    .control-section {
+        min-height: 100px;
+    }
+}
+
+
+.icon-container {
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(0, 0, 0, .05);
+        transition: background-color 0.3s ease;
+        /* Apply transition effect */
+
+    }
+
+    .icon-img {
+        padding-left: 8px;
+        width: 24px;
+        height: 24px;
+    }
+
+    .icon-name {
+        padding: 8px;
+    }
+}
