@@ -5,7 +5,7 @@ import Reels from '../../public/svg/reels.svg'
 import Message from '../../public/svg/message.svg'
 import Notification from '../../public/svg/notification.svg'
 import Create from '../../public/svg/create.svg'
-import More from '../../public/svg/more.svg'
+// import More from '../../public/svg/more.svg'
 
 import HomeActive from '../../public/svg/active/home-active.svg'
 import SearchActive from '../../public/svg/active/search-active.svg'
@@ -14,14 +14,14 @@ import ReelsActive from '../../public/svg/active/reels-active.svg'
 import MessageActive from '../../public/svg/active/message-active.svg'
 import NotificationActive from '../../public/svg/active/notification-active.svg'
 import CreateActive from '../../public/svg/active/create-active.svg'
-import MoreActive from '../../public/svg/active/more-active.svg'
+// import MoreActive from '../../public/svg/active/more-active.svg'
 
 interface UserControllerProps {
     activeIcon: string
-    setActiveIcon: React.Dispatch<React.SetStateAction<string>>;
+    handleIconClick: (name: string) => void; // Define the function type
 }
 
-export function ControlIcons({ activeIcon, setActiveIcon }: UserControllerProps) {
+export function ControlIcons({ handleIconClick, activeIcon }: UserControllerProps) {
 
     const icons = [
         {
@@ -66,22 +66,20 @@ export function ControlIcons({ activeIcon, setActiveIcon }: UserControllerProps)
             srcActive: CreateActive,
             alt: 'Create',
         },
-        {
-            name: 'More',
-            src: More,
-            srcActive: MoreActive,
-            alt: 'More',
-        },
+        // {
+        //     name: 'More',
+        //     src: More,
+        //     srcActive: MoreActive,
+        //     alt: 'More',
+        // },
     ]
 
-    const handleIconClick = (name: string) => {
-        setActiveIcon(prev => prev === name ? 'Home' : name);
-    };
+
 
     return (
-        <section className='flex column'>
+        <section className="flex column">
             {icons.map((icon, index) =>
-                <div key={index} className="icon-container flex align-center" onClick={() => handleIconClick(icon.name)}>
+                <div key={index} className="icon-container pointer flex align-center fs14" onClick={() => handleIconClick(icon.name)}>
                     <img
                         className='icon-img'
                         src={activeIcon === icon.name ? icon.srcActive : icon.src}

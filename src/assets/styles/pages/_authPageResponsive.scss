@@ -1,0 +1,60 @@
+@media (max-width: calc(1263px)) {
+    .user-controller {
+        min-width: 70px;
+        max-width: 70px;
+
+        section {
+            align-items: center;
+        }
+
+        .controller-logo {
+            display: none;
+            border-radius: 8px;
+
+            &:hover {
+                background-color: rgb(0, 0, 0, .05);
+                transition: background-color 0.3s ease;
+            }
+        }
+
+        .instagram-logo {
+            display: block;
+            // padding: 4px;
+            margin-top: 8px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            width: 48px;
+
+            &:hover {
+                background-color: rgb(0, 0, 0, .05);
+                transition: background-color 0.3s ease;
+            }
+        }
+
+        .logout-btn {
+            display: none;
+        }
+
+        .logout-icon {
+            display: block;
+        }
+
+    }
+
+    .icon-name {
+        display: none;
+    }
+
+    .icon-img {
+        margin-bottom: 10px;
+    }
+
+    .icon-container {
+        padding: 30px;
+        width: 48px;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: calc(768px)) {}

@@ -1,10 +1,11 @@
 import { combineReducers, compose, legacy_createStore as createStore } from 'redux'
 import { userReducer } from './reducers/user.reducer.ts'
+import { postsReducer } from './reducers/posts.reducer.ts'
 // import { reviewReducer } from './review.reducer.js'
 // import { systemReducer } from './system.reducer.js'
 
 const rootReducer = combineReducers({
-    // stayModule: stayReducer,
+    postsModule: postsReducer,
     userModule: userReducer,
     // systemModule: systemReducer,
     // reviewModule: reviewReducer,

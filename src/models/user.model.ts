@@ -1,3 +1,4 @@
+import { Post } from "./posts.model"
 
 export interface User {
     _id: string | undefined
@@ -10,7 +11,6 @@ export interface User {
     followers: Array<{ _id: string; fullname: string; username: string; imgUrl: string }>
     savedStoryIds: string[]
     email?: string;
-
 }
 
 export interface emptyUser {
@@ -27,10 +27,13 @@ export interface emptyUser {
 }
 interface UserModuleState {
     onlineUser: User | null;
-    isLoadingPage: boolean; // Move isLoadingPage inside UserModuleState
-    // Include other state properties of userModule here if there are any
+    isLoadingPage: boolean;
+}
+interface PostsModuleState {
+    posts: Post
 }
 
 export interface RootState {
     userModule: UserModuleState;
+    postsModule: PostsModuleState;
 }

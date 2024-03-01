@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { RootState } from "../models/user.model";
 import { useSelector } from "react-redux";
 import { UserController } from "../cmps/UserController";
+import { HomeIndex } from "../cmps/HomeIndex.tsx";
 
 export function HomePage() {
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
@@ -16,8 +17,9 @@ export function HomePage() {
 
 
     return (
-        <section>
+        <section className="flex">
             <UserController activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
+            <HomeIndex />
         </section>
     )
 }
