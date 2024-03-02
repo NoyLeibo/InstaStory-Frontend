@@ -1,5 +1,5 @@
 export interface UserMinimal {
-    _id: string;
+    _id: string
     username: string;
     imgUrl: string;
 }
@@ -25,6 +25,6 @@ export interface Post {
     by: UserMinimal;
     loc: Location;
     comments: Comment[];
-    likedBy: UserMinimal[];
+    likedBy: UserMinimal[]
     tags: string[];
 }

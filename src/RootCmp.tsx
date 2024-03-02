@@ -9,7 +9,7 @@ import './assets/styles/main.scss'
 
 function RootCmp() {
   return (
-    <main className="main-container">
+    <>
       <Provider store={store}>
         <Router>
           <Routes>
@@ -24,7 +24,7 @@ function RootCmp() {
         </Router>
       </Provider>
 
-    </main>
+    </>
   );
 }
 

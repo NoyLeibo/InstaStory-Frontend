@@ -3,13 +3,13 @@ export const storageService = {
     post,
     // Implement and uncomment these as needed:
     // get,
-    // put,
+    put,
     // remove,
 };
 
 interface Entity {
     _id: string;
-    [key: string]: any; // Allows any other property in addition to _id.
+    [key: string]: any;
 }
 
 function query<T extends Entity>(entityType: string, delay: number = 500): Promise<T[]> {
@@ -29,11 +29,25 @@ function post<T extends Entity>(entityType: string, newEntity: Omit<T, '_id'>): 
     });
 }
 
+async function put<T extends Entity>(entityType: string, updatedEntity: T): Promise<T> {
+    updatedEntity = JSON.parse(JSON.stringify(updatedEntity));
+
+    return query<T>(entityType).then((entities) => {
+        const idx = entities.findIndex((entity) => entity._id === updatedEntity._id);
+        if (idx < 0) {
+            throw new Error(`Update failed, cannot find entity with id: ${updatedEntity._id} in: ${entityType}`);
+        }
+        entities.splice(idx, 1, updatedEntity);
+        _save(entityType, entities);
+        return updatedEntity;
+    });
+}
+
 function _save<T extends Entity>(entityType: string, entities: T[]): void {
     localStorage.setItem(entityType, JSON.stringify(entities));
 }
 
-// Optional: Remove if not used elsewhere.
+// Remove if not used elsewhere.
 // function randomId(): string {
 //     return _makeId();
 // }

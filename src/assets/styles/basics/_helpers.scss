@@ -67,6 +67,10 @@
     flex: 1;
   }
 
+  .justify-end {
+    justify-content: flex-end
+  }
+
   &.row {
     flex-direction: row;
   }
@@ -199,4 +203,14 @@
   object-fit: cover;
   cursor: context-menu !important;
   margin: 0 !important;
+}
+
+.show-more-btn {
+  all: unset;
+  cursor: pointer;
+  color: #717171;
+
+  &:hover {
+    background-color: transparent;
+  }
 }

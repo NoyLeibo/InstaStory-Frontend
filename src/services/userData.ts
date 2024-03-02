@@ -33,7 +33,7 @@ export const userData: User[] = [
                 _id: 'u109',
                 fullname: 'Alice',
                 username: 'AliceM',
-                imgUrl: '../../img/faces/alice.png',
+                imgUrl: '',
             },
         ],
         savedStoryIds: ['s103', 's106'],
@@ -43,14 +43,14 @@ export const userData: User[] = [
         username: 'ChrisJ',
         password: 'chrispass',
         fullname: 'Chris Johnson',
-        imgUrl: '../../img/faces/chris.png',
+        imgUrl: '',
         bio: '',
         following: [
             {
                 _id: 'u110',
                 fullname: 'Sarah',
                 username: 'SarahK',
-                imgUrl: '../../img/faces/sarah.png',
+                imgUrl: '',
             },
         ],
         followers: [],
@@ -61,7 +61,7 @@ export const userData: User[] = [
         username: 'LindaG',
         password: 'linda123',
         fullname: 'Linda Gates',
-        imgUrl: '../../img/faces/linda.png',
+        imgUrl: '',
         bio: '',
         following: [
             {

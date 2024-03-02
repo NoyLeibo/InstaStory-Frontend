@@ -6,13 +6,15 @@
 import { Post } from "../models/posts.model";
 import { storageService } from "./async-storage.service";
 import { postsData } from "./postsData";
+import { userService } from "./user.service.ts";
 
-// const STORAGE_KEY = "post";
+const STORAGE_KEY = "posts";
 // const BASE_URL = "post/";
 _createPosts()
 
 export const postsService = {
-  getPosts
+  getPosts,
+  toggleLike
   // query,
   // getById,
   // save,
@@ -26,7 +28,7 @@ export const postsService = {
 // window.cs = stayService;
 
 async function getPosts(): Promise<any> {
-  const posts = (await storageService.query("posts"))
+  const posts = (await storageService.query(STORAGE_KEY))
   return posts;
   // return httpService.get(`posts`) // מוכן לBACK-END
 }
@@ -47,6 +49,42 @@ async function _createPosts(): Promise<any> {
     console.error('Error: cannot create users from demo data', err)
   }
 }
+
+async function toggleLike(post: Post) {
+  try {
+    console.log(post);
+
+    if (!post.likedBy) post.likedBy = []
+    const user = userService.getLoggedinUser()
+
+    if (!user) {
+      console.error('Cannot toggle like - user is not logged in')
+      throw new Error('Cannot toggle like - user is not logged in')
+    }
+    const userIdx = post.likedBy.findIndex((u) => u._id === user._id)
+
+    if (userIdx === -1 && user._id && user.imgUrl) {
+      post.likedBy.push({ _id: user._id, username: user.username, imgUrl: user.imgUrl })
+      console.log('Liked by user:', user)
+    } else {
+      post.likedBy.splice(userIdx, 1) // Remove like
+      console.log('Unliked by user:', user)
+    }
+
+    console.log('Updated post likedBy:', post.likedBy)
+
+    const postToUpdate = await storageService.put(STORAGE_KEY, post)
+    console.log('Story updated in storage:', postToUpdate)
+
+    return post
+  } catch (err) {
+    console.error('Cannot toggle like', err)
+    throw err
+  }
+}
+
+
+
 
 // async function query(filterBy = {}) {
 //   return httpService.get(BASE_URL, filterBy);

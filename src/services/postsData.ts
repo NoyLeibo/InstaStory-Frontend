@@ -4,7 +4,7 @@ export const postsData: Post[] = [
         _id: 's102',
         createdAt: 1695902487423,
         txt: 'Loving the beach life!',
-        imgUrl: 'https://www.cruisemummy.co.uk/wp-content/uploads/Deck-Chairs-and-Umbrella-on-the-Beach-1024x512.jpg',
+        imgUrl: 'https://a.cdn-hotels.com/gdcs/production14/d1087/59523f11-21cb-4a60-8d14-c61ccac2da6e.jpg',
         by: {
             _id: 'u102',
             username: 'NoyLeibo',
@@ -17,12 +17,12 @@ export const postsData: Post[] = [
         },
         comments: [
             {
-                id: 'c2001',
+                id: 'u102',
                 createdAt: 1696075287423,
                 by: {
-                    _id: 'u103',
-                    username: 'MichaelB',
-                    imgUrl: '../../public/img/faces/emily.png',
+                    _id: 'u102',
+                    username: 'NoyLeibo',
+                    imgUrl: '',
                 },
                 txt: 'Wow, looks amazing!',
             },
@@ -32,22 +32,12 @@ export const postsData: Post[] = [
                 by: {
                     _id: 'u108',
                     username: 'MichaelB',
-                    imgUrl: '../../public/img/faces/john.png',
+                    imgUrl: '',
                 },
                 txt: 'I miss this place!',
             },
         ],
         likedBy: [
-            {
-                _id: 'u107',
-                username: 'MichaelB',
-                imgUrl: '../../public/img/faces/emily.png',
-            },
-            {
-                _id: 'u108',
-                username: 'MichaelB',
-                imgUrl: '../../public/img/faces/john.png',
-            },
         ],
         tags: ['beach', 'sunset'],
     },
@@ -55,123 +45,57 @@ export const postsData: Post[] = [
         _id: 's103',
         createdAt: 1689076887423,
         txt: 'Exploring the mountains!',
-        imgUrl: '../img/story/mountains.jpg',
+        imgUrl: 'https://pics.craiyon.com/2023-09-26/aa2fbe35ce18489980f73a4acb336537.webp',
         by: {
             _id: 'u103',
-            username: 'MichaelB',
-            imgUrl: '../../public/img/faces/michael.png',
+            username: 'Almogk30',
+            imgUrl: 'https://media-fra3-2.cdn.whatsapp.net/v/t61.24694-24/349164433_708480904412403_1842111394855506367_n.jpg?ccb=11-4&oh=01_AdTbO2dvR_fDCCfXQgkCDjmiZUHxOukEccMW1UAzE1ILyw&oe=65EF1C70&_nc_sid=e6ed6c&_nc_cat=107',
         },
         loc: {
             lat: 45.66,
             lng: -110.56,
             name: 'Rocky Mountains',
         },
-        comments: [
-            {
-                id: 'c3001',
-                createdAt: 1694865687423,
-                by: {
-                    _id: 'u109',
-                    username: 'MichaelB',
-                    imgUrl: '../../public/img/faces/alice.png',
-                },
-                txt: 'Breathtaking view!',
-            },
-        ],
-        likedBy: [
-            {
-                _id: 'u109',
-                username: 'MichaelB',
-                imgUrl: '../../public/img/faces/alice.png',
-            },
-        ],
+        comments: [],
+        likedBy: [],
         tags: ['hiking', 'adventure'],
     },
     {
         _id: 's104',
         createdAt: 1698580887423,
         txt: 'Had an amazing time trying out street photography in New York. The energy of the city is just mesmerizing. Every corner tells a different story.',
-        imgUrl: '../img/story/newyork.jpg',
+        imgUrl: 'https://res.cloudinary.com/jerrick/image/upload/v1551826906/zwkt0dtrpivfbflcf366.jpg',
         by: {
             _id: 'u104',
-            username: 'MichaelB',
-            imgUrl: '../../public/img/faces/chris.png',
+            username: 'nivamira',
+            imgUrl: 'https://media-fra3-2.cdn.whatsapp.net/v/t61.24694-24/163534437_394257745873100_2694836356181667975_n.jpg?ccb=11-4&oh=01_AdQX55B6arbtFTPrpF9zzFjiYHRtEuVEqdUHtb6AIxvH2w&oe=65EEEAAB&_nc_sid=e6ed6c&_nc_cat=111',
         },
         loc: {
             lat: 40.71,
             lng: -74.01,
             name: 'New York City',
         },
-        comments: [
-            {
-                id: 'c4001',
-                createdAt: 1695729687423,
-                by: {
-                    _id: 'u110',
-                    username: 'MichaelB',
-                    imgUrl: '../../public/img/faces/sarah.png',
-                },
-                txt: 'NYC is always full of surprises!',
-            },
-            {
-                id: 'c4002',
-                createdAt: 1699790487423,
-                by: {
-                    _id: 'u111',
-                    username: 'MichaelB',
-                    imgUrl: '../../public/img/faces/mike.png',
-                },
-                txt: 'These shots are incredible! I wish I could visit there as soon as possible!',
-            },
-        ],
-        likedBy: [
-            {
-                _id: 'u110',
-                username: 'MichaelB',
-                imgUrl: '../../public/img/faces/sarah.png',
-            },
-        ],
+        comments: [],
+        likedBy: [],
         tags: ['photography', 'urban'],
     },
     {
         _id: 's105',
         createdAt: 1680609687423,
         txt: "There's something profoundly serene about sunrises. Woke up early for this view and it was totally worth it. Nature's way of reminding us to enjoy every moment.",
-        imgUrl: '../img/story/sunrise.jpg',
+        imgUrl: 'https://www.surfertoday.com/images/stories/sunrise-sunset-facts.jpg',
         by: {
             _id: 'u105',
-            username: 'MichaelB',
-            imgUrl: '../../public/img/faces/linda.png',
+            username: 'niry',
+            imgUrl: 'https://media-fra3-2.cdn.whatsapp.net/v/t61.24694-24/183330449_988500858400275_5412143777288048223_n.jpg?ccb=11-4&oh=01_AdQ6NQrMB2YME5OdqwpV_vW-RFhIMAkrHm6qLC2AB59HPg&oe=65EF1903&_nc_sid=e6ed6c&_nc_cat=101',
         },
         loc: {
             lat: 34.05,
             lng: -118.24,
             name: 'Los Angeles',
         },
-        comments: [
-            {
-                id: 'c5001',
-                createdAt: 1695556887423,
-                by: {
-                    _id: 'u112',
-                    username: 'MichaelB',
-                    imgUrl: '../../public/img/faces/kevin.png',
-                },
-                txt: 'This is stunning, Linda!',
-            },
-        ],
-        likedBy: [
-            {
-                _id: 'u112',
-                username: 'MichaelB',
-                imgUrl: '../../public/img/faces/kevin.png',
-            },
-            {
-                _id: 'u113',
-                username: 'MichaelB',
-                imgUrl: '../../public/img/faces/grace.png',
-            },
-        ],
+        comments: [],
+        likedBy: [],
         tags: ['sunrise', 'nature'],
     },
 ]

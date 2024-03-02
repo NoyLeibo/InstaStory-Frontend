@@ -12,15 +12,15 @@ export function HomeIndex() {
 
     useEffect(() => {
         loadPosts()
-        console.log('Hey ', loggedInUser);
+        console.log('welcome back', loggedInUser?.username);
 
     }, [])
 
     if (!posts) return (<h1>No posts for now</h1>)
     return (
-        <section className="home-index">
+        <section className="home-index flex">
             {/* <StoryIndex /> */}
-            <PostsList posts={posts} />
+            <PostsList posts={posts} loggedInUser={loggedInUser} />
         </section>
     )
 }

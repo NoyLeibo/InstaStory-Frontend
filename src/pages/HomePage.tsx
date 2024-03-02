@@ -11,15 +11,14 @@ export function HomePage() {
     const [activeIcon, setActiveIcon] = useState('Home');
 
     useEffect(() => {
-        console.log('loggedInUser: ', loggedInUser)
         if (loggedInUser === null) navigate('/auth')
     }, [])
 
 
     return (
-        <>
+        <main className="main-container">
             <UserController activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
             <HomeIndex />
-        </>
+        </main >
     )
 }
