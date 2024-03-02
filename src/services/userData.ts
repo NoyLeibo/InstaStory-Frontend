@@ -7,7 +7,7 @@ export const userData: User[] = [
         username: 'NoyLeibo',
         password: '123123',
         fullname: 'Noy Leibovich',
-        imgUrl: '../../img/faces/anna.png',
+        imgUrl: 'https://res.cloudinary.com/dysh9q6ir/image/upload/v1706788350/%D7%9C%D7%9C%D7%90_%D7%A9%D7%9D_ngeib7.png',
         bio: '',
         following: [],
         followers: [

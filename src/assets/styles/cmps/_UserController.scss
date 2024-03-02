@@ -1,8 +1,16 @@
 .user-controller {
     height: 100vh;
     width: 17vw;
-    border-right: 1px solid rgb(219, 219, 219);
     padding: 32px;
+    position: fixed;
+    background-color: #ffffff;
+    font-size: 0.875rem;
+    line-height: 18px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-top: 8px;
+    border-inline-end: 2px solid #efefef;
+
 
     section {
         justify-content: center;

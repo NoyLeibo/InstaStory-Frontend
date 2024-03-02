@@ -18,7 +18,7 @@ export function HomeIndex() {
 
     if (!posts) return (<h1>No posts for now</h1>)
     return (
-        <section>
+        <section className="home-index">
             {/* <StoryIndex /> */}
             <PostsList posts={posts} />
         </section>

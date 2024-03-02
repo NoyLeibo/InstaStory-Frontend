@@ -18,7 +18,7 @@ export function UserController({ activeIcon, setActiveIcon }: UserControllerProp
     };
 
     return (
-        <section className="user-controller flex column space-between">
+        <nav className="user-controller flex column space-between">
             <section className="flex column">
                 <img className='controller-logo pointer' src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
                 <InstagramIcon className='instagram-logo pointer' />
@@ -26,6 +26,6 @@ export function UserController({ activeIcon, setActiveIcon }: UserControllerProp
             </section >
             <span className='logout-btn pointer fs16'>Log out</span>
             <LogoutIcon className='logout-icon pointer' />
-        </section >
+        </nav >
     )
 }

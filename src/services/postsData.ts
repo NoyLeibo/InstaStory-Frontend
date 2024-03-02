@@ -4,10 +4,10 @@ export const postsData: Post[] = [
         _id: 's102',
         createdAt: 1695902487423,
         txt: 'Loving the beach life!',
-        imgUrl: '../img/story/beach.jpg',
+        imgUrl: 'https://www.cruisemummy.co.uk/wp-content/uploads/Deck-Chairs-and-Umbrella-on-the-Beach-1024x512.jpg',
         by: {
             _id: 'u102',
-            fullname: 'Noy Leibo',
+            username: 'NoyLeibo',
             imgUrl: 'https://res.cloudinary.com/dysh9q6ir/image/upload/v1706788350/%D7%9C%D7%9C%D7%90_%D7%A9%D7%9D_ngeib7.png',
         },
         loc: {
@@ -20,8 +20,8 @@ export const postsData: Post[] = [
                 id: 'c2001',
                 createdAt: 1696075287423,
                 by: {
-                    _id: 'u107',
-                    fullname: 'Emily',
+                    _id: 'u103',
+                    username: 'MichaelB',
                     imgUrl: '../../public/img/faces/emily.png',
                 },
                 txt: 'Wow, looks amazing!',
@@ -31,7 +31,7 @@ export const postsData: Post[] = [
                 createdAt: 1682337687423,
                 by: {
                     _id: 'u108',
-                    fullname: 'John',
+                    username: 'MichaelB',
                     imgUrl: '../../public/img/faces/john.png',
                 },
                 txt: 'I miss this place!',
@@ -40,12 +40,12 @@ export const postsData: Post[] = [
         likedBy: [
             {
                 _id: 'u107',
-                fullname: 'Emily',
+                username: 'MichaelB',
                 imgUrl: '../../public/img/faces/emily.png',
             },
             {
                 _id: 'u108',
-                fullname: 'John',
+                username: 'MichaelB',
                 imgUrl: '../../public/img/faces/john.png',
             },
         ],
@@ -58,7 +58,7 @@ export const postsData: Post[] = [
         imgUrl: '../img/story/mountains.jpg',
         by: {
             _id: 'u103',
-            fullname: 'Michael Brown',
+            username: 'MichaelB',
             imgUrl: '../../public/img/faces/michael.png',
         },
         loc: {
@@ -72,7 +72,7 @@ export const postsData: Post[] = [
                 createdAt: 1694865687423,
                 by: {
                     _id: 'u109',
-                    fullname: 'Alice',
+                    username: 'MichaelB',
                     imgUrl: '../../public/img/faces/alice.png',
                 },
                 txt: 'Breathtaking view!',
@@ -81,7 +81,7 @@ export const postsData: Post[] = [
         likedBy: [
             {
                 _id: 'u109',
-                fullname: 'Alice',
+                username: 'MichaelB',
                 imgUrl: '../../public/img/faces/alice.png',
             },
         ],
@@ -94,7 +94,7 @@ export const postsData: Post[] = [
         imgUrl: '../img/story/newyork.jpg',
         by: {
             _id: 'u104',
-            fullname: 'Chris Johnson',
+            username: 'MichaelB',
             imgUrl: '../../public/img/faces/chris.png',
         },
         loc: {
@@ -108,7 +108,7 @@ export const postsData: Post[] = [
                 createdAt: 1695729687423,
                 by: {
                     _id: 'u110',
-                    fullname: 'Sarah',
+                    username: 'MichaelB',
                     imgUrl: '../../public/img/faces/sarah.png',
                 },
                 txt: 'NYC is always full of surprises!',
@@ -118,7 +118,7 @@ export const postsData: Post[] = [
                 createdAt: 1699790487423,
                 by: {
                     _id: 'u111',
-                    fullname: 'Mike',
+                    username: 'MichaelB',
                     imgUrl: '../../public/img/faces/mike.png',
                 },
                 txt: 'These shots are incredible! I wish I could visit there as soon as possible!',
@@ -127,7 +127,7 @@ export const postsData: Post[] = [
         likedBy: [
             {
                 _id: 'u110',
-                fullname: 'Sarah',
+                username: 'MichaelB',
                 imgUrl: '../../public/img/faces/sarah.png',
             },
         ],
@@ -140,7 +140,7 @@ export const postsData: Post[] = [
         imgUrl: '../img/story/sunrise.jpg',
         by: {
             _id: 'u105',
-            fullname: 'Linda Gates',
+            username: 'MichaelB',
             imgUrl: '../../public/img/faces/linda.png',
         },
         loc: {
@@ -154,7 +154,7 @@ export const postsData: Post[] = [
                 createdAt: 1695556887423,
                 by: {
                     _id: 'u112',
-                    fullname: 'Kevin',
+                    username: 'MichaelB',
                     imgUrl: '../../public/img/faces/kevin.png',
                 },
                 txt: 'This is stunning, Linda!',
@@ -163,12 +163,12 @@ export const postsData: Post[] = [
         likedBy: [
             {
                 _id: 'u112',
-                fullname: 'Kevin',
+                username: 'MichaelB',
                 imgUrl: '../../public/img/faces/kevin.png',
             },
             {
                 _id: 'u113',
-                fullname: 'Grace',
+                username: 'MichaelB',
                 imgUrl: '../../public/img/faces/grace.png',
             },
         ],

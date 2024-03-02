@@ -17,9 +17,9 @@ export function HomePage() {
 
 
     return (
-        <section className="flex">
+        <>
             <UserController activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
             <HomeIndex />
-        </section>
+        </>
     )
 }

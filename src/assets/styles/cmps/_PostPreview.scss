@@ -1,0 +1,17 @@
+.post-preview {
+    width: 468px;
+    height: 792px;
+
+    .post-image {
+        max-height: 585px;
+    }
+
+    .profile-img-avatar {
+        width: 32px;
+        height: 32px;
+        margin-inline-end: 12px;
+        cursor: pointer;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+}
