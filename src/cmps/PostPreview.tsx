@@ -6,6 +6,7 @@ import { User } from "../models/user.model";
 import { postsService } from "../services/posts.service";
 import { eventBus } from "../services/event-bus.service";
 import { useEffect, useState } from "react";
+import { CommentModal } from "./CommentModal.tsx";
 // import { userService } from "../services/user.service";
 
 interface PostPreviewProps {
@@ -107,7 +108,7 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
                 rows={1}
             />
             {isCommentModalOpen ?
-                <></>
+                <CommentModal />
                 :
                 <></>}
         </section>
