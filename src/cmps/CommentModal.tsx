@@ -12,20 +12,15 @@ import { eventBus } from "../services/event-bus.service";
 interface CommentModalProps {
     post: Post;
     loggedInUser: User | null;
-    handleKeyDown: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void; // Correct type here
+    handleKeyDown: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
     getInitialIsLikedState: () => boolean
-    isCommentModalOpen: boolean
-    setIsCommentModalOpen: (value: React.SetStateAction<boolean>) => void;
+    setIsCommentModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function CommentModal({ setIsCommentModalOpen, isCommentModalOpen, getInitialIsLikedState, post, loggedInUser, handleKeyDown }: CommentModalProps) {
+export function CommentModal({ setIsCommentModalOpen, getInitialIsLikedState, post, loggedInUser, handleKeyDown }: CommentModalProps) {
     const [isLiked, setIsLiked] = useState(() => getInitialIsLikedState())
-    const [commentText, setCommentText] = useState('');
-    const [isEmojiModalOpen, setIsEmojiModalOpen] = useState(false);
-
-    useEffect(() => {
-        console.log(modalContentRef.current); // This should log the DOM node
-    }, []);
+    const [commentText, setCommentText] = useState('')
+    const [isEmojiModalOpen, setIsEmojiModalOpen] = useState(false)
 
     async function handleToggleLike() {
         try {
@@ -36,11 +31,10 @@ export function CommentModal({ setIsCommentModalOpen, isCommentModalOpen, getIni
             console.error('Cannot toggle like', err)
         }
     }
-    const handleCloseModal = () => setIsCommentModalOpen(false)
-    const handleCloseEmoji = () => setIsEmojiModalOpen(false)
 
-    const modalContentRef = useOutsideClick(handleCloseModal); // on click outside func, call to her service
-    const emojiContentRef = useOutsideClick(handleCloseEmoji); // on click outside func, call to her service
+
+    const modalContentRef = useOutsideClick(() => setIsCommentModalOpen(false)) // on click outside func, call to her service
+    const emojiContentRef = useOutsideClick(() => setIsEmojiModalOpen(false))
 
     const handleEmojiClick = (emojiObject: { emoji: string }) => {
         if (emojiObject && emojiObject.emoji) {
@@ -48,6 +42,21 @@ export function CommentModal({ setIsCommentModalOpen, isCommentModalOpen, getIni
             setIsEmojiModalOpen(false)
         } else {
             console.error('Emoji data not found')
+        }
+    }
+
+    async function handleSubmitComment(ev: React.FormEvent<HTMLFormElement>) {
+        console.log('test');
+        try {
+            ev.preventDefault()
+            if (!commentText) return // If press post and not text
+            let commentToAdd = postsService.getEmptyComment()
+            commentToAdd.txt = commentText
+            // const updatedPost = await postsService.addComment(post, commentToAdd.txt)
+            console.log('Successfully added comment')
+            setCommentText('') // Reset the input field after submission
+        } catch (err) {
+            console.log('Cannot add comment', err)
         }
     }
 
@@ -111,7 +120,7 @@ export function CommentModal({ setIsCommentModalOpen, isCommentModalOpen, getIni
                             </div> :
                             <div className="fs14 bold">{post.likedBy.length ? `${post.likedBy.length} likes` : 'No likes'}</div>
                         }
-                        <div className="flex">
+                        <form onSubmit={(ev) => handleSubmitComment(ev)} className="flex">
                             <textarea
                                 className="add-comment"
                                 placeholder="Add a comment..."
@@ -122,7 +131,7 @@ export function CommentModal({ setIsCommentModalOpen, isCommentModalOpen, getIni
                                 onKeyDown={handleKeyDown} />
                             {commentText && <button className="postbtn">post</button>}
                             <button className="emojibtn" onClick={() => setIsEmojiModalOpen(true)}>🙂</button>
-                        </div>
+                        </form>
                     </div>
                     {isEmojiModalOpen && (
                         <div className="emoji-modal">

@@ -20,15 +20,10 @@ export async function loadUsers() {
 export async function signup(credentials: emptyUser) {
   try {
     store.dispatch({ type: LOADING_START });
-
     await userService.signup(credentials)
     await loadUsers()
     login(credentials)
     store.dispatch({ type: SET_USERS, users: [] }); // Wrap user in an array
-    // login(credentials)
-    // Alternatively, introduce and use an ADD_USER action if adding a single user
-    // store.dispatch({ type: ADD_USER, user }); // Requires updating the reducer to handle this action
-
   } catch (err) {
     console.log('Cannot signup', err);
     throw err;

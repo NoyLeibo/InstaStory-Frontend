@@ -3,6 +3,7 @@ export const storageService = {
     post,
     // Implement and uncomment these as needed:
     // get,
+    makeId,
     put,
     // remove,
 };
@@ -21,7 +22,7 @@ function query<T extends Entity>(entityType: string, delay: number = 500): Promi
 }
 
 function post<T extends Entity>(entityType: string, newEntity: Omit<T, '_id'>): Promise<T> {
-    const entityWithId: T = { ...JSON.parse(JSON.stringify(newEntity)), _id: _makeId() } as T
+    const entityWithId: T = { ...JSON.parse(JSON.stringify(newEntity)), _id: makeId() } as T
     return query<T>(entityType).then((entities) => {
         entities.push(entityWithId);
         _save(entityType, entities);
@@ -52,7 +53,7 @@ function _save<T extends Entity>(entityType: string, entities: T[]): void {
 //     return _makeId();
 // }
 
-function _makeId(length: number = 5): string {
+function makeId(length: number = 5): string {
     let text = "";
     const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for (let i = 0; i < length; i++) {

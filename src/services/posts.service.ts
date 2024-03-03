@@ -3,7 +3,7 @@
 // import { utilService } from "./util.service.js";
 // import { userService } from "./user.service.js";
 
-import { Post } from "../models/posts.model";
+import { Comment, Post } from "../models/posts.model";
 import { storageService } from "./async-storage.service";
 import { postsData } from "./postsData";
 import { userService } from "./user.service.ts";
@@ -14,7 +14,9 @@ _createPosts()
 
 export const postsService = {
   getPosts,
-  toggleLike
+  toggleLike,
+  getEmptyComment,
+  addComment
   // query,
   // getById,
   // save,
@@ -83,7 +85,47 @@ async function toggleLike(post: Post) {
   }
 }
 
+function getEmptyComment() {
+  return {
+    id: '',
+    createdAt: '',
+    by: {
+      _id: '',
+      fullname: '',
+      imgUrl: '',
+    },
+    txt: '',
+  }
+}
 
+async function addComment(post: Post, txt: string) {
+  // Later, this is all done by the backend
+  try {
+    // const post = getById(post._Id)
+
+    if (!post.comments) post.comments = []
+    let user = userService.getLoggedinUser()
+
+    const id = storageService.makeId()
+    console.log('id', id);
+
+    if (user && user._id && user.username && user.imgUrl) { // Ensuring imgUrl is not undefined
+      const comment: Comment = {
+        id,
+        createdAt: Number(Date.now()),
+        by: { _id: user?._id, username: user?.username, imgUrl: user?.imgUrl }, //TODO - consider saving mini-user instead of the whole user
+        txt,
+      }
+      post.comments.push(comment)
+    }
+    const postToUpdate = await storageService.put(STORAGE_KEY, post)
+    console.log('Story to update from service', postToUpdate)
+    return postToUpdate
+  } catch (err) {
+    console.log('Cannot get story in order to add comment', err)
+    throw err
+  }
+}
 
 
 // async function query(filterBy = {}) {

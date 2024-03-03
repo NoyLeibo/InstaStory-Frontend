@@ -79,6 +79,21 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
         }
     }
 
+    async function handleSubmitComment(ev: React.FormEvent<HTMLFormElement>) {
+        console.log('test');
+        try {
+            ev.preventDefault()
+            if (!commentText) return // If press post and not text
+            let commentToAdd = postsService.getEmptyComment()
+            commentToAdd.txt = commentText
+            // const updatedPost = await postsService.addComment(post, commentToAdd.txt)
+            console.log('Successfully added comment')
+            setCommentText('') // Reset the input field after submission
+        } catch (err) {
+            console.log('Cannot add comment', err)
+        }
+    }
+
     return (
         <section className="post-preview flex column">
             <div className="post-header flex align-center">
@@ -122,7 +137,7 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
                     View {post.comments.length} {post.comments.length === 1 ? 'comment' : 'comments'}
                 </button>
             </span>}
-            <div className="flex row">
+            <form onSubmit={(ev) => handleSubmitComment(ev)} className="flex">
                 <textarea
                     className="add-comment"
                     placeholder="Add a comment..."
@@ -130,10 +145,12 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
                     onChange={(ev) => setCommentText(ev.target.value)}
                     rows={1}
                     maxLength={100}
-                    onKeyDown={handleKeyDown} />
-                {commentText && <button className="postbtn">post</button>}
+                    onKeyDown={handleKeyDown}
+                />
+
+                {commentText && <button type="submit" className="postbtn">Post</button>}
                 <button className="emojibtn" onClick={() => setIsEmojiModalOpen(true)}>🙂</button>
-            </div>
+            </form>
 
             {isEmojiModalOpen && (
                 <div className="emoji-modal">
@@ -143,7 +160,7 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
                 </div>
             )}
 
-            {isCommentModalOpen && <CommentModal isCommentModalOpen={isCommentModalOpen} setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
+            {isCommentModalOpen && <CommentModal setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
         </section>
     )
 }

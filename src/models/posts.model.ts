@@ -19,7 +19,7 @@ export interface Location {
 
 export interface Post {
     _id: string;
-    createdAt: number;
+    createdAt: any;
     txt: string;
     imgUrl: string;
     by: UserMinimal;
