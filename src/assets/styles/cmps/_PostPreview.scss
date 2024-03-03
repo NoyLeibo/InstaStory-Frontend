@@ -29,6 +29,9 @@
         font-family: inherit;
         margin-bottom: 10px;
         font-size: 16px;
+        overflow-wrap: break-word;
+        flex-grow: 1;
+        // overflow: auto;
     }
 
     .post-header {
@@ -37,7 +40,6 @@
 
     .full-like-row {
         margin-top: 10px;
-        margin-bottom: 10px;
         justify-content: space-between;
         height: 40px;
 
@@ -69,4 +71,17 @@
         object-fit: cover;
         border-radius: 20px;
     }
+}
+
+.emoji-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }

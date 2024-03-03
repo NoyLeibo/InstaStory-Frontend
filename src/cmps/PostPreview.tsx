@@ -2,11 +2,13 @@ import { Post } from "../models/posts.model";
 import { Avatar } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { User } from "../models/user.model";
+import EmojiPicker from 'emoji-picker-react';
 // import { useNavigate } from "react-router";
 import { postsService } from "../services/posts.service";
 import { eventBus } from "../services/event-bus.service";
 import { useEffect, useState } from "react";
 import { CommentModal } from "./CommentModal.tsx";
+import useOutsideClick from "../services/onclickoutside.service.ts";
 // import { userService } from "../services/user.service";
 
 interface PostPreviewProps {
@@ -19,11 +21,26 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [commentText, setCommentText] = useState('');
     const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
+    const [isEmojiModalOpen, setIsEmojiModalOpen] = useState(false);
+    // const navigate = useNavigate()
+
+    const words = post.txt.split(' ');
+    const showMoreNeeded = words.length > 7;
+    const displayedText = showMoreNeeded && !isExpanded ? words.slice(0, 7).join(' ') + '... ' : post.txt;
 
     useEffect(() => {
-        console.log(isCommentModalOpen);
-
+        if (!isCommentModalOpen) document.body.style.overflow = 'unset'
     }, [isCommentModalOpen])
+
+    useEffect(() => {
+        if (isEmojiModalOpen) document.body.style.overflow = 'hidden'
+        else if (!isEmojiModalOpen) document.body.style.overflow = 'unset'
+    }, [isEmojiModalOpen])
+
+    const handleCloseModal = () => {
+        setIsEmojiModalOpen(false);
+    };
+    const modalContentRef = useOutsideClick(handleCloseModal); // on click outside func, call to her service
 
     function getInitialIsLikedState() {
         if (loggedInUser?._id) {
@@ -32,30 +49,35 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
         return false
     }
 
-    function toggleExpand() {
-        setIsExpanded(!isExpanded);
-    }
-    const words = post.txt.split(' ');
-    const showMoreNeeded = words.length > 7;
-    const displayedText = showMoreNeeded && !isExpanded ? words.slice(0, 7).join(' ') + '... ' : post.txt;
-
-    // const navigate = useNavigate()
-
     async function handleToggleLike() {
         try {
             const updatedPost = await postsService.toggleLike(post)
             if (loggedInUser) setIsLiked(updatedPost.likedBy.some((like) => like._id === loggedInUser._id))
-
-            // setIsAnimating(true)
-            // setTimeout(() => setIsAnimating(false), 1000) // Reset animation state after 1 second
-            //  setIsAnimating(false)// Reset animation state after 1 second
-
             eventBus.emit('toggleLike', updatedPost)
         } catch (err) {
             console.error('Cannot toggle like', err)
         }
     }
 
+    function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            console.log("Enter was pressed without Shift. Handling custom action.");
+        }
+    }
+
+    function toggleExpand() {
+        setIsExpanded(!isExpanded);
+    }
+
+    const handleEmojiClick = (emojiObject: { emoji: string }) => {
+        if (emojiObject && emojiObject.emoji) {
+            setCommentText((prevText) => prevText + emojiObject.emoji)
+            setIsEmojiModalOpen(false)
+        } else {
+            console.error('Emoji data not found')
+        }
+    }
 
     return (
         <section className="post-preview flex column">
@@ -95,22 +117,34 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
                     </button>
                 )}
             </p>
-            <span>
+            {post.comments.length > 0 && <span>
                 <button onClick={() => setIsCommentModalOpen(!isCommentModalOpen)} className="comments-button">
                     View {post.comments.length} {post.comments.length === 1 ? 'comment' : 'comments'}
                 </button>
-            </span>
-            <textarea
-                className="add-comment"
-                placeholder="Add a comment..."
-                value={commentText}
-                onChange={(ev) => setCommentText(ev.target.value)}
-                rows={1}
-            />
-            {isCommentModalOpen ?
-                <CommentModal />
-                :
-                <></>}
+            </span>}
+            <div className="flex row">
+                <textarea
+                    className="add-comment"
+                    placeholder="Add a comment..."
+                    value={commentText}
+                    onChange={(ev) => setCommentText(ev.target.value)}
+                    rows={1}
+                    maxLength={100}
+                    onKeyDown={handleKeyDown} />
+                {commentText && <button className="postbtn">post</button>}
+                <button className="emojibtn" onClick={() => setIsEmojiModalOpen(true)}>🙂</button>
+            </div>
+
+            {isEmojiModalOpen && (
+                <div className="emoji-modal">
+                    <div ref={modalContentRef}>
+                        <EmojiPicker onEmojiClick={handleEmojiClick} />
+                    </div>
+                </div>
+            )}
+
+            {isCommentModalOpen && <CommentModal isCommentModalOpen={isCommentModalOpen} setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
         </section>
     )
 }
+

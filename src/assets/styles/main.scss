@@ -12,8 +12,8 @@
 @import "basics/forms";
 
 // Pages
-@import "pages/authPage";
-@import "pages/authPageResponsive";
+@import "pages/_authPage";
+@import "pages/_authPageResponsive";
 // @import "views/AboutUs";
 // @import "views/HomePage";
 // @import "views/StayIndex";
@@ -22,8 +22,9 @@
 // @import "views/StayDetails";
 
 // Components
-@import "cmps/UserController";
-@import "cmps/PostPreview";
+@import "cmps/_UserController";
+@import "cmps/_PostPreview";
+@import "cmps/_CommentModal";
 // @import "cmps/Calendar";
 // @import "cmps/Destination";
 // @import "cmps/Guest";
