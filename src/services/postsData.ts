@@ -2,7 +2,7 @@ import { Post } from "../models/posts.model";
 export const postsData: Post[] = [
     {
         _id: 's102',
-        createdAt: 1695902487423,
+        createdAt: 1709559776123,
         txt: 'Loving the beach life!',
         imgUrl: 'https://a.cdn-hotels.com/gdcs/production14/d1087/59523f11-21cb-4a60-8d14-c61ccac2da6e.jpg',
         by: {

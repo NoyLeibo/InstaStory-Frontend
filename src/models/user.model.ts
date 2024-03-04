@@ -28,6 +28,7 @@ export interface emptyUser {
 interface UserModuleState {
     onlineUser: User | null;
     isLoadingPage: boolean;
+    users: User
 }
 interface PostsModuleState {
     posts: Post
@@ -36,4 +37,5 @@ interface PostsModuleState {
 export interface RootState {
     userModule: UserModuleState;
     postsModule: PostsModuleState;
+    usersModule: UserModuleState
 }

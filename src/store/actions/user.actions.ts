@@ -61,11 +61,10 @@ export async function login(credentials: { username: string, password: string })
   }
 }
 
-export async function savePostAction(post: Post) {
+export async function savePostAction(loggedInUser: User, post: Post) {
   const users = await userService.getUsers();
-
   users.forEach(async (user: User) => {
-    if (user && Array.isArray(user.savedPostsIds)) {
+    if (user._id === loggedInUser._id && Array.isArray(user.savedPostsIds)) {
       const index = user.savedPostsIds.indexOf(post._id);
       if (index === -1) { // לא קיים במערך
         user.savedPostsIds.push(post._id);

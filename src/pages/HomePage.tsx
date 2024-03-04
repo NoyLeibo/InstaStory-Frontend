@@ -6,9 +6,9 @@ import { UserController } from "../cmps/UserController";
 import { HomeIndex } from "../cmps/HomeIndex.tsx";
 
 export function HomePage() {
+    const [activeIcon, setActiveIcon] = useState('Home');
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
     let navigate = useNavigate();
-    const [activeIcon, setActiveIcon] = useState('Home');
 
     useEffect(() => {
         if (loggedInUser === null) navigate('/auth')

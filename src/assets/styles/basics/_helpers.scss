@@ -137,11 +137,11 @@
 }
 
 .graytxt {
-  color: #717171;
+  color: #737373;
 }
 
 .blacktxt {
-  color: #222222;
+  color: #000000;
 }
 
 .padding1 {
@@ -221,10 +221,26 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
+.padding0 {
+  padding: 0;
+}
+
 .marginleft8 {
   margin-left: 8px;
 }
 
 .margin8 {
   margin: 20px;
+}
+
+.margintop20 {
+  margin-top: 20px;
+}
+
+.marginbottom10 {
+  margin-bottom: 10px;
+}
+
+.btn-txt-color {
+  color: #0095F6
 }

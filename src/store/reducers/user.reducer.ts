@@ -19,12 +19,13 @@ export function userReducer(state: UserState = initialState, action: UserAction)
     let newState = state;
 
     switch (action.type) {
-        case REMOVE_USER:
-            newState = {
-                ...state,
-                users: state.users.filter(user => user._id !== action.userId),
-            };
-            break;
+        // case REMOVE_USER:
+        //     newState = {
+        //         ...state,
+        //         users: state.users.filter(user => user._id !== action.userId),
+        //     };
+        //     break;
+
         case SET_USER:
             newState = { ...state, onlineUser: action.user }
             break
@@ -42,14 +43,13 @@ export function userReducer(state: UserState = initialState, action: UserAction)
 
     // Debugging log, consider removing or guarding with development check
     // window.userState = newState;
-    // console.log('State:', newState);
     return newState;
 }
 
 
 interface UserState {
     onlineUser: User | null;
-    users: User[];
+    users: any;
     isLoadingPage: boolean
 }
 

@@ -28,6 +28,7 @@ export function AuthPage() {
     useEffect(() => {
         loadUsers()
     }, [])
+
     useEffect(() => {
         console.log(loggedInUser);
     }, [loggedInUser])

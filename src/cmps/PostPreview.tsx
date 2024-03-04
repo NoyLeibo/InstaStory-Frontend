@@ -9,10 +9,10 @@ import { eventBus } from "../services/event-bus.service";
 import { useEffect, useState } from "react";
 import { CommentModal } from "./CommentModal.tsx";
 import useOutsideClick from "../services/onclickoutside.service.ts";
-import { userService } from "../services/user.service.ts";
-import { storageService } from "../services/async-storage.service.ts";
+// import { userService } from "../services/user.service.ts";
+// import { storageService } from "../services/async-storage.service.ts";
 import { savePostAction } from "../store/actions/user.actions.ts";
-// import { userService } from "../services/user.service";
+import moment from 'moment'
 
 interface PostPreviewProps {
     post: Post
@@ -102,7 +102,11 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
     }
 
     function savePost() {
-        savePostAction(post)
+        if (loggedInUser) savePostAction(loggedInUser, post)
+    }
+
+    function formatTimestamp(timestamp: Date) {
+        return moment(timestamp).fromNow()
     }
 
     return (
@@ -112,7 +116,7 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
                     <Avatar className="profile-img-avatar" src={post.by.imgUrl} />
                 </Stack>
                 <div className="flex column fs14 ">
-                    <span className="bold pointer">{post.by.username}</span>
+                    <span className="bold pointer">{post.by.username} • <span className="graytxt fs12">{formatTimestamp(post.createdAt)}</span> </span>
                     {post.loc.name && <span className="pointer">{post.loc.name}</span>}
                 </div>
             </div>

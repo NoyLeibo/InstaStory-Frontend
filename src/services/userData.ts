@@ -199,22 +199,4 @@ export const userData: User[] = [
         followers: [],
         savedPostsIds: ['s105'],
     },
-    {
-        _id: 'u114',
-        username: 'EmmaP',
-        password: 'emmapass',
-        fullname: 'Emma',
-        imgUrl: '../../img/faces/emma.png',
-        bio: '',
-        following: [
-            {
-                _id: 'u106',
-                fullname: 'David Lee',
-                username: 'DavidL',
-                imgUrl: '../../img/faces/david.png',
-            },
-        ],
-        followers: [],
-        savedPostsIds: ['s106'],
-    },
 ]
