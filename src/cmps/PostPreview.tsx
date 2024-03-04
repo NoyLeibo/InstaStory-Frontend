@@ -9,6 +9,9 @@ import { eventBus } from "../services/event-bus.service";
 import { useEffect, useState } from "react";
 import { CommentModal } from "./CommentModal.tsx";
 import useOutsideClick from "../services/onclickoutside.service.ts";
+import { userService } from "../services/user.service.ts";
+import { storageService } from "../services/async-storage.service.ts";
+import { savePostAction } from "../store/actions/user.actions.ts";
 // import { userService } from "../services/user.service";
 
 interface PostPreviewProps {
@@ -27,6 +30,10 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
     const words = post.txt.split(' ');
     const showMoreNeeded = words.length > 7;
     const displayedText = showMoreNeeded && !isExpanded ? words.slice(0, 7).join(' ') + '... ' : post.txt;
+    const savedPosts = loggedInUser?.savedPostsIds
+
+    useEffect(() => {
+    }, [savedPosts, isLiked])
 
     useEffect(() => {
         if (!isCommentModalOpen) document.body.style.overflow = 'unset'
@@ -83,15 +90,19 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
         console.log('test');
         try {
             ev.preventDefault()
-            if (!commentText) return // If press post and not text
+            if (!commentText) return
             let commentToAdd = postsService.getEmptyComment()
             commentToAdd.txt = commentText
-            // const updatedPost = await postsService.addComment(post, commentToAdd.txt)
+            await postsService.addComment(post, commentToAdd.txt)
             console.log('Successfully added comment')
-            setCommentText('') // Reset the input field after submission
+            setCommentText('')
         } catch (err) {
             console.log('Cannot add comment', err)
         }
+    }
+
+    function savePost() {
+        savePostAction(post)
     }
 
     return (
@@ -113,10 +124,14 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
                         :
                         <span onClick={() => handleToggleLike()} className="emoji-container pointer"><i className="fa-regular fa-heart fa-lg"></i></span>
                     }
-                    <span className="emoji-container pointer"><i className="fa-regular fa-comment fa-lg"></i></span>
+                    <span onClick={() => setIsCommentModalOpen(true)} className="emoji-container pointer"><i className="fa-regular fa-comment fa-lg"></i></span>
                     <span className="emoji-container pointer"><i className="fa-solid fa-arrow-up-right-from-square"></i></span>
                 </div>
-                <span className="emoji-container pointer justify-end"><i className="fa-regular fa-bookmark"></i></span>
+                {savedPosts?.includes(post._id) ?
+                    <span onClick={savePost} className="emoji-container pointer justify-end"><i className="fas fa-bookmark"></i></span>
+                    :
+                    <span onClick={savePost} className="emoji-container pointer justify-end"><i className="far fa-bookmark"></i></span>
+                }
             </div>
             {isLiked ?
                 <div className="fs14 bold">
@@ -132,11 +147,13 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
                     </button>
                 )}
             </p>
+
             {post.comments.length > 0 && <span>
                 <button onClick={() => setIsCommentModalOpen(!isCommentModalOpen)} className="comments-button">
                     View {post.comments.length} {post.comments.length === 1 ? 'comment' : 'comments'}
                 </button>
             </span>}
+
             <form onSubmit={(ev) => handleSubmitComment(ev)} className="flex">
                 <textarea
                     className="add-comment"
@@ -147,7 +164,6 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
                     maxLength={100}
                     onKeyDown={handleKeyDown}
                 />
-
                 {commentText && <button type="submit" className="postbtn">Post</button>}
                 <button className="emojibtn" onClick={() => setIsEmojiModalOpen(true)}>🙂</button>
             </form>
@@ -160,7 +176,7 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
                 </div>
             )}
 
-            {isCommentModalOpen && <CommentModal setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
+            {isCommentModalOpen && <CommentModal savePost={savePost} setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
         </section>
     )
 }

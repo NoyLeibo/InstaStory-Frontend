@@ -18,7 +18,7 @@ export const userData: User[] = [
                 imgUrl: '../../img/faces/emily.png',
             },
         ],
-        savedStoryIds: ['s102', 's105'],
+        savedPostsIds: ['s102', 's105'],
     },
     {
         _id: 'u103',
@@ -36,7 +36,7 @@ export const userData: User[] = [
                 imgUrl: '',
             },
         ],
-        savedStoryIds: ['s103', 's106'],
+        savedPostsIds: ['s103', 's106'],
     },
     {
         _id: 'u104',
@@ -54,7 +54,7 @@ export const userData: User[] = [
             },
         ],
         followers: [],
-        savedStoryIds: ['s104'],
+        savedPostsIds: ['s104'],
     },
     {
         _id: 'u105',
@@ -72,7 +72,7 @@ export const userData: User[] = [
             },
         ],
         followers: [],
-        savedStoryIds: ['s105'],
+        savedPostsIds: ['s105'],
     },
     {
         _id: 'u106',
@@ -90,7 +90,7 @@ export const userData: User[] = [
             },
         ],
         followers: [],
-        savedStoryIds: ['s106'],
+        savedPostsIds: ['s106'],
     },
 
     // Commenters and Likers
@@ -110,7 +110,7 @@ export const userData: User[] = [
             },
         ],
         followers: [],
-        savedStoryIds: ['s102'],
+        savedPostsIds: ['s102'],
     },
     {
         _id: 'u108',
@@ -121,7 +121,7 @@ export const userData: User[] = [
         bio: '',
         following: [],
         followers: [],
-        savedStoryIds: ['s102', 's104'],
+        savedPostsIds: ['s102', 's104'],
     },
     {
         _id: 'u109',
@@ -139,7 +139,7 @@ export const userData: User[] = [
                 imgUrl: '../../img/faces/michael.png',
             },
         ],
-        savedStoryIds: ['s103'],
+        savedPostsIds: ['s103'],
     },
     {
         _id: 'u110',
@@ -157,7 +157,7 @@ export const userData: User[] = [
             },
         ],
         followers: [],
-        savedStoryIds: ['s104', 's105'],
+        savedPostsIds: ['s104', 's105'],
     },
     {
         _id: 'u111',
@@ -168,7 +168,7 @@ export const userData: User[] = [
         bio: '',
         following: [],
         followers: [],
-        savedStoryIds: ['s104'],
+        savedPostsIds: ['s104'],
     },
     {
         _id: 'u112',
@@ -186,7 +186,7 @@ export const userData: User[] = [
             },
         ],
         followers: [],
-        savedStoryIds: ['s105', 's106'],
+        savedPostsIds: ['s105', 's106'],
     },
     {
         _id: 'u113',
@@ -197,7 +197,7 @@ export const userData: User[] = [
         bio: '',
         following: [],
         followers: [],
-        savedStoryIds: ['s105'],
+        savedPostsIds: ['s105'],
     },
     {
         _id: 'u114',
@@ -215,6 +215,6 @@ export const userData: User[] = [
             },
         ],
         followers: [],
-        savedStoryIds: ['s106'],
+        savedPostsIds: ['s106'],
     },
 ]

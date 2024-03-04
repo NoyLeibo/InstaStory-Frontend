@@ -54,8 +54,6 @@ async function _createPosts(): Promise<any> {
 
 async function toggleLike(post: Post) {
   try {
-    console.log(post);
-
     if (!post.likedBy) post.likedBy = []
     const user = userService.getLoggedinUser()
 
@@ -102,12 +100,9 @@ async function addComment(post: Post, txt: string) {
   // Later, this is all done by the backend
   try {
     // const post = getById(post._Id)
-
     if (!post.comments) post.comments = []
     let user = userService.getLoggedinUser()
-
     const id = storageService.makeId()
-    console.log('id', id);
 
     if (user && user._id && user.username && user.imgUrl) { // Ensuring imgUrl is not undefined
       const comment: Comment = {

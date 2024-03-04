@@ -15,12 +15,14 @@ interface CommentModalProps {
     handleKeyDown: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
     getInitialIsLikedState: () => boolean
     setIsCommentModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+    savePost: () => void
 }
 
-export function CommentModal({ setIsCommentModalOpen, getInitialIsLikedState, post, loggedInUser, handleKeyDown }: CommentModalProps) {
+export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLikedState, post, loggedInUser, handleKeyDown }: CommentModalProps) {
     const [isLiked, setIsLiked] = useState(() => getInitialIsLikedState())
     const [commentText, setCommentText] = useState('')
     const [isEmojiModalOpen, setIsEmojiModalOpen] = useState(false)
+    const savedPosts = loggedInUser?.savedPostsIds
 
     async function handleToggleLike() {
         try {
@@ -31,7 +33,6 @@ export function CommentModal({ setIsCommentModalOpen, getInitialIsLikedState, po
             console.error('Cannot toggle like', err)
         }
     }
-
 
     const modalContentRef = useOutsideClick(() => setIsCommentModalOpen(false)) // on click outside func, call to her service
     const emojiContentRef = useOutsideClick(() => setIsEmojiModalOpen(false))
@@ -112,8 +113,11 @@ export function CommentModal({ setIsCommentModalOpen, getInitialIsLikedState, po
                                 <span className="emoji-container pointer"><i className="fa-regular fa-comment fa-lg"></i></span>
                                 <span className="emoji-container pointer"><i className="fa-solid fa-arrow-up-right-from-square"></i></span>
                             </div>
-                            <span className="emoji-container pointer justify-end"><i className="fa-regular fa-bookmark"></i></span>
-                        </div>
+                            {savedPosts?.includes(post._id) ?
+                                <span onClick={savePost} className="emoji-container pointer justify-end"><i className="fas fa-bookmark"></i></span>
+                                :
+                                <span onClick={savePost} className="emoji-container pointer justify-end"><i className="far fa-bookmark"></i></span>
+                            }                        </div>
                         {isLiked ?
                             <div className="fs14 bold">
                                 Liked by you{post.likedBy.length > 1 ? ` and ${post.likedBy.length - 1} others` : ''}

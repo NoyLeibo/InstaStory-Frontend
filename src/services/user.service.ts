@@ -39,7 +39,6 @@ async function _createUsers(): Promise<any> {
 
     try {
         const users = await getUsers()
-        // Check if users is empty (length is 0)
         if (!users.length) {
             const users: User[] = userData;
             localStorage.setItem('user', JSON.stringify(users))
@@ -88,7 +87,7 @@ function saveLocalUser(user: User | emptyUser) {
         imgUrl: user.imgUrl,
         following: user.following,
         followers: user.followers,
-        savedStoryIds: user.savedStoryIds,
+        savedPostsIds: user.savedPostsIds,
     }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(userForSession))
     return userForSession
@@ -104,7 +103,7 @@ function createEmptyUser() {
         imgUrl: '',
         following: [],
         followers: [],
-        savedStoryIds: [],
+        savedPostsIds: [],
     }
 }
 
