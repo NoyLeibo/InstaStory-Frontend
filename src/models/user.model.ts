@@ -25,6 +25,17 @@ export interface emptyUser {
     savedPostsIds?: string[];
     email?: string;
 }
+
+export interface UserStorage {
+    _id: string;
+    username: string;
+    fullname: string;
+    bio: string;
+    imgUrl: string | null;
+    following?: Array<{ _id: string; fullname: string; username: string; imgUrl: string }>
+    followers?: Array<{ _id: string; fullname: string; username: string; imgUrl: string }>
+    savedPostsIds?: string[];
+}
 interface UserModuleState {
     onlineUser: User | null;
     isLoadingPage: boolean;

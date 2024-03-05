@@ -78,6 +78,17 @@ export async function savePostAction(loggedInUser: User, post: Post) {
   })
 }
 
+
+export async function onFollowsActions(userToSave: User, loggedInUser: boolean) {
+  console.log(userToSave);
+
+  await storageService.put("user", userToSave) // שומר ב LocalStorage
+  if (loggedInUser) {
+    store.dispatch({ type: SET_USER, user: userToSave }); // מעדכן את הOnlineUser בReducer (חנות)
+    userService.saveLocalUser(userToSave) // שומר ב Session-Storage
+  }
+  loadUsers()
+}
 // try {
 //     const stays = await userService.getUsers();
 //     store.dispatch({

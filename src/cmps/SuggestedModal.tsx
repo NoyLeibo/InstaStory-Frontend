@@ -2,6 +2,7 @@ import { Avatar } from "@mui/material"
 import { User } from "../models/user.model.ts"
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { onFollowsActions } from "../store/actions/user.actions.ts";
 
 interface SuggestModalProps {
     loggedInUser: User | null
@@ -11,7 +12,7 @@ interface SuggestModalProps {
 
 export function SuggestedModal({ allUsers, loggedInUser }: SuggestModalProps) {
     const [localLoggedInUser, setLocalLoggedInUser] = useState<User | null>(loggedInUser);
-    const [userGotFollowed, setUserGotFollowed] = useState<User | null>(null);
+    // const [userGotFollowed, setUserGotFollowed] = useState<User | null>(null);
     const maxCurrSuggest = 5
     let navigate = useNavigate();
 
@@ -20,42 +21,46 @@ export function SuggestedModal({ allUsers, loggedInUser }: SuggestModalProps) {
         navigate('/user/:' + user?.username)
     } // כשלוחצים על הAVATAR של היוזר זה מעביר לעמוד בית שלו
 
-    function onLogOut() { }
+    // function onLogOut() { }
 
     function toggleFollows(targetUser: User, action: 'follow' | 'unfollow') {
         if (!localLoggedInUser || targetUser === null) return;
         let updatedFollowing = [...localLoggedInUser.following];
+
         if (action === 'follow') {
-            if (!updatedFollowing.some(follower => follower._id === targetUser._id)) {
-                updatedFollowing.push({
-                    _id: targetUser._id,
-                    fullname: targetUser.fullname,
-                    username: targetUser.username,
-                    imgUrl: targetUser.imgUrl || '',
-                });
-                setUserGotFollowed(targetUser)
-                setUserGotFollowed(prev => ({
-                    ...targetUser,
-                    followers: prev && prev.followers ? [...prev.followers, {
-                        _id: localLoggedInUser._id,
-                        fullname: localLoggedInUser.fullname,
-                        username: localLoggedInUser.username,
-                        imgUrl: localLoggedInUser.imgUrl || '',
-                    }] : [{
-                        _id: localLoggedInUser._id,
-                        fullname: localLoggedInUser.fullname,
-                        username: localLoggedInUser.username,
-                        imgUrl: localLoggedInUser.imgUrl || '',
-                    }]// adding to his followers the localLoggedInUser
-                }))
-            }
-        } else if (action === 'unfollow') {
-            updatedFollowing = updatedFollowing.filter(follower => follower._id !== targetUser._id);
-            if (userGotFollowed && userGotFollowed._id === targetUser._id) {
-                setUserGotFollowed(null)
-            }
         }
-        setLocalLoggedInUser({ ...localLoggedInUser, following: updatedFollowing });
+        //         if (!updatedFollowing.some(follower => follower._id === targetUser._id)) {
+        //             updatedFollowing.push({
+        //                 _id: targetUser._id,
+        //                 fullname: targetUser.fullname,
+        //                 username: targetUser.username,
+        //                 imgUrl: targetUser.imgUrl || '',
+        //             });
+        //             setUserGotFollowed(targetUser)
+        //             setUserGotFollowed(prev => ({
+        //                 ...targetUser,
+        //                 followers: prev && prev.followers ? [...prev.followers, {
+        //                     _id: localLoggedInUser._id,
+        //                     fullname: localLoggedInUser.fullname,
+        //                     username: localLoggedInUser.username,
+        //                     imgUrl: localLoggedInUser.imgUrl || '',
+        //                 }] : [{
+        //                     _id: localLoggedInUser._id,
+        //                     fullname: localLoggedInUser.fullname,
+        //                     username: localLoggedInUser.username,
+        //                     imgUrl: localLoggedInUser.imgUrl || '',
+        //                 }]// adding to his followers the localLoggedInUser
+        //             }))
+        //         }
+        //     } else if (action === 'unfollow') {
+        //         updatedFollowing = updatedFollowing.filter(follower => follower._id !== targetUser._id);
+        //         if (userGotFollowed && userGotFollowed._id === targetUser._id) {
+        //             setUserGotFollowed(null)
+        //         }
+        //     }
+        //     setLocalLoggedInUser({ ...localLoggedInUser, following: updatedFollowing });
+        //     onFollowsActions(localLoggedInUser, true)
+        //     if (userGotFollowed) onFollowsActions(userGotFollowed, false)
     }
 
     const isFollowing = (user: User) => {
