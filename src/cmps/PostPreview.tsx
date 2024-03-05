@@ -88,7 +88,6 @@ export function PostPreview({ index, post, loggedInUser }: PostPreviewProps) {
     }
 
     async function handleSubmitComment(ev: React.FormEvent<HTMLFormElement>) {
-        console.log('test');
         try {
             ev.preventDefault()
             if (!commentText) return
