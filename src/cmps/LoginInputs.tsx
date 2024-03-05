@@ -40,16 +40,17 @@ export function LoginInputs({ username, setPassword, setUsername, password }: Lo
                     onChange={(e) => setUsername(e.target.value)}
                     minLength={3}
                     maxLength={10}
-                />
+                    autoComplete="username" />
                 <input
                     required
-                    placeholder='Password'
+                    placeholder="Password"
                     type="password"
                     name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                     minLength={3}
                     maxLength={10}
+                    value={password}
+                    autoComplete="current-password"
+                    onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit" className="bold">Log in</button>
                 <div className="text-center flex row align-center justify-between">

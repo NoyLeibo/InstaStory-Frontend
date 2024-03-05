@@ -10,14 +10,7 @@ import { User, emptyUser } from "../../models/user.model.ts";
 import { Post } from "../../models/posts.model.ts";
 import { storageService } from "../../services/async-storage.service.ts";
 
-export async function loadUsers() {
-  try {
-    const users = await userService.getUsers()
-    store.dispatch({ type: SET_USERS, users });
-  } catch (err) {
-    console.log("UserActions: err in loadUsers", err);
-  }
-}
+
 
 export async function signup(credentials: emptyUser) {
   try {
@@ -79,16 +72,26 @@ export async function savePostAction(loggedInUser: User, post: Post) {
 }
 
 
-export async function onFollowsActions(userToSave: User, loggedInUser: boolean) {
-  console.log(userToSave);
-
+export async function onLoggedInUserActions(userToSave: User) {
   await storageService.put("user", userToSave) // שומר ב LocalStorage
-  if (loggedInUser) {
-    store.dispatch({ type: SET_USER, user: userToSave }); // מעדכן את הOnlineUser בReducer (חנות)
-    userService.saveLocalUser(userToSave) // שומר ב Session-Storage
-  }
+  userService.saveLocalUser(userToSave) // שומר ב Session-Storage
+  store.dispatch({ type: SET_USER, user: userToSave }); // מעדכן את הOnlineUser בReducer (חנות)
+
   loadUsers()
 }
+
+export async function loadUsers() {
+  try {
+    const users = await userService.getUsers()
+    console.log('users', users);
+
+    store.dispatch({ type: SET_USERS, users });
+  } catch (err) {
+    console.log("UserActions: err in loadUsers", err);
+  }
+}
+
+
 // try {
 //     const stays = await userService.getUsers();
 //     store.dispatch({

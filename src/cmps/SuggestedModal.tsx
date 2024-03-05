@@ -1,8 +1,8 @@
 import { Avatar } from "@mui/material"
 import { User } from "../models/user.model.ts"
-import { useState } from "react";
 import { useNavigate } from "react-router";
-import { onFollowsActions } from "../store/actions/user.actions.ts";
+import { onLoggedInUserActions } from "../store/actions/user.actions.ts";
+import { storageService } from "../services/async-storage.service.ts";
 
 interface SuggestModalProps {
     loggedInUser: User | null
@@ -11,60 +11,65 @@ interface SuggestModalProps {
 
 
 export function SuggestedModal({ allUsers, loggedInUser }: SuggestModalProps) {
-    const [localLoggedInUser, setLocalLoggedInUser] = useState<User | null>(loggedInUser);
-    // const [userGotFollowed, setUserGotFollowed] = useState<User | null>(null);
+
     const maxCurrSuggest = 5
     let navigate = useNavigate();
 
     function navigateToUserPage(user = loggedInUser) {
         console.log(user);
-        navigate('/user/:' + user?.username)
+        navigate('/user/' + user?._id)
     } // כשלוחצים על הAVATAR של היוזר זה מעביר לעמוד בית שלו
 
-    // function onLogOut() { }
+    // function onLogOut() { logOut(loggedInUser)}
 
-    function toggleFollows(targetUser: User, action: 'follow' | 'unfollow') {
-        if (!localLoggedInUser || targetUser === null) return;
+    async function toggleFollows(targetUser: User, action: 'follow' | 'unfollow') {
+        const localLoggedInUser = loggedInUser
+        if (!localLoggedInUser || !targetUser) return;
         let updatedFollowing = [...localLoggedInUser.following];
+        let updatedFollowers = [...targetUser.followers];
+
+        console.log(localLoggedInUser.username, action, 'to', targetUser.username);
 
         if (action === 'follow') {
+            // Add targetUser to loggedInUser Following list DONE
+            localLoggedInUser.following.push({
+                _id: targetUser._id,
+                fullname: targetUser.fullname,
+                username: targetUser.username,
+                imgUrl: targetUser.imgUrl || '',
+            })
+            // Add loggedInUser to targetUser Followers list DONE
+            targetUser.followers.push({
+                _id: localLoggedInUser._id,
+                fullname: localLoggedInUser.fullname,
+                username: localLoggedInUser.username,
+                imgUrl: localLoggedInUser.imgUrl || '',
+            })
         }
-        //         if (!updatedFollowing.some(follower => follower._id === targetUser._id)) {
-        //             updatedFollowing.push({
-        //                 _id: targetUser._id,
-        //                 fullname: targetUser.fullname,
-        //                 username: targetUser.username,
-        //                 imgUrl: targetUser.imgUrl || '',
-        //             });
-        //             setUserGotFollowed(targetUser)
-        //             setUserGotFollowed(prev => ({
-        //                 ...targetUser,
-        //                 followers: prev && prev.followers ? [...prev.followers, {
-        //                     _id: localLoggedInUser._id,
-        //                     fullname: localLoggedInUser.fullname,
-        //                     username: localLoggedInUser.username,
-        //                     imgUrl: localLoggedInUser.imgUrl || '',
-        //                 }] : [{
-        //                     _id: localLoggedInUser._id,
-        //                     fullname: localLoggedInUser.fullname,
-        //                     username: localLoggedInUser.username,
-        //                     imgUrl: localLoggedInUser.imgUrl || '',
-        //                 }]// adding to his followers the localLoggedInUser
-        //             }))
-        //         }
-        //     } else if (action === 'unfollow') {
-        //         updatedFollowing = updatedFollowing.filter(follower => follower._id !== targetUser._id);
-        //         if (userGotFollowed && userGotFollowed._id === targetUser._id) {
-        //             setUserGotFollowed(null)
-        //         }
-        //     }
-        //     setLocalLoggedInUser({ ...localLoggedInUser, following: updatedFollowing });
-        //     onFollowsActions(localLoggedInUser, true)
-        //     if (userGotFollowed) onFollowsActions(userGotFollowed, false)
+        else if (action === 'unfollow') {
+            // splice tragetUser from loggedInUser Following list DONE
+            updatedFollowing.map((following, index) => {
+                if (following._id === targetUser._id) {
+                    updatedFollowing.splice(index, 1)
+                }
+            })
+
+            // splice loggedInUser from targetUser Followers list DONE
+            updatedFollowers.map((follower, index) => {
+                if (follower._id === targetUser._id) {
+                    updatedFollowers.splice(index, 1)
+                }
+            })
+
+            targetUser.followers = updatedFollowers ? updatedFollowers : []
+            localLoggedInUser.following = updatedFollowing ? updatedFollowing : []
+        }
+        await storageService.put("user", targetUser) // שומר ב LocalStorage
+        onLoggedInUserActions(localLoggedInUser)
     }
 
     const isFollowing = (user: User) => {
-        return localLoggedInUser?.following.some(follower => follower._id === user._id);
+        return loggedInUser?.following.some(follower => follower._id === user._id);
     };
 
     return (

@@ -1,0 +1,121 @@
+@media (max-width: calc(1263px)) {
+    .user-controller {
+        min-width: 70px;
+        max-width: 70px;
+
+        .icon-container {
+            width: 75px;
+        }
+
+        section {
+            align-items: center;
+        }
+
+        .controller-logo {
+            display: none;
+            border-radius: 8px;
+
+            &:hover {
+                background-color: rgb(0, 0, 0, .05);
+                transition: background-color 0.3s ease;
+            }
+        }
+
+        .instagram-logo {
+            display: block;
+            // padding: 4px;
+            margin-top: 8px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            width: 48px;
+
+            &:hover {
+                background-color: rgb(0, 0, 0, .05);
+                transition: background-color 0.3s ease;
+            }
+        }
+
+        .logout-btn {
+            display: none;
+        }
+
+        .logout-icon {
+            display: block;
+        }
+
+    }
+
+    .icon-name {
+        display: none;
+    }
+
+    .icon-img {
+        margin-bottom: 10px;
+    }
+
+    .icon-container {
+        padding: 30px;
+        width: 48px;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.user-controller-responsive {
+    display: none;
+}
+
+.controller-logo-responsive {
+    display: none;
+}
+
+@media (max-width: calc(778px)) {
+    .user-controller {
+        display: none;
+    }
+
+    .post-preview-first {
+        margin-top: 27px;
+    }
+
+    .controller-logo-responsive {
+        display: inline;
+        position: fixed;
+        top: 0;
+        min-height: 2rem;
+        border-bottom: 2px solid #efefef;
+        background-color: white;
+        z-index: 1000;
+        max-height: 4rem;
+        width: 97vw;
+        object-fit: scale-down;
+
+        img {
+            height: 60px;
+            width: 150px;
+        }
+    }
+
+    .user-controller-responsive {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        min-height: 4rem;
+        border-top: 2px solid #efefef;
+        width: 97vw;
+        background-color: white;
+        z-index: 1000;
+        justify-content: space-evenly;
+
+        .css-1pqm26d-MuiAvatar-img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+
+        .icon-container-responsive {
+            min-width: 24px;
+            max-width: 24px;
+        }
+    }
+}

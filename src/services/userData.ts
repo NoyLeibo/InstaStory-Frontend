@@ -9,7 +9,14 @@ export const userData: User[] = [
         fullname: 'Noy Leibovich',
         imgUrl: 'https://res.cloudinary.com/dysh9q6ir/image/upload/v1706788350/%D7%9C%D7%9C%D7%90_%D7%A9%D7%9D_ngeib7.png',
         bio: '',
-        following: [],
+        following: [
+            {
+                _id: 'u107',
+                fullname: 'Emily',
+                username: 'EmilyC',
+                imgUrl: '../../img/faces/emily.png',
+            }
+        ],
         followers: [
             {
                 _id: 'u107',

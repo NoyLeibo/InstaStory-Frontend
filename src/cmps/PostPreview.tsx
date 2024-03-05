@@ -15,11 +15,12 @@ import { savePostAction } from "../store/actions/user.actions.ts";
 import moment from 'moment'
 
 interface PostPreviewProps {
+    index: Number;
     post: Post
     loggedInUser: User | null
 }
 
-export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
+export function PostPreview({ index, post, loggedInUser }: PostPreviewProps) {
     const [isLiked, setIsLiked] = useState(() => getInitialIsLikedState())
     const [isExpanded, setIsExpanded] = useState(false);
     const [commentText, setCommentText] = useState('');
@@ -110,7 +111,7 @@ export function PostPreview({ post, loggedInUser }: PostPreviewProps) {
     }
 
     return (
-        <section className="post-preview flex column">
+        <section className={index === 0 ? "post-preview post-preview-first flex column" : "post-preview flex column"}>
             <div className="post-header flex align-center">
                 <Stack direction="row" spacing={2}>
                     <Avatar className="profile-img-avatar" src={post.by.imgUrl} />

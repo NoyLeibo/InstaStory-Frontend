@@ -26,7 +26,7 @@ export function SignUpLevelOne({ setUsername, setFullname, setEmail, setPassword
                     onChange={(e) => setUsername(e.target.value)}
                     minLength={3}
                     maxLength={10}
-                />
+                    autoComplete="username" />
                 <input
                     required
                     placeholder='Fullname'
@@ -49,13 +49,14 @@ export function SignUpLevelOne({ setUsername, setFullname, setEmail, setPassword
                 />
                 <input
                     required
-                    placeholder='Password'
+                    placeholder="Password"
                     type="password"
                     name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                     minLength={3}
                     maxLength={10}
+                    value={password}
+                    autoComplete="current-password"
+                    onChange={(e) => setPassword(e.target.value)}
                 />
                 <button type="submit" className="bold">Register</button>
                 <div className="text-center flex row align-center justify-between">

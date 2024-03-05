@@ -7,6 +7,49 @@
 
 }
 
+@media (max-width: calc(777px)) {
+    .main-container {
+        grid-template-columns: 1fr;
+        /* Resets to single column */
+        // grid-template-rows: 1fr;
+        justify-content: center;
+        gap: 20px;
+        grid-template-areas:
+            "userController"
+            "homeIndex";
+    }
+
+    .user-controller,
+    .home-index {
+        grid-area: unset;
+    }
+
+}
+
+@media (max-width: calc(500px)) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .post-preview {
+        max-width: 400px;
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: calc(450px)) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .post-preview {
+        max-width: 350px;
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
 .home-index {
     grid-area: homeIndex;
     justify-content: center;

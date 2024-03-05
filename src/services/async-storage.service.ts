@@ -13,7 +13,7 @@ interface Entity {
     [key: string]: any;
 }
 
-function query<T extends Entity>(entityType: string, delay: number = 500): Promise<T[]> {
+function query<T extends Entity>(entityType: string, delay: number = 0): Promise<T[]> {
     return new Promise((resolve) => {
         const storedData = localStorage.getItem(entityType);
         const entities: T[] = storedData ? JSON.parse(storedData) : [];

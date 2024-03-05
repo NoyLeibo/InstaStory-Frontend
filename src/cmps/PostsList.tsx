@@ -12,9 +12,9 @@ export function PostsList({ posts, loggedInUser }: PostsListProps) {
 
     return (
         <ul className="posts-list">
-            {posts?.map((post) => (
+            {posts?.map((post, index) => (
                 <div key={post._id}>
-                    <PostPreview post={post} loggedInUser={loggedInUser} />
+                    <PostPreview index={index} post={post} loggedInUser={loggedInUser} />
                 </div>
             ))}
         </ul>
