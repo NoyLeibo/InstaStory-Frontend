@@ -23,8 +23,8 @@ export function HomePage() {
             </header>
             <UserController activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
             <UserControllerResponsive loggedInUser={loggedInUser} activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
-            <HomeIndex />
-            {activeIcon === 'Create' && <CreateImage setActiveIcon={setActiveIcon} activeIcon={activeIcon} />}
+            < HomeIndex />
+            {activeIcon === 'Create' && <CreateImage loggedInUser={loggedInUser} setActiveIcon={setActiveIcon} activeIcon={activeIcon} />}
         </main >
     )
 }

@@ -4,14 +4,24 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import RestorePageIcon from '@mui/icons-material/RestorePage';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import { postsService } from "../services/posts.service";
-
+import { storageService } from "../services/async-storage.service";
+import { User } from "../models/user.model";
+import EmojiPicker from "emoji-picker-react";
+import useOutsideClick from "../services/onclickoutside.service";
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 interface CreateImageProps {
   activeIcon: string;
   setActiveIcon: React.Dispatch<React.SetStateAction<string>>;
+  loggedInUser: User | null
 }
-export function CreateImage({ activeIcon, setActiveIcon }: CreateImageProps) {
+export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateImageProps) {
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadStepLevel, setUploadStepLevel] = useState(1);
+  const [imageTxt, setImageTxt] = useState('');
+  const [isEmojiModalOpen, setIsEmojiModalOpen] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [imgData, setImgData] = useState<{
     imgUrl: string | null;
     height: number;
@@ -21,6 +31,8 @@ export function CreateImage({ activeIcon, setActiveIcon }: CreateImageProps) {
     height: 500,
     width: 500,
   });
+  const emojiContentRef = useOutsideClick(() => setIsEmojiModalOpen(false))
+  const uploadImageContentRef = useOutsideClick(() => setActiveIcon('Home'))
 
   useEffect(() => {
     return () => {
@@ -29,22 +41,47 @@ export function CreateImage({ activeIcon, setActiveIcon }: CreateImageProps) {
     };
   }, []);
 
-function onClickStepBack(){
-// ev.preventDefault
-setImgData({
-    imgUrl: null,
-    height: 500,
-    width: 500,
-  })
-  setIsUploading(false)
-}
+  function onClickStepBack() {
+    // ev.preventDefault
+    setImgData({
+      imgUrl: null,
+      height: 500,
+      width: 500,
+    })
+    setIsUploading(false)
+  }
 
-function onUploadImage(){
-  const newImage = postsService.getEmptyPost()
-  console.log(newImage)
-  
-}
+  const handleEmojiClick = (emojiObject: { emoji: string }) => {
+    if (emojiObject && emojiObject.emoji) {
+      setImageTxt((prevText) => prevText + emojiObject.emoji)
+      setIsEmojiModalOpen(false)
+    } else {
+      console.error('Emoji data not found')
+    }
+  }
+  const toggleEmojiPicker = () => {
+    setIsEmojiModalOpen(!isEmojiModalOpen)
+  }
 
+  function onUploadImage() {
+    const newImage = postsService.getEmptyPost()
+    console.log(newImage)
+    if (imgData.imgUrl) newImage.imgUrl = imgData.imgUrl
+    else alert('error no imgUrl ')
+    newImage.createdAt = String(new Date())
+    newImage._id = storageService.makeId()
+    newImage.txt = imageTxt
+    if (loggedInUser) newImage.by = { imgUrl: loggedInUser.imgUrl || '', username: loggedInUser.username, _id: loggedInUser._id }
+    // _id: string;
+    // createdAt: any;
+    // txt: string;
+    // imgUrl: string;
+    // by: UserMinimal;
+    // loc: Location;
+    // comments: Comment[];
+    // likedBy: UserMinimal[]
+    // tags: string[];
+  }
   const onUpload = async (ev: ChangeEvent<HTMLInputElement>): Promise<void> => {
     ev.preventDefault();
     const files = ev.target.files;
@@ -71,53 +108,76 @@ function onUploadImage(){
         console.error("Error uploading image:", error);
       } finally {
         setIsUploading(false);
+        setUploadStepLevel(2)
       }
     }
-  };
-
+  }
+  function handleTextChange(ev: any) {
+    setImageTxt(ev.target.value)
+  }
   return (
     <section className="create-image-background">
-      <div className="create-image-modal flex column">
+      <div ref={uploadImageContentRef} className="create-image-modal flex column">
         <div className="create-image-title flex align-center justify-center">
-          Create 
+          Create
         </div>
-          {imgData.imgUrl && !isUploading ? (
-        // <div className="create-image-main flex column align-center justify-center">
-            <div className="upload-preview flex column align-center">
-              <img
-                className="post-img"
-                src={imgData.imgUrl}
-                alt="Uploaded"
-              />
-              <div className="flex post-btns width100">
-              <button className="post-btn" onClick={onClickStepBack}><RestorePageIcon/> Pick another
-              </button>
-              <button className="post-btn" onClick={onUploadImage}>
-                Continue<DownloadDoneIcon/>
-              </button>
-            </div>
-         </div>
-          ) : ( 
-            <div className="create-image-main flex column align-center justify-center">
-              <img
-                className="upload-post-image"
-                src="../public/svg/upload-photo.svg"
-                alt="Placeholder for upload"
-              />
+        {uploadStepLevel === 1 && (
+          <div className="create-image-main  flex column align-center justify-center">
+            {/* Wrap the clickable elements with a label */}
+            <label htmlFor="imgUpload" style={{ cursor: 'pointer', textAlign: 'center' }}>
+              <img className="upload-post-image" src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1709736903/upload-photo_fznclk.svg" alt="Placeholder for upload" />
               <div>Upload photos here.</div>
-              <label htmlFor="imgUpload">
-                {isUploading ? "Uploading...." : <span className="flex align-center justify-center margin8">* Upload Image <AddAPhotoIcon/></span>}
-              </label>
-              <input
-                id="imgUpload"
-                type="file"
-                style={{ display: "none" }}
-                onChange={onUpload}
-              />
+            </label>
+            <label className="pointer" htmlFor="imgUpload">
+              {isUploading ? "Uploading...." : <span className="flex align-center justify-center margin8">* Upload Image <AddAPhotoIcon /></span>}
+            </label>
+            <input id="imgUpload" type="file" style={{ display: "none" }} onChange={onUpload} />
+          </div>
+        )}
+
+
+        {uploadStepLevel === 2 && imgData.imgUrl && (
+          <div className="upload-preview flex column align-center">
+            <img className="post-img" src={imgData.imgUrl} alt="Uploaded" />
+            <div className="flex post-btns width100">
+              <button className="post-btn-step2" onClick={onClickStepBack}><SkipPreviousIcon /> Pick another</button>
+              <span className="bold fs16">Is the picture ok?</span>
+              <button className="post-btn-step2" onClick={() => setUploadStepLevel(3)}>Continue<SkipNextIcon /></button>
             </div>
-            
-          )}
+          </div>
+        )}
+        {uploadStepLevel === 3 && (
+          <div className="upload-preview-step3 flex column align-center">
+            <div>
+              <textarea
+                className="post-create-textarea"
+                value={imageTxt}
+                placeholder="Write a caption..."
+                onChange={handleTextChange} />
+
+              <div className="flex row">
+                <div className="emoji-text-length flex">
+                  <span>
+                    <img src={'../svg/emoji.svg'} className="toggle-emoji-picker" onClick={toggleEmojiPicker} />
+                    <span className="text-length">{imageTxt.length}/2,200</span>
+                  </span>
+                  <span className="post-btn pointer" onClick={onUploadImage}>Continue<DownloadDoneIcon /></span>
+                </div>
+
+              </div>
+
+            </div>
+            <img className="post-image-before-post" src={imgData.imgUrl || ''} />
+          </div>
+        )}
+
       </div>
+
+      {isEmojiModalOpen && (<div className="emoji-modal">
+        <div ref={emojiContentRef}>
+          <EmojiPicker onEmojiClick={handleEmojiClick} />
+        </div>
+      </div>)}
     </section>
   )
 }

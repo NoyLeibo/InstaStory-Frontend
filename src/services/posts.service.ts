@@ -111,7 +111,7 @@ function getEmptyFollower() {
   )
 }
 
-function getEmptyPost(){
+function getEmptyPost() {
   return ({
     _id: '',
     createdAt: '',
@@ -120,17 +120,17 @@ function getEmptyPost(){
     by: {
       _id: '',
       username: '',
-      imgUrl: ''
-  },
+      imgUrl: '',
+    },
     loc: {
       lat: '',
       lng: '',
       name: '',
-  },
+    },
     comments: [],
     likedBy: [],
     tags: []
-})
+  })
 }
 
 async function addComment(post: Post, txt: string) {
