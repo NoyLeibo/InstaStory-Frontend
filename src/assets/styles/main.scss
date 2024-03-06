@@ -14,12 +14,6 @@
 // Pages
 @import "pages/_authPage";
 @import "pages/_authPageResponsive";
-// @import "views/AboutUs";
-// @import "views/HomePage";
-// @import "views/StayIndex";
-// @import "views/ReviewIndex";
-// @import "views/UserDetails";
-// @import "views/StayDetails";
 
 // Components
 @import "cmps/_UserController";
@@ -27,8 +21,4 @@
 @import "cmps/_PostPreview";
 @import "cmps/_CommentModal";
 @import "cmps/_SuggestedModal";
-@import "cmps/_CreateImage.scss";
-// @import "cmps/Calendar";
-// @import "cmps/Destination";
-// @import "cmps/Guest";
-// @import "cmps/AppFooter";
+@import "cmps/_CreateImage";

@@ -157,6 +157,10 @@
   padding-block: 32px;
 }
 
+.width100{
+  width: 90%;
+}
+
 // Media Helpers
 .square-ratio {
   @include aspect-ratio(1, 1);

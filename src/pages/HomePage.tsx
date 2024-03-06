@@ -8,7 +8,7 @@ import { HomeIndex } from "../cmps/HomeIndex.tsx";
 import { CreateImage } from "../cmps/CreateImage.tsx";
 
 export function HomePage() {
-    const [activeIcon, setActiveIcon] = useState('Home');
+    const [activeIcon, setActiveIcon] = useState('Create');
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
     let navigate = useNavigate();
 

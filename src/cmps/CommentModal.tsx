@@ -47,7 +47,6 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
     }
 
     async function handleSubmitComment(ev: React.FormEvent<HTMLFormElement>) {
-        console.log('test');
         try {
             ev.preventDefault()
             if (!commentText) return // If press post and not text
@@ -64,6 +63,7 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
     useEffect(() => {
         document.body.style.overflow = 'hidden'
     }, [])
+
 
     return (
         <section className="comment-modal-background">

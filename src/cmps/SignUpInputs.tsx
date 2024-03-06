@@ -62,6 +62,7 @@ export function SignUpInputs({ username, setPassword, setUsername, password }: S
         if (registerLevel === 1 && !checkIfInvalidMail(email)) setRegisterLevel(2)
         if (checkIfInvalidMail(email)) alert('Your email is not valid')
     }
+
     const onUpload = async (ev: ChangeEvent<HTMLInputElement>): Promise<void> => {
         ev.preventDefault();
         const files = ev.target.files;

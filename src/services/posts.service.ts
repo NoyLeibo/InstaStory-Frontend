@@ -17,7 +17,8 @@ export const postsService = {
   toggleLike,
   getEmptyComment,
   addComment,
-  getEmptyFollower
+  getEmptyFollower,
+  getEmptyPost,
   // query,
   // getById,
   // save,
@@ -97,6 +98,8 @@ function getEmptyComment() {
   }
 }
 
+
+
 function getEmptyFollower() {
   return (
     {
@@ -108,6 +111,27 @@ function getEmptyFollower() {
   )
 }
 
+function getEmptyPost(){
+  return ({
+    _id: '',
+    createdAt: '',
+    txt: '',
+    imgUrl: '',
+    by: {
+      _id: '',
+      username: '',
+      imgUrl: ''
+  },
+    loc: {
+      lat: '',
+      lng: '',
+      name: '',
+  },
+    comments: [],
+    likedBy: [],
+    tags: []
+})
+}
 
 async function addComment(post: Post, txt: string) {
   // Later, this is all done by the backend

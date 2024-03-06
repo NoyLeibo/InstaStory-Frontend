@@ -1,4 +1,4 @@
-.create-image-modal {
+.create-image-background{
     position: fixed;
     top: 0;
     left: 0;
@@ -9,4 +9,74 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
+    .create-image-modal {
+        background-color: white;
+        max-width: rem(510px);
+        min-width: rem(510px);
+        min-height: 85vh;
+        border-radius: 12px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+    
+    .create-image-title{
+        height: 50px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #dbdbdb;
+    }
+    .create-image-main{
+        flex-grow: 1;
+        .upload-post-image{
+            width: 96px;
+            height: 77px;
+        }
+        .step-back-btn{
+            border: none;
+            height: 30px;
+            margin: 10px;
+            color: white;
+            font-size: 14px;
+            width: 200px;
+        }
+        .signup-btn{
+            border: none;
+            height: 30px;
+            margin: 10px;
+            color: white;
+            font-size: 14px;
+            width: 100px;
+        }
+        .upload-btn{
+            color: white;
+            border:none;
+            height: 32px;
+            width: 130px;
+        }
+    }
+}
+
+.upload-preview{
+    flex-grow: .3;
+    justify-content: space-around;
+    .post-btns{
+        justify-content: space-between;
+.post-btn{
+    color: white;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border:none;
+    
+}
+    }
+    .post-img{
+        // width: rem(300px);
+        // height: rem(300px);
+        object-fit:cover;
+    height: 100%;
+    max-width:90%;
+    max-height: calc(100vh - 140px);
+        border-radius: 20px;
+        border: 1px solid rgb(125, 123, 123);
+    }
 }
