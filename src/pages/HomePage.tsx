@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { UserController } from "../cmps/UserController";
 import { UserControllerResponsive } from "../cmps/UserControllerResponsive.tsx";
 import { HomeIndex } from "../cmps/HomeIndex.tsx";
+import { CreateImage } from "../cmps/CreateImage.tsx";
 
 export function HomePage() {
     const [activeIcon, setActiveIcon] = useState('Home');
@@ -23,6 +24,7 @@ export function HomePage() {
             <UserController activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
             <UserControllerResponsive loggedInUser={loggedInUser} activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
             <HomeIndex />
+            {activeIcon === 'Create' && <CreateImage setActiveIcon={setActiveIcon} activeIcon={activeIcon} />}
         </main >
     )
 }

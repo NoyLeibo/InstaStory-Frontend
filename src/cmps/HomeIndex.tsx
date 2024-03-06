@@ -8,6 +8,7 @@ import { Post } from "../models/posts.model.ts";
 import { loadUsers } from "../store/actions/user.actions.ts";
 
 
+
 export function HomeIndex() {
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
     const posts: Post[] | any = useSelector((state: RootState) => state.postsModule.posts)
