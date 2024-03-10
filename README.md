@@ -1,7 +1,7 @@
-## *_InstaStory_*
+# *_InstaStory_*
 InstaStory is a modern web application inspired by Instagram, focusing on sharing and interacting with stories in a vibrant community. This project is designed to replicate the seamless experience of Instagram's story feature, allowing users to post, view, and manage stories within a streamlined interface.
 
-# **_🛠️Technologies Used🛠️_**
+## *_🛠️Technologies Used🛠️_*
 Frontend:
 
 React.js: A JavaScript library for building user interfaces
