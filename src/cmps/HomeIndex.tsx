@@ -15,30 +15,25 @@ export function HomeIndex({ activeIcon }: HomeIndexPrpos) {
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
     const posts: Post[] | any = useSelector((state: RootState) => state.postsModule.posts)
     const allUsers: User[] | any = useSelector((state: RootState) => state.userModule.users)
-    const [filteredPostsByNewest, setFilteredPostsByNewest] = useState<Post[]>([]);
 
     useEffect(() => {
         loadPosts()
         loadUsers()
         // console.log('welcome back', loggedInUser?.username);
-        console.log('posts', posts);
-    }, [activeIcon])
+    }, [])
 
     useEffect(() => {
-        const newFilteredPosts = posts.sort((a: Post, b: Post) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
-        setFilteredPostsByNewest(newFilteredPosts);
-        console.log(filteredPostsByNewest);
-
-    }, [posts]);
+        console.log('posts1', posts);
+        loadPosts()
+        console.log('posts2', posts);
+    }, [activeIcon])
 
 
     if (!posts || posts.length === 0) return (<h1>No posts for now</h1>)
     return (
         <section className="home-index flex">
             {/* <StoryIndex /> */}
-            <PostsList posts={filteredPostsByNewest} loggedInUser={loggedInUser} />
+            <PostsList posts={posts} loggedInUser={loggedInUser} />
             <SuggestedModal allUsers={allUsers} loggedInUser={loggedInUser} />
         </section>
     )

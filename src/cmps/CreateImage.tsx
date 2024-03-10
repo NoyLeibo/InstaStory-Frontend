@@ -50,9 +50,7 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
   useEffect(() => {
     const fetchData = async () => {
       const city = imageToEdit.loc.city;
-
       if (!city) return
-
       const apiKey = 'FI4PLbJWY419OZOekoGiEw==YlZDI137pJrTNAF1';
       const url = `https://api.api-ninjas.com/v1/geocoding?city=${encodeURIComponent(city)}`
 
@@ -100,7 +98,7 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
   }
 
   function onUploadImage() {
-    if (!imageToEdit.loc.city) alert('error no city located')
+    // if (!imageToEdit.loc.city) alert('error no city located')
     if (imgData.imgUrl) imageToEdit.imgUrl = imgData.imgUrl
     else alert('error no imgUrl ')
     imageToEdit.createdAt = new Date().getTime()
@@ -111,10 +109,13 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
     imageToEdit.loc.lng = cords.lng
     try {
       onPostReadyImage(imageToEdit)
-      setActiveIcon("Home")
+
+      // console.log('CreateImage.tsx');
+      setTimeout(() => {
+        setActiveIcon("Home")
+      }, 1000);
     } catch (err) {
       console.log(err);
-
     }
   }
 

@@ -1,0 +1,21 @@
+.comment-responsive {
+    display: none;
+}
+
+@media (max-width: calc(1263px)) {}
+
+@media (max-width: calc(650px)) {
+    .comment-not-responsive {
+        display: none;
+    }
+
+    .comment-responsive {
+        display: block;
+    }
+
+    .create-image-background {
+        .create-image-modal {
+            min-width: 20.875rem;
+        }
+    }
+}

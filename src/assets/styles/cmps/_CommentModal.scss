@@ -16,6 +16,7 @@
         max-width: 70vw;
         min-width: 70vw;
         min-height: 85vh;
+        max-height: 50vh;
         border-radius: 12px;
         border-top-left-radius: 15px;
         border-bottom-left-radius: 15px;
@@ -103,5 +104,28 @@
         color: rgb(0, 55, 107);
         transition: color .3s ease;
 
+    }
+}
+
+.comment-text {
+    word-wrap: break-word;
+}
+
+.max-width-textmodal {
+    word-wrap: break-word;
+    max-width: 180px;
+}
+
+@media (max-width: calc(1263px)) {
+
+    .max-width-textmodal {
+        max-width: 100px;
+    }
+}
+
+@media (max-width: calc(1090px)) {
+
+    .max-width-textmodal {
+        max-width: 50px;
     }
 }

@@ -3,10 +3,12 @@ import Explore from '../../public/svg/explore.svg'
 import Reels from '../../public/svg/reels.svg'
 import Notification from '../../public/svg/notification.svg'
 // import More from '../../public/svg/more.svg'
+import Create from '../../public/svg/create.svg'
 
 import HomeActive from '../../public/svg/active/home-active.svg'
 import ExploreActive from '../../public/svg/active/explore-active.svg'
 import ReelsActive from '../../public/svg/active/reels-active.svg'
+import CreateActive from '../../public/svg/active/create-active.svg'
 import NotificationActive from '../../public/svg/active/notification-active.svg'
 import { User } from '../models/user.model'
 import { Avatar } from '@mui/material'
@@ -34,10 +36,10 @@ export function UserControllerResponsive({ loggedInUser, activeIcon, setActiveIc
             alt: 'Explore',
         },
         {
-            name: 'Reels',
-            src: Reels,
-            srcActive: ReelsActive,
-            alt: 'Reels',
+            name: 'Create',
+            src: Create,
+            srcActive: CreateActive,
+            alt: 'Create',
         },
         {
             name: 'Notification',

@@ -29,6 +29,7 @@ import { store } from "../store";
 export async function loadPosts() {
   try {
     const posts = await postsService.getPosts()
+
     store.dispatch({ type: SET_POSTS, posts });
   } catch (err) {
     console.log("PostActions: err in loadPosts", err);
@@ -37,7 +38,7 @@ export async function loadPosts() {
 
 export function onPostReadyImage(imageToPost: Post) {
   postsService.addPost(imageToPost)
-  loadPosts() // will update on the store the posts
+  // loadPosts() // will update on the store the posts
 }
 
 //   return {

@@ -33,7 +33,7 @@ export const postsService = {
 // window.cs = stayService;
 
 async function getPosts(): Promise<any> {
-  const posts = (await storageService.query(STORAGE_KEY))
+  const posts = await storageService.query(STORAGE_KEY, 0, true);
   return posts;
   // return httpService.get(`posts`) // מוכן לBACK-END
 }
@@ -137,7 +137,7 @@ function getEmptyPost(): Post {
 async function addPost(post: Post) {
   try {
     const postToUpdate = await storageService.post(STORAGE_KEY, post)
-    console.log('Story to update from service', postToUpdate)
+    console.log('Post to update from service', postToUpdate)
     return postToUpdate
   } catch (err) {
     console.log('Cannot get post in order to add post', err)

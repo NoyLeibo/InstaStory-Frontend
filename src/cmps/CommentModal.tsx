@@ -82,8 +82,8 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
                             <div>
                                 <div className="flex align-center fs14 comment">
                                     <Avatar src={post.by.imgUrl} />
-                                    <div className="marginleft8">
-                                        <span className="bold">{post.by.username}</span><span>{" "}</span>{post.txt}
+                                    <div className="marginleft8 max-width-textmodal">
+                                        <span className="bold">{post.by.username}</span><span>{" "}</span><span className="comment-text">{post.txt}</span>
                                         <div className="fs14">
                                             {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
                                         </div>
@@ -94,7 +94,7 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
                             <div key={comment.id} className="flex align-center fs14 comment">
                                 <Avatar src={comment.by.imgUrl} alt={comment.by.username} />
                                 <div className="marginleft8">
-                                    <span className="bold">{comment.by.username}</span><span>{" "}</span>{comment.txt}
+                                    <span className="bold">{comment.by.username}</span><span>{" "}</span><span className="comment-text">{post.txt}</span>
                                     <div className="fs14">
                                         {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                                     </div>

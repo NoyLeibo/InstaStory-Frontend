@@ -24,6 +24,7 @@ export function postsReducer(state: PostsState = initialState, action: PostsActi
   var newState = state;
   // var stays;
   // var cart;
+
   switch (action.type) {
     case SET_POSTS:
       newState = { ...state, posts: action.posts };

@@ -13,13 +13,22 @@ interface Entity {
     [key: string]: any;
 }
 
-function query<T extends Entity>(entityType: string, delay: number = 0): Promise<T[]> {
+function query<T extends Entity>(entityType: string, delay: number = 0, sortNewestFirst: boolean = false): Promise<T[]> {
     return new Promise((resolve) => {
         const storedData = localStorage.getItem(entityType);
-        const entities: T[] = storedData ? JSON.parse(storedData) : [];
+        let entities: T[] = storedData ? JSON.parse(storedData) : [];
+
+        // Sort entities by createdAt date if sortNewestFirst is true
+        if (sortNewestFirst && entities.length > 0 && 'createdAt' in entities[0]) {
+            entities = entities.sort((a, b) =>
+                new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+        }
+
         setTimeout(() => resolve(entities), delay);
     });
 }
+
 
 function post<T extends Entity>(entityType: string, newEntity: Omit<T, '_id'>): Promise<T> {
     const entityWithId: T = { ...JSON.parse(JSON.stringify(newEntity)), _id: makeId() } as T

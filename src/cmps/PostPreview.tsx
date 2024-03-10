@@ -30,7 +30,9 @@ export function PostPreview({ index, post, loggedInUser }: PostPreviewProps) {
 
     const words = post.txt.split(' ');
     const showMoreNeeded = words.length > 7;
+    const showMoreNeededResponsive = words.length > 5;
     const displayedText = showMoreNeeded && !isExpanded ? words.slice(0, 7).join(' ') + '... ' : post.txt;
+    const displayedTextResponsive = showMoreNeededResponsive && !isExpanded ? words.slice(0, 5).join(' ') + '... ' : post.txt;
     const savedPosts = loggedInUser?.savedPostsIds
 
     useEffect(() => {
@@ -146,9 +148,17 @@ export function PostPreview({ index, post, loggedInUser }: PostPreviewProps) {
                 </div> :
                 <div className="fs14 bold">{post.likedBy.length ? `${post.likedBy.length} likes` : ''}</div>
             }
-            <p className="fs14">
+            <p className="fs14 comment-not-responsive">
                 <span className="bold pointer">{post.by.username}</span> {displayedText}
                 {showMoreNeeded && !isExpanded && (
+                    <button onClick={toggleExpand} className="show-more-btn pointer">
+                        more
+                    </button>
+                )}
+            </p>
+            <p className="fs14 comment-responsive">
+                <span className="bold pointer">{post.by.username}</span> <span className="comment-text">{displayedText}</span>
+                {showMoreNeededResponsive && !isExpanded && (
                     <button onClick={toggleExpand} className="show-more-btn pointer">
                         more
                     </button>
