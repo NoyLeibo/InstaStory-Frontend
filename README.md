@@ -1,30 +1,36 @@
-# React + TypeScript + Vite
+# *_InstaStory_*
+InstaStory is a personal project inspired by Instagram, focusing on sharing and interacting with stories in a vibrant online community. Designed as a playground for improving my coding skills and for my own enjoyment, this project aims to replicate the seamless experience of Instagram's story feature. Users can post, view, and manage stories within a streamlined interface, making storytelling more engaging and accessible.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## *_🛠️Technologies Used🛠️_*
+### *Frontend:*
+React.js,
+TypeScript,
+Redux,
+Local Storage & Session Storage: Web storage solutions for storing data on the client side.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### *Backend (To be developed):*
 
-## Expanding the ESLint configuration
+Express,
+TypeScript,
+MongoDB,
+Node.js.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+### *_Project Status_*
+InstaStory is currently in its initial development phase, focusing primarily on the frontend. The backend development will commence once the frontend part is robust and feature-complete.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### *_Current Features_*
+Story Management: Users can post new stories, view existing ones, and manage their stories using local and session storage for data persistence. *TO BE*
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## *_Upcoming Features_*
+Backend Integration: Development of a scalable backend using Express, MongoDB, TypeScript, and Node.js.
+Authentication: Implementing user authentication to manage access and user sessions.
+Enhanced Story Features: Including but not limited to commenting, likes, and story customization options.
+
+## **_Contact_**
+Noy Leibovich - [@LinkedIn](https://www.linkedin.com/in/noy-leibovich-66343a1b1/) - Noyleibo70@gmail.com
+
+Project Link: https://github.com/NoyLeibo/InstaStory
+Project Domain: **Soon.**
+
