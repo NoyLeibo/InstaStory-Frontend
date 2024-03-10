@@ -3,24 +3,18 @@ InstaStory is a personal project inspired by Instagram, focusing on sharing and 
 
 ## *_🛠️Technologies Used🛠️_*
 ### *Frontend:*
-React.js
-
-TypeScript
-
-Redux
-
-Local Storage & Session Storage: Web storage solutions for storing data on the client side
+React.js,
+TypeScript,
+Redux,
+Local Storage & Session Storage: Web storage solutions for storing data on the client side.
 
 
 ### *Backend (To be developed):*
 
-Express
-
-TypeScript
-
-MongoDB
-
-Node.js
+Express,
+TypeScript,
+MongoDB,
+Node.js.
 
 
 ### *_Project Status_*
@@ -28,7 +22,8 @@ InstaStory is currently in its initial development phase, focusing primarily on 
 
 ### *_Current Features_*
 Story Management: Users can post new stories, view existing ones, and manage their stories using local and session storage for data persistence. *TO BE*
-Upcoming Features
+
+## *_Upcoming Features_*
 Backend Integration: Development of a scalable backend using Express, MongoDB, TypeScript, and Node.js.
 Authentication: Implementing user authentication to manage access and user sessions.
 Enhanced Story Features: Including but not limited to commenting, likes, and story customization options.
