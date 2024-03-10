@@ -18,6 +18,7 @@
 // import { SET_SCORE, SET_USERS } from "../reducers/user.reducer.js";
 // import { SET_FILTER_BY } from "../reducers/stay.reducer.js";
 
+import { Post } from "../../models/posts.model";
 import { postsService } from "../../services/posts.service";
 import { SET_POSTS } from "../reducers/posts.reducer";
 import { store } from "../store";
@@ -33,6 +34,12 @@ export async function loadPosts() {
     console.log("PostActions: err in loadPosts", err);
   }
 }
+
+export function onPostReadyImage(imageToPost: Post) {
+  postsService.addPost(imageToPost)
+  loadPosts() // will update on the store the posts
+}
+
 //   return {
 //     type: REMOVE_STAY,
 //     stayId,

@@ -19,6 +19,7 @@ export const postsService = {
   addComment,
   getEmptyFollower,
   getEmptyPost,
+  addPost,
   // query,
   // getById,
   // save,
@@ -111,8 +112,8 @@ function getEmptyFollower() {
   )
 }
 
-function getEmptyPost() {
-  return ({
+function getEmptyPost(): Post {
+  return {
     _id: '',
     createdAt: '',
     txt: '',
@@ -123,15 +124,27 @@ function getEmptyPost() {
       imgUrl: '',
     },
     loc: {
-      lat: '',
-      lng: '',
-      name: '',
+      lat: 0,
+      lng: 0,
+      city: '',
     },
     comments: [],
     likedBy: [],
     tags: []
-  })
+  }
 }
+
+async function addPost(post: Post) {
+  try {
+    const postToUpdate = await storageService.post(STORAGE_KEY, post)
+    console.log('Story to update from service', postToUpdate)
+    return postToUpdate
+  } catch (err) {
+    console.log('Cannot get post in order to add post', err)
+    throw err
+  }
+}
+
 
 async function addComment(post: Post, txt: string) {
   // Later, this is all done by the backend
@@ -151,10 +164,10 @@ async function addComment(post: Post, txt: string) {
       post.comments.push(comment)
     }
     const postToUpdate = await storageService.put(STORAGE_KEY, post)
-    console.log('Story to update from service', postToUpdate)
+    console.log('Post to update from service', postToUpdate)
     return postToUpdate
   } catch (err) {
-    console.log('Cannot get story in order to add comment', err)
+    console.log('Cannot get post in order to add comment', err)
     throw err
   }
 }

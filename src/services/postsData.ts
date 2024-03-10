@@ -13,7 +13,7 @@ export const postsData: Post[] = [
         loc: {
             lat: 33.91,
             lng: -118.41,
-            name: 'Santa Monica',
+            city: 'Santa Monica',
         },
         comments: [
             {
@@ -54,7 +54,7 @@ export const postsData: Post[] = [
         loc: {
             lat: 45.66,
             lng: -110.56,
-            name: 'Rocky Mountains',
+            city: 'Rocky Mountains',
         },
         comments: [],
         likedBy: [],
@@ -73,7 +73,7 @@ export const postsData: Post[] = [
         loc: {
             lat: 40.71,
             lng: -74.01,
-            name: 'New York City',
+            city: 'New York City',
         },
         comments: [],
         likedBy: [],
@@ -92,7 +92,7 @@ export const postsData: Post[] = [
         loc: {
             lat: 34.05,
             lng: -118.24,
-            name: 'Los Angeles',
+            city: 'Los Angeles',
         },
         comments: [],
         likedBy: [],

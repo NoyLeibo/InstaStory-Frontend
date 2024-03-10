@@ -13,7 +13,7 @@ import useOutsideClick from "../services/onclickoutside.service.ts";
 // import { storageService } from "../services/async-storage.service.ts";
 import { savePostAction } from "../store/actions/user.actions.ts";
 import moment from 'moment'
-
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 interface PostPreviewProps {
     index: Number;
     post: Post
@@ -111,14 +111,17 @@ export function PostPreview({ index, post, loggedInUser }: PostPreviewProps) {
 
     return (
         <section className={index === 0 ? "post-preview post-preview-first flex column" : "post-preview flex column"}>
-            <div className="post-header flex align-center">
-                <Stack direction="row" spacing={2}>
-                    <Avatar className="profile-img-avatar" src={post.by.imgUrl} />
-                </Stack>
-                <div className="flex column fs14 ">
-                    <span className="bold pointer">{post.by.username} • <span className="graytxt fs12">{formatTimestamp(post.createdAt)}</span> </span>
-                    {post.loc.name && <span className="pointer">{post.loc.name}</span>}
+            <div className="flex space-between align-center">
+                <div className="post-header flex align-center">
+                    <Stack direction="row" spacing={2}>
+                        <Avatar className="profile-img-avatar" src={post.by.imgUrl} />
+                    </Stack>
+                    <div className="flex column fs14 ">
+                        <span className="bold pointer">{post.by.username} • <span className="graytxt fs12">{formatTimestamp(post.createdAt)}</span> </span>
+                        {post.loc.city && <span className="pointer">{post.loc.city}</span>}
+                    </div>
                 </div>
+                <MoreHorizIcon className="pointer" /> {/*On click should open modal with btns: go to post / cancel */}
             </div>
             <img className="post-image" src={post.imgUrl} />
             <div className="full-like-row flex">

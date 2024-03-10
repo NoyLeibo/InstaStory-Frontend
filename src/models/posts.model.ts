@@ -14,8 +14,9 @@ export interface Comment {
 export interface Location {
     lat: number;
     lng: number;
-    name: string;
+    city: string;
 }
+
 
 export interface Post {
     _id: string;

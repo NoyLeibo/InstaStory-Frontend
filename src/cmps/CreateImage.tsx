@@ -1,7 +1,6 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { uploadService } from "../services/upload.service";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import RestorePageIcon from '@mui/icons-material/RestorePage';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import { postsService } from "../services/posts.service";
 import { storageService } from "../services/async-storage.service";
@@ -10,17 +9,24 @@ import EmojiPicker from "emoji-picker-react";
 import useOutsideClick from "../services/onclickoutside.service";
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import SimpleMap from "./GoogleMap";
+import { onPostReadyImage } from "../store/actions/posts.actions";
+
 interface CreateImageProps {
   activeIcon: string;
   setActiveIcon: React.Dispatch<React.SetStateAction<string>>;
   loggedInUser: User | null
 }
+
 export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateImageProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadStepLevel, setUploadStepLevel] = useState(1);
   const [imageTxt, setImageTxt] = useState('');
   const [isEmojiModalOpen, setIsEmojiModalOpen] = useState(false)
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [cords, setCords] = useState({ lat: 32.109333, lng: 34.855499 })
+  const [imageToEdit, setImageToEdit] = useState(postsService.getEmptyPost())
+
+  // const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [imgData, setImgData] = useState<{
     imgUrl: string | null;
@@ -41,6 +47,35 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
     };
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const city = imageToEdit.loc.city;
+
+      if (!city) return
+
+      const apiKey = 'FI4PLbJWY419OZOekoGiEw==YlZDI137pJrTNAF1';
+      const url = `https://api.api-ninjas.com/v1/geocoding?city=${encodeURIComponent(city)}`
+
+      try {
+        const response = await fetch(url, {
+          headers: {
+            'X-Api-Key': apiKey
+          }
+        })
+
+        if (!response.ok) throw new Error(`Error: ${response.status}`);
+        const data = await response.json();
+        console.log(data);
+        setCords({ lat: data[0].latitude, lng: data[0].longitude });
+      } catch (error) {
+        console.error('Request failed:', error);
+      }
+    };
+
+    fetchData();
+  }, [imageToEdit.loc.city]); // Dependency array ensures effect runs on changes to city or country
+
+
   function onClickStepBack() {
     // ev.preventDefault
     setImgData({
@@ -49,6 +84,7 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
       width: 500,
     })
     setIsUploading(false)
+    setUploadStepLevel(1)
   }
 
   const handleEmojiClick = (emojiObject: { emoji: string }) => {
@@ -64,24 +100,45 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
   }
 
   function onUploadImage() {
-    const newImage = postsService.getEmptyPost()
-    console.log(newImage)
-    if (imgData.imgUrl) newImage.imgUrl = imgData.imgUrl
+    if (!imageToEdit.loc.city) alert('error no city located')
+    if (imgData.imgUrl) imageToEdit.imgUrl = imgData.imgUrl
     else alert('error no imgUrl ')
-    newImage.createdAt = String(new Date())
-    newImage._id = storageService.makeId()
-    newImage.txt = imageTxt
-    if (loggedInUser) newImage.by = { imgUrl: loggedInUser.imgUrl || '', username: loggedInUser.username, _id: loggedInUser._id }
-    // _id: string;
-    // createdAt: any;
-    // txt: string;
-    // imgUrl: string;
-    // by: UserMinimal;
-    // loc: Location;
-    // comments: Comment[];
-    // likedBy: UserMinimal[]
-    // tags: string[];
+    imageToEdit.createdAt = new Date().getTime()
+    imageToEdit._id = storageService.makeId()
+    imageToEdit.txt = imageTxt
+    if (loggedInUser) imageToEdit.by = { imgUrl: loggedInUser.imgUrl || '', username: loggedInUser.username, _id: loggedInUser._id }
+    imageToEdit.loc.lat = cords.lat
+    imageToEdit.loc.lng = cords.lng
+    try {
+      onPostReadyImage(imageToEdit)
+      setActiveIcon("Home")
+    } catch (err) {
+      console.log(err);
+
+    }
   }
+
+  function handleChange(ev: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = ev.target;
+
+    setImageToEdit(prev => {
+      // Directly update 'country' and 'city' within the loc object
+      if (name === "country" || name === "city") {
+        return {
+          ...prev,
+          loc: {
+            ...prev.loc,
+            [name]: value,
+          },
+        };
+      }
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  }
+
   const onUpload = async (ev: ChangeEvent<HTMLInputElement>): Promise<void> => {
     ev.preventDefault();
     const files = ev.target.files;
@@ -117,7 +174,7 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
   }
   return (
     <section className="create-image-background">
-      <div ref={uploadImageContentRef} className="create-image-modal flex column">
+      <div ref={isEmojiModalOpen ? null : uploadImageContentRef} className="create-image-modal flex column">
         <div className="create-image-title flex align-center justify-center">
           Create
         </div>
@@ -134,7 +191,6 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
             <input id="imgUpload" type="file" style={{ display: "none" }} onChange={onUpload} />
           </div>
         )}
-
 
         {uploadStepLevel === 2 && imgData.imgUrl && (
           <div className="upload-preview flex column align-center">
@@ -161,13 +217,26 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
                     <img src={'../svg/emoji.svg'} className="toggle-emoji-picker" onClick={toggleEmojiPicker} />
                     <span className="text-length">{imageTxt.length}/2,200</span>
                   </span>
-                  <span className="post-btn pointer" onClick={onUploadImage}>Continue<DownloadDoneIcon /></span>
+                  <span className="post-btn pointer" onClick={onUploadImage}>Post<DownloadDoneIcon /></span>
                 </div>
-
               </div>
 
             </div>
-            <img className="post-image-before-post" src={imgData.imgUrl || ''} />
+            <div className="loc-step-container">
+              <label className="flex column">
+                <span>City</span>
+                <input
+                  className="edit-input name-input"
+                  value={imageToEdit.loc.city}
+                  onChange={handleChange}
+                  type="text"
+                  name="city"
+                  placeholder="City"
+                />
+              </label>
+            </div>
+
+            <SimpleMap lat={cords.lat} lng={cords.lng} marker={"You"} />
           </div>
         )}
 

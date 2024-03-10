@@ -8,7 +8,7 @@ import { HomeIndex } from "../cmps/HomeIndex.tsx";
 import { CreateImage } from "../cmps/CreateImage.tsx";
 
 export function HomePage() {
-    const [activeIcon, setActiveIcon] = useState('Create');
+    const [activeIcon, setActiveIcon] = useState('Home');
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
     let navigate = useNavigate();
 
@@ -23,7 +23,7 @@ export function HomePage() {
             </header>
             <UserController activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
             <UserControllerResponsive loggedInUser={loggedInUser} activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
-            < HomeIndex />
+            < HomeIndex activeIcon={activeIcon} />
             {activeIcon === 'Create' && <CreateImage loggedInUser={loggedInUser} setActiveIcon={setActiveIcon} activeIcon={activeIcon} />}
         </main >
     )

@@ -83,7 +83,7 @@ export async function onLoggedInUserActions(userToSave: User) {
 export async function loadUsers() {
   try {
     const users = await userService.getUsers()
-    console.log('users', users);
+    // console.log('users', users);
 
     store.dispatch({ type: SET_USERS, users });
   } catch (err) {
