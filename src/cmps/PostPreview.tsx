@@ -157,7 +157,7 @@ export function PostPreview({ index, post, loggedInUser }: PostPreviewProps) {
                 )}
             </p>
             <p className="fs14 comment-responsive">
-                <span className="bold pointer">{post.by.username}</span> <span className="comment-text">{displayedText}</span>
+                <span className="bold pointer">{post.by.username}</span> <span className="comment-text">{displayedTextResponsive}</span>
                 {showMoreNeededResponsive && !isExpanded && (
                     <button onClick={toggleExpand} className="show-more-btn pointer">
                         more

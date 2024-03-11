@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { RootState, User } from "../models/user.model";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { loadPosts } from "../store/actions/posts.actions";
 import { PostsList } from "./PostsList";
 import { SuggestedModal } from "./SuggestedModal.tsx";
@@ -23,9 +23,7 @@ export function HomeIndex({ activeIcon }: HomeIndexPrpos) {
     }, [])
 
     useEffect(() => {
-        console.log('posts1', posts);
         loadPosts()
-        console.log('posts2', posts);
     }, [activeIcon])
 
 

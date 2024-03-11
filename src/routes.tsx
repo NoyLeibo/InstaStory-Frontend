@@ -3,6 +3,7 @@ import { HomePage } from "./pages/HomePage.tsx";
 import { AuthPage } from "./pages/AuthPage.tsx";
 
 const routes: Routemodel[] = [
+
   {
     path: '/',
     element: <HomePage />,

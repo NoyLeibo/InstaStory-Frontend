@@ -6,13 +6,13 @@
 import { ControlIcons } from './ControlIcons';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LogoutIcon from '@mui/icons-material/Logout';
-interface UserControllerProps {
-    activeIcon: string
-    setActiveIcon: React.Dispatch<React.SetStateAction<string>>;
+import { useActiveIcon } from './ActiveIconContext';
 
-}
 
-export function UserController({ activeIcon, setActiveIcon }: UserControllerProps) {
+export function UserController() {
+
+    const { activeIcon, setActiveIcon } = useActiveIcon();
+
     const handleIconClick = (name: string) => {
         setActiveIcon(name);
     };
@@ -22,7 +22,7 @@ export function UserController({ activeIcon, setActiveIcon }: UserControllerProp
             <section className="flex column">
                 <img className='controller-logo pointer' src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
                 <InstagramIcon className='instagram-logo pointer' />
-                <ControlIcons handleIconClick={handleIconClick} activeIcon={activeIcon} />
+                <ControlIcons handleIconClick={handleIconClick} activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
             </section >
             <span className='logout-btn pointer fs16'>Log out</span>
             <LogoutIcon className='logout-icon pointer' />
