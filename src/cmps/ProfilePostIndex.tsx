@@ -9,12 +9,12 @@ export function ProfilePostIndex({ userPosts }: ProfilePostIndexProps) {
     return (
         <section className="flex profile-post-index">
             {userPosts.length ?
-                (userPosts?.map((post, index) => (
+                (userPosts?.map((post) => (
                     <div key={post._id}>
-                        <ProfilePostPreview index={index} post={post} />
+                        <ProfilePostPreview post={post} />
                     </div>
                 ))) : (
-                    <span>No post</span>
+                    <span>No posts</span>
                 )
             }
         </section>

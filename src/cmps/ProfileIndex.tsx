@@ -1,11 +1,12 @@
 import { Post } from "../models/posts.model"
-import { User } from "../models/user.model"
+import { RootState, User } from "../models/user.model"
 import ProfileTaggedSvg from '../../public/svg/profile-page/profile-tagged.svg'
 import ProfilePostsSvg from '../../public/svg/profile-page/profile-posts.svg'
 import ProfileSavedSvg from '../../public/svg/profile-page/profile-saved.svg'
 import { useState } from "react"
 import { ProfilePostIndex } from "./ProfilePostIndex"
 import { ProfileSavedPostIndex } from "./ProfileSavedPostIndex"
+import { useSelector } from "react-redux"
 
 interface ProfileIndexProps {
     userDetails: User
@@ -15,6 +16,7 @@ interface ProfileIndexProps {
 export function ProfileIndex({ userDetails, userPosts }: ProfileIndexProps) {
     const [activeIcon, setActiveIcon] = useState('Posts')
     const imageUrl = userDetails.imgUrl || ''
+    const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
 
     const isActive = (iconName: string) => activeIcon === iconName;
 
@@ -42,22 +44,25 @@ export function ProfileIndex({ userDetails, userPosts }: ProfileIndexProps) {
                         <span>POSTS</span>
                     </div>
 
-                    <div className={`marginleft16 profile-pics-link ${isActive('Saved') ? 'active' : ''}`} onClick={() => setActiveIcon('Saved')}>
-                        <a className="posts-icon">
-                            <img src={ProfileSavedSvg} alt="Saved icon" />
-                        </a>
-                        <span>SAVED</span>
-                    </div>
+                    {loggedInUser?._id === userDetails._id && (
+                        <>
+                            <div className={`marginleft16 profile-pics-link ${isActive('Saved') ? 'active' : ''}`} onClick={() => setActiveIcon('Saved')}>
+                                <a className="posts-icon">
+                                    <img src={ProfileSavedSvg} alt="Saved icon" />
+                                </a>
+                                <span>SAVED</span>
+                            </div>
 
-                    <div className={`marginleft16 profile-pics-link ${isActive('Tagged') ? 'active' : ''}`} onClick={() => setActiveIcon('Tagged')}>
-                        <a className="posts-icon">
-                            <img src={ProfileTaggedSvg} alt="Tagged icon" />
-                        </a>
-                        <span>TAGGED</span>
-                    </div>
+                            <div className={`marginleft16 profile-pics-link ${isActive('Tagged') ? 'active' : ''}`} onClick={() => setActiveIcon('Tagged')}>
+                                <a className="posts-icon">
+                                    <img src={ProfileTaggedSvg} alt="Tagged icon" />
+                                </a>
+                                <span>TAGGED</span>
+                            </div>
+                        </>)}
                 </div>
                 {isActive('Posts') && <ProfilePostIndex userPosts={userPosts} />}
-                {isActive('Saved') && <ProfileSavedPostIndex userDetails={userDetails} userPosts={userPosts} />}
+                {loggedInUser?._id === userDetails._id && isActive('Saved') && <ProfileSavedPostIndex userDetails={userDetails} />}
             </main>
         </section>
     )

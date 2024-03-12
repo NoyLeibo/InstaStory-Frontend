@@ -1,15 +1,15 @@
+import { useSelector } from "react-redux";
+import { Post } from "../models/posts.model";
+import { RootState } from "../models/user.model";
 import { useState } from "react";
-import { Post } from "../models/posts.model"
 import { CommentModal } from "./CommentModal";
 import { savePostAction } from "../store/actions/user.actions";
-import { useSelector } from "react-redux";
-import { RootState } from "../models/user.model";
 
-interface ProfilePostPreviewProps {
+interface ProfileSavedPostPreviewProps {
     post: Post
 }
 
-export function ProfilePostPreview({ post }: ProfilePostPreviewProps) {
+export function ProfileSavedPostPreview({ post }: ProfileSavedPostPreviewProps) {
     const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
 
@@ -31,7 +31,6 @@ export function ProfilePostPreview({ post }: ProfilePostPreviewProps) {
     function savePost() {
         if (loggedInUser) savePostAction(loggedInUser, post)
     }
-
     return (
         <section>
             <img className="profile-post-preview pointer" onClick={() => setIsCommentModalOpen(true)} src={post.imgUrl} />

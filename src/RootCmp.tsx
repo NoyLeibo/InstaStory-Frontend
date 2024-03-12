@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Provider, useSelector } from 'react-redux';
 import { store } from './store/store';
 import routes from "./routes";
@@ -13,11 +13,14 @@ import { CreateImage } from './cmps/CreateImage';
 function AppContent() {
   const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
   const { activeIcon, setActiveIcon } = useActiveIcon();
+  const location = useLocation()
+
+  const currentPath = location.pathname
 
   return (
     <>
-      <UserController />
-      <UserControllerResponsive loggedInUser={loggedInUser} />
+      {!currentPath.startsWith('/auth') && <UserController />}
+      {!currentPath.startsWith('/auth') && <UserControllerResponsive loggedInUser={loggedInUser} />}
       <Routes>
         {routes.map((route: Routemodel) => (
           <Route
@@ -28,7 +31,7 @@ function AppContent() {
         ))}
 
       </Routes>
-      {activeIcon === 'Create' && <CreateImage loggedInUser={loggedInUser} setActiveIcon={setActiveIcon} />}
+      {!currentPath.startsWith('/auth') && activeIcon === 'Create' && <CreateImage loggedInUser={loggedInUser} setActiveIcon={setActiveIcon} />}
     </>
   );
 }

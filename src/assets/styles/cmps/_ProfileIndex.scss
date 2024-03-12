@@ -22,7 +22,7 @@
 
 .profile-pics-link {
     align-items: center;
-    color: #c4c4c4;
+    color: #000;
     cursor: pointer;
     display: flex;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
@@ -34,13 +34,12 @@
     justify-content: center;
     letter-spacing: 2px;
     line-height: 18px;
-    // fill: gray;
+    opacity: .5;
 
     &.active {
         border-top: 1px solid #000;
         // fill: black;
-
-        color: #000;
+        opacity: 1;
     }
 }
 

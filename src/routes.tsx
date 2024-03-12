@@ -10,6 +10,7 @@ const routes: Routemodel[] = [
     element: <HomePage />,
     label: 'Home 🏠',
   },
+
   {
     path: '/auth',
     element: <AuthPage />,
@@ -20,6 +21,7 @@ const routes: Routemodel[] = [
     element: <ProfilePage />,
     label: 'Profile',
   },
+
 ];
 
 export default routes;

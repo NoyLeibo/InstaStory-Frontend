@@ -39,6 +39,7 @@ async function getById(userId: string) {
         throw err
     }
 }
+
 async function getUsers(): Promise<any> {
     const users = (await storageService.query("user"))
     return users;

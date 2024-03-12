@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { userService } from '../services/user.service.ts';
 import { ProfileIndex } from '../cmps/ProfileIndex';
 import { RootState, User } from '../models/user.model';
@@ -11,6 +11,12 @@ export function ProfilePage() {
     const [userDetails, setUserDetails] = useState<User | null>(null);
     const [userPosts, setUserPosts] = useState<any>(null);
     const posts: Post[] | any = useSelector((state: RootState) => state.postsModule.posts)
+    const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
+    let navigate = useNavigate()
+
+    useEffect(() => {
+        if (loggedInUser === null) navigate('/auth')
+    }, [])
 
     useEffect(() => {
         if (!id) return
