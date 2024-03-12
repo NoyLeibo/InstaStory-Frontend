@@ -18,7 +18,7 @@ const routes: Routemodel[] = [
   {
     path: '/user/:id',
     element: <ProfilePage />,
-    label: 'Auth 🏠',
+    label: 'Profile',
   },
 ];
 

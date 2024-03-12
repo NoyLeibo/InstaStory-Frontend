@@ -1,6 +1,7 @@
 // import { stayService } from "../../services/stay.service";
 
 import { Post } from "../../models/posts.model";
+import { postsService } from "../../services/posts.service";
 
 export const SET_POSTS = "SET_POSTS";
 // export const REMOVE_STAY = "REMOVE_STAY";
@@ -16,7 +17,7 @@ export const SET_POSTS = "SET_POSTS";
 // export const SET_FILTER_BY = "SET_FILTER_BY";
 
 const initialState = {
-  posts: []
+  posts: await postsService.getPosts()
 }
 
 

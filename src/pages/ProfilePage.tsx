@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { userService } from '../services/user.service.ts';
 import { ProfileIndex } from '../cmps/ProfileIndex';
-import { User } from '../models/user.model';
+import { RootState, User } from '../models/user.model';
+import { Post } from '../models/posts.model.ts';
+import { useSelector } from 'react-redux';
 
 export function ProfilePage() {
     const { id } = useParams<string>()
     const [userDetails, setUserDetails] = useState<User | null>(null);
+    const [userPosts, setUserPosts] = useState<any>(null);
+    const posts: Post[] | any = useSelector((state: RootState) => state.postsModule.posts)
 
     useEffect(() => {
         if (!id) return
@@ -18,6 +22,16 @@ export function ProfilePage() {
         fetchUserDetails();
     }, [id]);
 
+
+    useEffect(() => {
+
+        if (Array.isArray(posts)) { // Check if posts is indeed an array
+            const filteredPosts = posts.filter((post: Post) => post.by._id === id);
+            setUserPosts(filteredPosts);
+        }
+
+    }, []);
+
     if (!userDetails) {
         return <div>Loading...</div>;
     }
@@ -27,7 +41,7 @@ export function ProfilePage() {
             <header className="controller-logo-responsive">
                 <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
             </header>
-            <ProfileIndex userDetails={userDetails} />
+            <ProfileIndex userPosts={userPosts} userDetails={userDetails} />
         </main>
     );
 }
