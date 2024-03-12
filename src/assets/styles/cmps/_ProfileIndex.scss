@@ -1,0 +1,11 @@
+.profile-index {
+    grid-area: profileIndex;
+
+    .profile-image {
+        height: 166px;
+        width: 166px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 5px solid rgb(219, 219, 219);
+    }
+}

@@ -16,7 +16,7 @@ export const userService = {
     saveLocalUser,
     createEmptyUser,
     getUsers,
-    // getById,
+    getById,
     // remove,
     // update,
     // updateTripList,
@@ -28,7 +28,17 @@ export const userService = {
     // addDemoUser,
 };
 
-
+async function getById(userId: string) {
+    try {
+        //   const user = await httpService.get(`user/${userId}`);
+        const user = await storageService.get('user', userId)
+        console.log('User Service - getById - succesfuly got user obj by userId')
+        return user;
+    } catch (err) {
+        console.error('User Service - getById - cannot get user obj by userId')
+        throw err
+    }
+}
 async function getUsers(): Promise<any> {
     const users = (await storageService.query("user"))
     return users;

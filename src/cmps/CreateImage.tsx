@@ -11,14 +11,14 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SimpleMap from "./GoogleMap";
 import { onPostReadyImage } from "../store/actions/posts.actions";
+import { useLocation } from "react-router";
 
 interface CreateImageProps {
-  activeIcon: string;
   setActiveIcon: React.Dispatch<React.SetStateAction<string>>;
   loggedInUser: User | null
 }
 
-export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateImageProps) {
+export function CreateImage({ loggedInUser, setActiveIcon }: CreateImageProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadStepLevel, setUploadStepLevel] = useState(1);
   const [imageTxt, setImageTxt] = useState('');
@@ -26,7 +26,19 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
   const [cords, setCords] = useState({ lat: 32.109333, lng: 34.855499 })
   const [imageToEdit, setImageToEdit] = useState(postsService.getEmptyPost())
 
-  // const fileInputRef = useRef<HTMLInputElement>(null);
+  const location = useLocation();
+  const { pathname } = location;
+  let lastActiveIcon: string
+
+
+  if (pathname.startsWith('/user')) {
+    lastActiveIcon = 'Profile'
+  } else {
+    lastActiveIcon = 'Home'
+  }
+  // טיפול בבעיה שכשנסגר המודל של הCREATE על ידי לחיצה בחוץ הוא משתגע איזה setActiveIcon לעשות
+
+
 
   const [imgData, setImgData] = useState<{
     imgUrl: string | null;
@@ -38,12 +50,12 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
     width: 500,
   });
   const emojiContentRef = useOutsideClick(() => setIsEmojiModalOpen(false))
-  const uploadImageContentRef = useOutsideClick(() => setActiveIcon('Home'))
+  const uploadImageContentRef = useOutsideClick(() => setActiveIcon(lastActiveIcon))
 
   useEffect(() => {
     return () => {
       console.log("Component will unmount");
-      setActiveIcon("Home");
+      // setActiveIcon(lastActiveIcon);
     };
   }, []);
 
@@ -170,9 +182,11 @@ export function CreateImage({ loggedInUser, activeIcon, setActiveIcon }: CreateI
       }
     }
   }
+
   function handleTextChange(ev: any) {
     setImageTxt(ev.target.value)
   }
+
   return (
     <section className="create-image-background">
       <div ref={isEmojiModalOpen ? null : uploadImageContentRef} className="create-image-modal flex column">

@@ -32,27 +32,11 @@ export function ControlIcons({ handleIconClick, activeIcon, setActiveIcon }: Use
     const navigate = useNavigate()
     const location = useLocation();
 
-
     useEffect(() => {
         if (location.pathname.startsWith('/user')) {
             setActiveIcon('Profile');
         }
     }, [location]);
-
-
-    useEffect(() => {
-        switch (activeIcon) {
-            case 'Home':
-                navigate('/');
-                break;
-            // case 'Profile':
-            //     navigate('/user/' + loggedInUser?._id);
-            //     break;
-            // Add more cases as needed
-            default:
-                break;
-        }
-    }, [activeIcon]);
 
 
     const icons = [
@@ -104,15 +88,15 @@ export function ControlIcons({ handleIconClick, activeIcon, setActiveIcon }: Use
             srcActive: loggedInUser?.imgUrl ?? "",
             alt: 'Profile',
         },
-
     ]
 
     const onIconClick = (name: string) => {
         if (name === 'Profile' && loggedInUser?._id) {
             navigate('/user/' + loggedInUser._id);
-        } else {
-            handleIconClick(name);
+        } else if (name === 'Home') {
+            navigate('/')
         }
+        handleIconClick(name);
     };
 
 

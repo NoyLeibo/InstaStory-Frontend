@@ -2,7 +2,7 @@ export const storageService = {
     query,
     post,
     // Implement and uncomment these as needed:
-    // get,
+    get,
     makeId,
     put,
     // remove,
@@ -38,6 +38,19 @@ function post<T extends Entity>(entityType: string, newEntity: Omit<T, '_id'>): 
         return entityWithId;
     });
 }
+
+
+function get(entityType: string, entityId: string): Promise<Entity> {
+    return query(entityType).then((entities: Entity[]) => {
+        const entity = entities.find((entity) => entity._id === entityId);
+        if (!entity)
+            throw new Error(
+                `Get failed, cannot find entity with id: ${entityId} in: ${entityType}`
+            );
+        return entity;
+    });
+}
+
 
 async function put<T extends Entity>(entityType: string, updatedEntity: T): Promise<T> {
     updatedEntity = JSON.parse(JSON.stringify(updatedEntity));
