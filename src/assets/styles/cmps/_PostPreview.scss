@@ -23,15 +23,7 @@
         }
     }
 
-    .add-comment {
-        all: unset;
-        font-family: inherit;
-        margin-bottom: 10px;
-        font-size: 16px;
-        overflow-wrap: break-word;
-        flex-grow: 1;
-        // overflow: auto;
-    }
+
 
     .post-header {
         margin-bottom: 10px;
@@ -84,4 +76,14 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+}
+
+.add-comment {
+    all: unset;
+    font-family: inherit;
+    margin-bottom: 10px;
+    font-size: 16px;
+    overflow-wrap: break-word;
+    flex-grow: 1;
+    // overflow: auto;
 }

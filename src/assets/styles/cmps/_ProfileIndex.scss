@@ -34,10 +34,26 @@
     justify-content: center;
     letter-spacing: 2px;
     line-height: 18px;
+    // fill: gray;
 
     &.active {
         border-top: 1px solid #000;
+        // fill: black;
 
         color: #000;
     }
+}
+
+.profile-post-preview {
+    height: 30vh;
+    object-fit: cover;
+}
+
+.profile-post-index {
+    grid-gap: 20px;
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: 14vw 14vw 14vw;
+    max-width: 961px;
+    padding-bottom: 50px;
 }

@@ -49,20 +49,24 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
     async function handleSubmitComment(ev: React.FormEvent<HTMLFormElement>) {
         try {
             ev.preventDefault()
-            if (!commentText) return // If press post and not text
+            if (!commentText) return
             let commentToAdd = postsService.getEmptyComment()
             commentToAdd.txt = commentText
-            // const updatedPost = await postsService.addComment(post, commentToAdd.txt)
+            console.log(commentToAdd.txt);
+
+            await postsService.addComment(post, commentToAdd.txt)
             console.log('Successfully added comment')
-            setCommentText('') // Reset the input field after submission
+            setCommentText('')
         } catch (err) {
             console.log('Cannot add comment', err)
         }
     }
 
+
     useEffect(() => {
         document.body.style.overflow = 'hidden'
     }, [])
+    console.log(post.comments);
 
 
     return (
@@ -93,8 +97,8 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
                         {post.comments.map((comment) => (
                             <div key={comment.id} className="flex align-center fs14 comment">
                                 <Avatar src={comment.by.imgUrl} alt={comment.by.username} />
-                                <div className="marginleft8">
-                                    <span className="bold">{comment.by.username}</span><span>{" "}</span><span className="comment-text">{post.txt}</span>
+                                <div className="marginleft8 max-width-textmodal">
+                                    <span className="bold">{comment.by.username}</span><span>{" "}</span><span className="comment-text">{comment.txt}</span>
                                     <div className="fs14">
                                         {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                                     </div>
