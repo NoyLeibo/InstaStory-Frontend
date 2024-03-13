@@ -67,11 +67,16 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
     const onIconClick = (name: string) => {
         if (name === 'Profile' && loggedInUser?._id) {
             navigate('/user/' + loggedInUser._id);
-        } else {
-            setActiveIcon(name);
+        } else if (name === 'Home') {
+            navigate('/')
         }
+        handleIconClick(name);
     };
 
+    const handleIconClick = (name: string) => {
+        setActiveIcon(name);
+    };
+    
     return (
         <nav className="user-controller-responsive flex row align-center">
             {icons.map((icon, index) =>
