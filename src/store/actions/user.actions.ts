@@ -9,7 +9,7 @@ import { userService } from "../../services/user.service.ts";
 import { User, emptyUser } from "../../models/user.model.ts";
 import { Post } from "../../models/posts.model.ts";
 import { storageService } from "../../services/async-storage.service.ts";
-
+import { useNavigate } from "react-router";
 
 
 export async function signup(credentials: emptyUser) {
@@ -53,6 +53,22 @@ export async function login(credentials: { username: string, password: string })
     store.dispatch({ type: LOADING_DONE });
   }
 }
+
+export async function logout() {
+  try {
+    await userService.logout();
+    store.dispatch({
+      type: SET_USER, user: null
+    })
+
+    // socketService.logout();
+    // refreshPage();
+  } catch (err) {
+    console.log("Cannot logout", err);
+    throw err;
+  }
+}
+
 
 export async function savePostAction(loggedInUser: User, post: Post) {
   const users = await userService.getUsers();
@@ -127,20 +143,7 @@ export async function loadUsers() {
 //   window.location.reload(false);
 // }
 
-// export async function logout() {
-//   try {
-//     await userService.logout();
-//     store.dispatch({
-//       type: SET_USER,
-//       user: null,
-//     });
-//     socketService.logout();
-//     refreshPage();
-//   } catch (err) {
-//     console.log("Cannot logout", err);
-//     throw err;
-//   }
-// }
+
 
 // export async function updateUser(user) {
 //   try {

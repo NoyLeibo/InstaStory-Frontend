@@ -19,7 +19,6 @@ export function HomeIndex({ activeIcon }: HomeIndexPrpos) {
     useEffect(() => {
         loadPosts()
         loadUsers()
-        // console.log('welcome back', loggedInUser?.username);
     }, [])
 
     useEffect(() => {

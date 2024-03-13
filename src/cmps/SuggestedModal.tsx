@@ -1,7 +1,7 @@
 import { Avatar } from "@mui/material"
 import { User } from "../models/user.model.ts"
 import { useNavigate } from "react-router";
-import { onLoggedInUserActions } from "../store/actions/user.actions.ts";
+import { logout, onLoggedInUserActions } from "../store/actions/user.actions.ts";
 import { storageService } from "../services/async-storage.service.ts";
 
 interface SuggestModalProps {
@@ -11,16 +11,17 @@ interface SuggestModalProps {
 
 
 export function SuggestedModal({ allUsers, loggedInUser }: SuggestModalProps) {
-
     const maxCurrSuggest = 5
     let navigate = useNavigate();
 
     function navigateToUserPage(user = loggedInUser) {
         console.log(user);
         navigate('/user/' + user?._id)
-    } // כשלוחצים על הAVATAR של היוזר זה מעביר לעמוד בית שלו
+    }
 
-    // function onLogOut() { logOut(loggedInUser)}
+    function onLogOut() {
+        logout()
+    }
 
     async function toggleFollows(targetUser: User, action: 'follow' | 'unfollow') {
         const localLoggedInUser = loggedInUser
@@ -82,7 +83,7 @@ export function SuggestedModal({ allUsers, loggedInUser }: SuggestModalProps) {
                         <div onClick={() => navigateToUserPage()} className="graytxt fs14 pointer">{loggedInUser?.fullname}</div>
                     </div>
                 </div>
-                <div className="logout-btn pointer fs12 bold">Logout</div>
+                <div className="logout-btn pointer fs12 bold" onClick={() => onLogOut()}>Logout</div>
             </div>
             <div className="flex space-between margintop20 fs14">
                 <div className="graytxt">Suggested for you</div>

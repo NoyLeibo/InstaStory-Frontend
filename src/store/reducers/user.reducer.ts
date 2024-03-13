@@ -56,6 +56,6 @@ interface UserState {
 type UserAction =
     | { type: typeof REMOVE_USER; userId: string }
     | { type: typeof SET_USERS; users: User[] }
-    | { type: typeof SET_USER; user: User }
+    | { type: typeof SET_USER; user: User | null }
     | { type: typeof LOADING_START }
     | { type: typeof LOADING_DONE }

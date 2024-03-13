@@ -27,7 +27,6 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
     useEffect(() => {
         if (location.pathname.startsWith('/user')) {
             setActiveIcon('Profile');
-            console.log('PROFILE');
         }
     }, [location]);
 
@@ -76,7 +75,7 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
     const handleIconClick = (name: string) => {
         setActiveIcon(name);
     };
-    
+
     return (
         <nav className="user-controller-responsive flex row align-center">
             {icons.map((icon, index) =>

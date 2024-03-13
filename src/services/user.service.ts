@@ -10,7 +10,7 @@ _createUsers()
 
 export const userService = {
     login,
-    // logout,
+    logout,
     signup,
     getLoggedinUser,
     saveLocalUser,
@@ -38,6 +38,11 @@ async function getById(userId: string) {
         console.error('User Service - getById - cannot get user obj by userId')
         throw err
     }
+}
+
+async function logout() {
+    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
+    // return await httpService.post("auth/logout");
 }
 
 async function getUsers(): Promise<any> {

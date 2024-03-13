@@ -5,8 +5,8 @@
 // import SmartDisplayOutlinedIcon from '@mui/icons-material/SmartDisplayOutlined';
 import { ControlIcons } from './ControlIcons';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import LogoutIcon from '@mui/icons-material/Logout';
 import { useActiveIcon } from './ActiveIconContext';
+import { logout } from '../store/actions/user.actions';
 
 
 export function UserController() {
@@ -16,7 +16,9 @@ export function UserController() {
     const handleIconClick = (name: string) => {
         setActiveIcon(name);
     };
-
+    function onLogOut() {
+        logout()
+    }
     return (
         <nav className="user-controller flex column space-between">
             <section className="flex column">
@@ -24,8 +26,7 @@ export function UserController() {
                 <InstagramIcon className='instagram-logo pointer' />
                 <ControlIcons handleIconClick={handleIconClick} activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
             </section >
-            <span className='logout-btn pointer fs16'>Log out</span>
-            <LogoutIcon className='logout-icon pointer' />
+            <span onClick={() => onLogOut()} className='logout-btn pointer fs16'>Log out</span>
         </nav >
     )
 }

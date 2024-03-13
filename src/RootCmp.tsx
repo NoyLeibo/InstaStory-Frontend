@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { Provider, useSelector } from 'react-redux';
 import { store } from './store/store';
 import routes from "./routes";
@@ -9,13 +9,19 @@ import { UserControllerResponsive } from './cmps/UserControllerResponsive';
 import { RootState } from './models/user.model';
 import { ActiveIconProvider, useActiveIcon } from './cmps/ActiveIconContext';
 import { CreateImage } from './cmps/CreateImage';
+import { useEffect } from 'react';
 
 function AppContent() {
   const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
   const { activeIcon, setActiveIcon } = useActiveIcon();
   const location = useLocation()
-
+  const navigate = useNavigate()
   const currentPath = location.pathname
+
+  useEffect(() => {
+    if (loggedInUser === null) navigate('/auth')
+
+  }, [loggedInUser])
 
   return (
     <>
