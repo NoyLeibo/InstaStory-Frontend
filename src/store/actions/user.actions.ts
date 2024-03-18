@@ -1,16 +1,9 @@
-// import { userService } from "../../services/user.service.js";
-// import { socketService } from "../../services/socket.service.js";
-// import { showErrorMsg } from "../../services/event-bus.service.js";
-// import { LOADING_DONE, LOADING_START } from "./system.reducer.js";
-
 import { store } from "../store.ts";
 import { LOADING_DONE, LOADING_START, SET_USER, SET_USERS } from "../reducers/user.reducer.ts";
 import { userService } from "../../services/user.service.ts";
 import { User, emptyUser } from "../../models/user.model.ts";
 import { Post } from "../../models/posts.model.ts";
 import { storageService } from "../../services/async-storage.service.ts";
-import { useNavigate } from "react-router";
-
 
 export async function signup(credentials: emptyUser) {
   try {

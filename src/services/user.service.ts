@@ -1,5 +1,6 @@
 import { User, emptyUser } from "../models/user.model.ts";
 import { storageService } from "./async-storage.service.ts";
+import { httpService } from "./http.service.ts";
 import { userData } from "./userData.ts";
 
 
@@ -48,7 +49,7 @@ async function logout() {
 async function getUsers(): Promise<any> {
     const users = (await storageService.query("user"))
     return users;
-    // return httpService.get(`user`) // מוכן לBACK-END
+    return httpService.get(`user`) // מוכן לBACK-END
 }
 
 async function _createUsers(): Promise<any> {
