@@ -23,6 +23,8 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
     const [commentText, setCommentText] = useState('')
     const [isEmojiModalOpen, setIsEmojiModalOpen] = useState(false)
     const savedPosts = loggedInUser?.savedPostsIds
+    const modalContentRef = useOutsideClick(() => setIsCommentModalOpen(false)) // on click outside func, call to her service
+    const emojiContentRef = useOutsideClick(() => setIsEmojiModalOpen(false))
 
     useEffect(() => {
         document.body.style.overflow = 'hidden'
@@ -38,8 +40,6 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
         }
     }
 
-    const modalContentRef = useOutsideClick(() => setIsCommentModalOpen(false)) // on click outside func, call to her service
-    const emojiContentRef = useOutsideClick(() => setIsEmojiModalOpen(false))
 
     const handleEmojiClick = (emojiObject: { emoji: string }) => {
         if (emojiObject && emojiObject.emoji) {
@@ -65,7 +65,6 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
             console.log('Cannot add comment', err)
         }
     }
-
 
     return (
         <section className="comment-modal-background">

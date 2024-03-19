@@ -5,12 +5,13 @@
 
 import { Comment, Post } from "../models/posts.model";
 import { storageService } from "./async-storage.service";
+import { httpService } from "./http.service.ts";
 import { postsData } from "./postsData";
 import { userService } from "./user.service.ts";
 
 const STORAGE_KEY = "posts";
 const BASE_URL = "post/";
-_createPosts()
+// _createPosts()
 
 export const postsService = {
   getPosts,
@@ -34,27 +35,13 @@ export const postsService = {
 // window.cs = stayService;
 
 async function getPosts(): Promise<any> {
-  const posts = await storageService.query(STORAGE_KEY, 0, true);
-  return posts;
-  // return httpService.get(`posts`) // מוכן לBACK-END
+  // const posts = await storageService.query(STORAGE_KEY, 0, true);
+  // return posts;
+  return await httpService.get(BASE_URL) // מוכן לBACK-END
 }
 
 
-async function _createPosts(): Promise<any> {
 
-  try {
-    const posts = await getPosts()
-    // Check if users is empty (length is 0)
-    if (!posts.length) {
-      const posts: Post[] = postsData;
-      localStorage.setItem('posts', JSON.stringify(posts))
-    }
-    return posts
-
-  } catch (err) {
-    console.error('Error: cannot create users from demo data', err)
-  }
-}
 
 async function toggleLike(post: Post) {
   try {
@@ -77,7 +64,7 @@ async function toggleLike(post: Post) {
 
     console.log('Updated post likedBy:', post.likedBy)
 
-    const postToUpdate = await storageService.put(STORAGE_KEY, post)
+    const postToUpdate = await httpService.put(BASE_URL, post)
     console.log('Story updated in storage:', postToUpdate)
 
     return post
@@ -184,6 +171,20 @@ async function addComment(post: Post, txt: string) {
   }
 }
 
+// async function _createPosts(): Promise<any> {
+//   try {
+//     const posts = await getPosts()
+//     // Check if users is empty (length is 0)
+//     if (!posts.length) {
+//       const posts: Post[] = postsData;
+//       localStorage.setItem('posts', JSON.stringify(posts))
+//     }
+//     return posts
+
+//   } catch (err) {
+//     console.error('Error: cannot create posts from demo data', err)
+//   }
+// }
 
 // async function query(filterBy = {}) {
 //   return httpService.get(BASE_URL, filterBy);
