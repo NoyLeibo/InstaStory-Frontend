@@ -9,7 +9,7 @@ import { postsData } from "./postsData";
 import { userService } from "./user.service.ts";
 
 const STORAGE_KEY = "posts";
-// const BASE_URL = "post/";
+const BASE_URL = "post/";
 _createPosts()
 
 export const postsService = {

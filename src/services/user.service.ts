@@ -1,13 +1,13 @@
-import { User, emptyUser } from "../models/user.model.ts";
-import { storageService } from "./async-storage.service.ts";
+import { User } from "../models/user.model.ts";
+// import { storageService } from "./async-storage.service.ts";
 import { httpService } from "./http.service.ts";
-import { userData } from "./userData.ts";
+// import { userData } from "./userData.ts";
 
 
 const STORAGE_KEY_LOGGEDIN_USER: string = "loggedinUser";
 // const BASE_URL = "auth/";
 
-_createUsers()
+// _createUsers()
 
 export const userService = {
     login,
@@ -31,8 +31,8 @@ export const userService = {
 
 async function getById(userId: string) {
     try {
-        //   const user = await httpService.get(`user/${userId}`);
-        const user = await storageService.get('user', userId)
+        const user = await httpService.get(`user/${userId}`);
+        // const user = await storageService.get('user', userId)
         console.log('User Service - getById - succesfuly got user obj by userId')
         return user;
     } catch (err) {
@@ -43,29 +43,29 @@ async function getById(userId: string) {
 
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
-    // return await httpService.post("auth/logout");
+    return await httpService.post("auth/logout");
 }
 
 async function getUsers(): Promise<any> {
-    const users = (await storageService.query("user"))
-    return users;
-    return httpService.get(`user`) // מוכן לBACK-END
+    // const users = (await storageService.query("user"))
+    // return users;
+    return await httpService.get(`user`) // מוכן לBACK-END
 }
 
-async function _createUsers(): Promise<any> {
+// async function _createUsers(): Promise<any> {
 
-    try {
-        const users = await getUsers()
-        if (!users.length) {
-            const users: User[] = userData;
-            localStorage.setItem('user', JSON.stringify(users))
-        }
-        return users
+//     try {
+//         const users = await getUsers()
+//         if (!users.length) {
+//             const users: User[] = userData;
+//             localStorage.setItem('user', JSON.stringify(users))
+//         }
+//         return users
 
-    } catch (err) {
-        console.error('Error: cannot create users from demo data', err)
-    }
-}
+//     } catch (err) {
+//         console.error('Error: cannot create users from demo data', err)
+//     }
+// }
 
 // async function login(userCred) { // מוכן לBACK-END
 //     const user = await httpService.post("auth/login", userCred);
@@ -79,23 +79,29 @@ interface UserCredentials {
 }
 
 async function login(userCred: UserCredentials) {
-    const users: User[] | any[] = await storageService.query('user');
-    const user = users.find((user) => user.username === userCred.username && user.password === userCred.password);
+    const users = await getUsers()
+    const user = await httpService.post("auth/login", userCred);
+    // const user = users.find((user) => user.username === userCred.username && user.password === userCred.password);
+    // if (user) return saveLocalUser(user);
 
-    if (user) return saveLocalUser(user);
+    if (user) {
+        const userToStorage = users.find((user: User) => user.username === userCred.username);
+        saveLocalUser(userToStorage)
+        return user
+    }
+    return Promise.reject("Invalid user");
 }
 
 
-async function signup(userCred: User | emptyUser) {
-    await storageService.post("user", userCred);
-
-    // login({userCred.username, userCred.password})
-    return
-
+async function signup(userCred: User) {
     // await storageService.post("user", userCred);
+    await httpService.post("auth/signup", userCred);
+    saveLocalUser(userCred)
+    // return await login(userCred);
+
 }
 
-function saveLocalUser(user: User | emptyUser) {
+function saveLocalUser(user: User) {
     const userForSession = {
         _id: user._id,
         username: user.username,

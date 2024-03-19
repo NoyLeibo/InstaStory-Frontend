@@ -1,16 +1,17 @@
 import { store } from "../store.ts";
 import { LOADING_DONE, LOADING_START, SET_USER, SET_USERS } from "../reducers/user.reducer.ts";
 import { userService } from "../../services/user.service.ts";
-import { User, emptyUser } from "../../models/user.model.ts";
+import { User } from "../../models/user.model.ts";
 import { Post } from "../../models/posts.model.ts";
 import { storageService } from "../../services/async-storage.service.ts";
+import { httpService } from "../../services/http.service.ts";
 
-export async function signup(credentials: emptyUser) {
+export async function signup(credentials: User) {
   try {
     store.dispatch({ type: LOADING_START });
     await userService.signup(credentials)
     await loadUsers()
-    login(credentials)
+    // login(credentials)
     store.dispatch({ type: SET_USERS, users: [] }); // Wrap user in an array
   } catch (err) {
     console.log('Cannot signup', err);
@@ -35,7 +36,6 @@ export async function login(credentials: { username: string, password: string })
       console.log('Logging in with:', user);
       return true;
     } else {
-      // Handle incomplete user object
       console.log('Incomplete user object');
     }
   } catch (err) {
@@ -73,7 +73,7 @@ export async function savePostAction(loggedInUser: User, post: Post) {
       } else { // אחרת הוא קיים במערך ואז צריך למחוק אותו
         user.savedPostsIds = user.savedPostsIds.filter(id => id !== post._id);
       }
-      await storageService.put("user", user) // שומר ב LocalStorage
+      await httpService.put("user", user) // שומר ב LocalStorage
       store.dispatch({ type: SET_USER, user: user }); // מעדכן את הOnlineUser בReducer (חנות)
       userService.saveLocalUser(user) // שומר ב Session-Storage
     }
@@ -92,7 +92,7 @@ export async function onLoggedInUserActions(userToSave: User) {
 export async function loadUsers() {
   try {
     const users = await userService.getUsers()
-    // console.log('users', users);
+    console.log('users', users);
 
     store.dispatch({ type: SET_USERS, users });
   } catch (err) {

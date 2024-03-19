@@ -24,6 +24,10 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
     const [isEmojiModalOpen, setIsEmojiModalOpen] = useState(false)
     const savedPosts = loggedInUser?.savedPostsIds
 
+    useEffect(() => {
+        document.body.style.overflow = 'hidden'
+    }, [])
+
     async function handleToggleLike() {
         try {
             const updatedPost = await postsService.toggleLike(post)
@@ -61,12 +65,6 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
             console.log('Cannot add comment', err)
         }
     }
-
-
-    useEffect(() => {
-        document.body.style.overflow = 'hidden'
-    }, [])
-    console.log(post.comments);
 
 
     return (
