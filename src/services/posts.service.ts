@@ -3,13 +3,13 @@
 // import { utilService } from "./util.service.js";
 // import { userService } from "./user.service.js";
 
-import { Comment, Post } from "../models/posts.model";
+import { Comment, EmptyPost, Post } from "../models/posts.model";
 import { storageService } from "./async-storage.service";
 import { httpService } from "./http.service.ts";
-import { postsData } from "./postsData";
+// import { postsData } from "./postsData";
 import { userService } from "./user.service.ts";
 
-const STORAGE_KEY = "posts";
+// const STORAGE_KEY = "posts";
 const BASE_URL = "post/";
 // _createPosts()
 
@@ -39,9 +39,6 @@ async function getPosts(): Promise<any> {
   // return posts;
   return await httpService.get(BASE_URL) // מוכן לBACK-END
 }
-
-
-
 
 async function toggleLike(post: Post) {
   try {
@@ -90,7 +87,7 @@ function getEmptyComment() {
 async function getPostById(postId: string) {
   try {
     //   const post = await httpService.get(`post/${postId}`);
-    const post = await storageService.get('posts', postId)
+    const post = await httpService.get(BASE_URL, postId)
     console.log('User Service - getById - succesfuly got post obj by userId')
     return post;
   } catch (err) {
@@ -111,9 +108,8 @@ function getEmptyFollower() {
   )
 }
 
-function getEmptyPost(): Post {
+function getEmptyPost(): EmptyPost {
   return {
-    _id: '',
     createdAt: '',
     txt: '',
     imgUrl: '',
@@ -133,9 +129,9 @@ function getEmptyPost(): Post {
   }
 }
 
-async function addPost(post: Post) {
+async function addPost(post: EmptyPost) {
   try {
-    const postToUpdate = await storageService.post(STORAGE_KEY, post)
+    const postToUpdate = await httpService.post(BASE_URL, post)
     console.log('Post to update from service', postToUpdate)
     return postToUpdate
   } catch (err) {
@@ -162,7 +158,7 @@ async function addComment(post: Post, txt: string) {
       }
       post.comments.push(comment)
     }
-    const postToUpdate = await storageService.put(STORAGE_KEY, post)
+    const postToUpdate = await httpService.put(BASE_URL, post)
     console.log('Post to update from service', postToUpdate)
     return postToUpdate
   } catch (err) {

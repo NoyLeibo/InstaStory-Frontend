@@ -3,7 +3,7 @@ import { uploadService } from "../services/upload.service";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import { postsService } from "../services/posts.service";
-import { storageService } from "../services/async-storage.service";
+// import { storageService } from "../services/async-storage.service";
 import { User } from "../models/user.model";
 import EmojiPicker from "emoji-picker-react";
 import useOutsideClick from "../services/onclickoutside.service";
@@ -114,7 +114,7 @@ export function CreateImage({ loggedInUser, setActiveIcon }: CreateImageProps) {
     if (imgData.imgUrl) imageToEdit.imgUrl = imgData.imgUrl
     else alert('error no imgUrl ')
     imageToEdit.createdAt = new Date().getTime()
-    imageToEdit._id = storageService.makeId()
+    // imageToEdit._id = storageService.makeId()
     imageToEdit.txt = imageTxt
     if (loggedInUser) imageToEdit.by = { imgUrl: loggedInUser.imgUrl || '', username: loggedInUser.username, _id: loggedInUser._id }
     imageToEdit.loc.lat = cords.lat
@@ -219,7 +219,7 @@ export function CreateImage({ loggedInUser, setActiveIcon }: CreateImageProps) {
         )}
         {uploadStepLevel === 3 && (
           <div className="upload-preview-step3 flex column align-center">
-            <div>
+            <div className="post-create-textarea-div">
               <textarea
                 className="post-create-textarea"
                 value={imageTxt}

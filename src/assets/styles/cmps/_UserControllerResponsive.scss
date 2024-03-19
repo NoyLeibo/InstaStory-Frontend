@@ -79,7 +79,8 @@
     }
 
     .controller-logo-responsive {
-        display: inline;
+        display: flex;
+        align-items: center;
         position: fixed;
         top: 0;
         min-height: 2rem;
@@ -93,6 +94,10 @@
         img {
             height: 60px;
             width: 150px;
+        }
+
+        span {
+            font-weight: bold;
         }
     }
 

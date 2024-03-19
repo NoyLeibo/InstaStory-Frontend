@@ -4,6 +4,7 @@ import { RootState } from "../models/user.model";
 import { useSelector } from "react-redux";
 import { HomeIndex } from "../cmps/HomeIndex.tsx";
 import { useActiveIcon } from "../cmps/ActiveIconContext.tsx";
+import { logout } from "../store/actions/user.actions.ts";
 
 
 export function HomePage() {
@@ -15,10 +16,15 @@ export function HomePage() {
         if (loggedInUser === null) navigate('/auth')
     }, [])
 
+    function onLogOut() {
+        logout()
+    }
+
     return (
         <main className="main-container">
-            <header className="controller-logo-responsive">
+            <header className="controller-logo-responsive flex space-between">
                 <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
+                <span onClick={() => onLogOut()} className='logout-btn pointer fs16'>Log out</span>
             </header>
             <HomeIndex activeIcon={activeIcon} />
         </main >

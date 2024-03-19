@@ -3,6 +3,7 @@ import { User } from "../models/user.model.ts"
 import { useNavigate } from "react-router";
 import { logout, onLoggedInUserActions } from "../store/actions/user.actions.ts";
 import { storageService } from "../services/async-storage.service.ts";
+import { httpService } from "../services/http.service.ts";
 
 interface SuggestModalProps {
     loggedInUser: User | null
@@ -65,7 +66,13 @@ export function SuggestedModal({ allUsers, loggedInUser }: SuggestModalProps) {
             targetUser.followers = updatedFollowers ? updatedFollowers : []
             localLoggedInUser.following = updatedFollowing ? updatedFollowing : []
         }
-        await storageService.put("user", targetUser) // שומר ב LocalStorage
+        console.log('test1');
+        // delete targetUser._id
+        console.log(targetUser);
+        await httpService.put("user", targetUser) // שומר ב LocalStorage
+
+        console.log('test2');
+        // delete localLoggedInUser._id
         onLoggedInUserActions(localLoggedInUser)
     }
 

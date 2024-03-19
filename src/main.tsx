@@ -9,7 +9,5 @@ import RootCmp from './RootCmp'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 root.render(
-  // <Provider store={store}>
   <RootCmp />
-  // </Provider>
 );

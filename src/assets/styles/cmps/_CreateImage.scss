@@ -87,6 +87,10 @@
     height: 24px;
 }
 
+.post-create-textarea-div {
+    width: -webkit-fill-available;
+}
+
 .post-btn-step2 {
     color: black;
     display: flex;
@@ -146,4 +150,13 @@
 .upload-preview-step3 {
     flex-grow: 1;
     justify-content: space-around;
+}
+
+@media (max-width:650px) {
+    .create-image-background .create-image-modal {
+        background-color: white;
+        max-width: 94vw;
+        max-height: 69vh;
+
+    }
 }

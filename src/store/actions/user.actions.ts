@@ -82,7 +82,7 @@ export async function savePostAction(loggedInUser: User, post: Post) {
 
 
 export async function onLoggedInUserActions(userToSave: User) {
-  await storageService.put("user", userToSave) // שומר ב LocalStorage
+  await httpService.put("user", userToSave) // שומר ב LocalStorage
   userService.saveLocalUser(userToSave) // שומר ב Session-Storage
   store.dispatch({ type: SET_USER, user: userToSave }); // מעדכן את הOnlineUser בReducer (חנות)
 

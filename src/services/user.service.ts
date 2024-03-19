@@ -118,7 +118,7 @@ function saveLocalUser(user: User) {
 
 function createEmptyUser() {
     return {
-        _id: '',
+        // _id: '',
         username: '',
         password: '',
         fullname: '',

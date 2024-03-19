@@ -29,3 +29,13 @@ export interface Post {
     likedBy: UserMinimal[]
     tags: string[];
 }
+export interface EmptyPost {
+    createdAt: any;
+    txt: string;
+    imgUrl: string;
+    by: UserMinimal;
+    loc: Location;
+    comments: Comment[];
+    likedBy: UserMinimal[]
+    tags: string[];
+}
