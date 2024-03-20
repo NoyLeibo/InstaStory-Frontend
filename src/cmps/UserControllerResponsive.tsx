@@ -1,19 +1,17 @@
-import Home from '../../public/svg/home.svg'
-import Explore from '../../public/svg/explore.svg'
-import Notification from '../../public/svg/notification.svg'
-// import More from '../../public/svg/more.svg'
-import Create from '../../public/svg/create.svg'
+import Home from '/svg/home.svg'
+import Explore from '/svg/explore.svg'
+import Notification from '/svg/notification.svg'
+import Create from '/svg/create.svg'
 
-import HomeActive from '../../public/svg/active/home-active.svg'
-import ExploreActive from '../../public/svg/active/explore-active.svg'
-import CreateActive from '../../public/svg/active/create-active.svg'
-import NotificationActive from '../../public/svg/active/notification-active.svg'
+import HomeActive from '/svg/active/home-active.svg'
+import ExploreActive from '/svg/active/explore-active.svg'
+import CreateActive from '/svg/active/create-active.svg'
+import NotificationActive from '/svg/active/notification-active.svg'
 import { User } from '../models/user.model'
 import { Avatar } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router'
 import { useEffect } from 'react'
 import { useActiveIcon } from './ActiveIconContext'
-// import MoreActive from '../../public/svg/active/more-active.svg'
 
 interface UserControllerResponsiveProps {
     loggedInUser: User | null;

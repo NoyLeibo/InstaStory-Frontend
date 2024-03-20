@@ -7,6 +7,7 @@ import { postsService } from "../services/posts.service";
 import { eventBus } from "../services/event-bus.service";
 import { useEffect, useState } from "react";
 import { CommentModal } from "./CommentModal.tsx";
+import { CommentModalResponsive } from "./CommentModalResponsive.tsx";
 import useOutsideClick from "../services/onclickoutside.service.ts";
 // import { userService } from "../services/user.service.ts";
 // import { storageService } from "../services/async-storage.service.ts";
@@ -199,7 +200,8 @@ export function PostPreview({ index, post, loggedInUser }: PostPreviewProps) {
                 </div>
             )}
 
-            {isCommentModalOpen && <CommentModal savePost={savePost} setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
+            {isCommentModalOpen && window.innerWidth > 777 && <CommentModal savePost={savePost} setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
+            {isCommentModalOpen && window.innerWidth <= 777 && <CommentModalResponsive savePost={savePost} setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
         </section>
     )
 }

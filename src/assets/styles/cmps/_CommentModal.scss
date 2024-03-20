@@ -10,6 +10,7 @@
     align-items: center;
     z-index: 1;
 
+
     .comment-modal {
         background-color: white;
         // width: 100%;
@@ -127,5 +128,89 @@
 
     .max-width-textmodal {
         max-width: 50px;
+    }
+}
+
+.comment-modal-background-responsive {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+
+    .comment-modal-responsive {
+        overflow: auto;
+        background-color: white;
+        max-width: 80vw;
+        min-width: 80vw;
+        min-height: 85vh;
+        max-height: 50vh;
+        border-radius: 12px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+
+        .comments-on-modal {
+            flex-grow: 1;
+
+            .comments-modal-header {
+                padding: 1rem;
+                border-bottom: 1px solid rgb(239, 239, 239);
+            }
+
+            .comments-modal-middle {
+                padding: 1rem;
+                overflow-x: hidden;
+                height: 535px;
+                border-bottom: 1px solid rgb(239, 239, 239);
+
+                .comment {
+                    padding-bottom: 1rem;
+                    width: 100%;
+                }
+            }
+
+            .comments-modal-bottom {
+                flex-grow: 1;
+
+                .full-like-row-modal {
+                    justify-content: space-between;
+                    height: 40px;
+
+                    .emoji-container {
+                        width: 40px;
+                        height: 40px;
+                        transition: opacity .5s ease;
+                        align-self: center;
+                        display: flex;
+                        align-items: center;
+
+                        &:hover {
+                            opacity: .5;
+                            transition: opacity .3s ease;
+                        }
+                    }
+                }
+            }
+        }
+
+        img {
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            flex-grow: 1;
+            max-width: 100%;
+            object-fit: contain;
+            border-right: 1px solid rgb(239, 239, 239);
+        }
+    }
+
+    .max-width-textmodal {
+
+        min-width: 85%;
+
     }
 }

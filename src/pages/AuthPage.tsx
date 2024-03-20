@@ -29,10 +29,6 @@ export function AuthPage() {
         loadUsers()
     }, [])
 
-    useEffect(() => {
-        console.log(loggedInUser);
-    }, [loggedInUser])
-
     return (isLoadingPage === false ?
         <section className="auth-page flex row align-center justify-center">
             <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864012/auth_synw53.png" />

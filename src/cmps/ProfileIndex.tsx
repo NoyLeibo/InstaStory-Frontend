@@ -1,8 +1,8 @@
 import { Post } from "../models/posts.model"
 import { RootState, User } from "../models/user.model"
-import ProfileTaggedSvg from '../../public/svg/profile-page/profile-tagged.svg'
-import ProfilePostsSvg from '../../public/svg/profile-page/profile-posts.svg'
-import ProfileSavedSvg from '../../public/svg/profile-page/profile-saved.svg'
+import ProfileTaggedSvg from '/svg/profile-page/profile-tagged.svg'
+import ProfilePostsSvg from '/svg/profile-page/profile-posts.svg'
+import ProfileSavedSvg from '/svg/profile-page/profile-saved.svg'
 import { useState } from "react"
 import { ProfilePostIndex } from "./ProfilePostIndex"
 import { ProfileSavedPostIndex } from "./ProfileSavedPostIndex"
