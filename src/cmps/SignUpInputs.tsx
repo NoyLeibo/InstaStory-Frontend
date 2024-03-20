@@ -49,8 +49,8 @@ export function SignUpInputs({ username, setPassword, setUsername, password }: S
             await userService.signup(newUserDetails)
             await loadUsers()
             if (await login({ username, password })) navigate('/')
-        } catch (error) {
-            console.error('Signup or login failed:', error);
+        } catch (error: any) {
+            console.error('Signup or login failed:', error.message); // SignUpInputs.tsx:53 Signup or login failed: Request failed with status code 500
         }
         if (loggedInUser) navigate('/'); // Navigate to the homepage or dashboard on successful login
     }

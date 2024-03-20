@@ -3,7 +3,7 @@ import { LOADING_DONE, LOADING_START, SET_USER, SET_USERS } from "../reducers/us
 import { userService } from "../../services/user.service.ts";
 import { User } from "../../models/user.model.ts";
 import { Post } from "../../models/posts.model.ts";
-import { storageService } from "../../services/async-storage.service.ts";
+// import { storageService } from "../../services/async-storage.service.ts";
 import { httpService } from "../../services/http.service.ts";
 
 export async function signup(credentials: User) {

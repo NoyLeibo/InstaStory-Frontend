@@ -1,4 +1,4 @@
-import { User } from "../models/user.model.ts";
+import { User, emptyUser } from "../models/user.model.ts";
 // import { storageService } from "./async-storage.service.ts";
 import { httpService } from "./http.service.ts";
 // import { userData } from "./userData.ts";
@@ -93,7 +93,7 @@ async function login(userCred: UserCredentials) {
 }
 
 
-async function signup(userCred: User) {
+async function signup(userCred: User | emptyUser) {
     // await storageService.post("user", userCred);
     await httpService.post("auth/signup", userCred);
     saveLocalUser(userCred)
@@ -101,7 +101,7 @@ async function signup(userCred: User) {
 
 }
 
-function saveLocalUser(user: User) {
+function saveLocalUser(user: User | emptyUser) {
     const userForSession = {
         _id: user._id,
         username: user.username,
