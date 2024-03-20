@@ -1,16 +1,17 @@
 .posts-list {
     padding: 0;
 
-    section &:last-child {
-        margin-bottom: 40px;
-    }
+
 }
 
 .post-preview {
     width: 468px;
-    // height: 792px;
     border-bottom: 1px solid #dbdbdb;
     margin-block-end: 10px;
+
+    &:last-child {
+        margin-bottom: 60px;
+    }
 
     p {
         margin-bottom: 0;

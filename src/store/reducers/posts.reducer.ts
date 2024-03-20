@@ -17,7 +17,7 @@ export const SET_POSTS = "SET_POSTS";
 // export const SET_FILTER_BY = "SET_FILTER_BY";
 
 const initialState = {
-  posts: await postsService.getPosts()
+  posts: []
 }
 
 
