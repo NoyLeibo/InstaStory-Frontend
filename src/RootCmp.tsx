@@ -27,6 +27,7 @@ function AppContent() {
     <>
       {!currentPath.startsWith('/auth') && <UserController />}
       {!currentPath.startsWith('/auth') && <UserControllerResponsive loggedInUser={loggedInUser} />}
+      {/*צריך שלא יתרנדר כשהמודל ברספונסיבי פתוח חשוב לבטל!!!!isCommentModalOpen && window.innerWidth <= 777  צריך להיות FALSE */}
       <Routes>
         {routes.map((route: Routemodel) => (
           <Route
