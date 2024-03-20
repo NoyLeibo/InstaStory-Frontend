@@ -35,7 +35,7 @@ export function SignUpLevelOne({ setUsername, setFullname, setEmail, setPassword
                     value={fullname}
                     onChange={(e) => setFullname(e.target.value)}
                     minLength={3}
-                    maxLength={10}
+                    maxLength={20}
                 />
                 <input
                     required

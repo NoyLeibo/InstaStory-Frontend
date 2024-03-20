@@ -86,12 +86,12 @@ function getEmptyComment() {
 
 async function getPostById(postId: string) {
   try {
-    //   const post = await httpService.get(`post/${postId}`);
-    const post = await httpService.get(BASE_URL, postId)
-    console.log('User Service - getById - succesfuly got post obj by userId')
+    const post = await httpService.get(`post/${postId}`);
+    // const post = await httpService.get(BASE_URL, postId)
+    console.log('Post Service - getById - succesfuly got post obj by PostId')
     return post;
   } catch (err) {
-    console.error('User Service - getById - cannot get post obj by userId')
+    console.error('Post Service - getById - cannot get post obj by PostId')
     throw err
   }
 }
