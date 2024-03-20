@@ -69,8 +69,8 @@
             border-bottom-left-radius: 12px;
             flex-grow: 1;
             max-width: 70%;
-            object-fit: cover;
-            // aspect-ratio: 1080/1920;
+            object-fit: contain;
+            border-right: 1px solid rgb(239, 239, 239);
             z-index: 5;
         }
     }
