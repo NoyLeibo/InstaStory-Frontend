@@ -4,6 +4,7 @@ import { RootState } from "../models/user.model";
 import { useState } from "react";
 import { CommentModal } from "./CommentModal";
 import { savePostAction } from "../store/actions/user.actions";
+import { CommentModalResponsive } from "./CommentModalResponsive";
 
 interface ProfileSavedPostPreviewProps {
     post: Post
@@ -34,7 +35,8 @@ export function ProfileSavedPostPreview({ post }: ProfileSavedPostPreviewProps) 
     return (
         <section>
             <img className="profile-post-preview pointer" onClick={() => setIsCommentModalOpen(true)} src={post.imgUrl} />
-            {isCommentModalOpen && <CommentModal savePost={savePost} setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
+            {isCommentModalOpen && window.innerWidth > 777 && <CommentModal savePost={savePost} setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
+            {isCommentModalOpen && window.innerWidth <= 777 && <CommentModalResponsive savePost={savePost} setIsCommentModalOpen={setIsCommentModalOpen} getInitialIsLikedState={getInitialIsLikedState} handleKeyDown={handleKeyDown} post={post} loggedInUser={loggedInUser} />}
         </section>
     )
 }

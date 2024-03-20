@@ -165,7 +165,7 @@
             .comments-modal-middle {
                 padding: 1rem;
                 overflow-x: hidden;
-                height: 535px;
+                min-height: 190px;
                 border-bottom: 1px solid rgb(239, 239, 239);
 
                 .comment {
@@ -199,9 +199,6 @@
         }
 
         img {
-            border-top-left-radius: 12px;
-            border-bottom-left-radius: 12px;
-            flex-grow: 1;
             max-width: 100%;
             object-fit: contain;
             border-right: 1px solid rgb(239, 239, 239);

@@ -23,7 +23,7 @@ export function HomePage() {
     return (
         <main className="main-container">
             <header className="controller-logo-responsive flex space-between">
-                <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
+                <img onClick={() => navigate('/')} src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
                 <span onClick={() => onLogOut()} className='logout-btn pointer fs16'>Log out</span>
             </header>
             <HomeIndex activeIcon={activeIcon} />

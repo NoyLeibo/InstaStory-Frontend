@@ -56,3 +56,30 @@
     max-width: 961px;
     padding-bottom: 50px;
 }
+
+@media (max-width: calc(778px)) {
+    .profile-index {
+        width: 95vw;
+        margin-top: 40px;
+    }
+
+    .profile-post-index {
+        grid-gap: 81px;
+        grid-template-columns: 8vw 8vw 8vw;
+    }
+
+    .profile-post-preview {
+        min-width: 25vw;
+        border-radius: 10px;
+    }
+
+    .profile-index {
+        .profile-image {
+            height: 96px;
+            width: 146px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid rgb(219, 219, 219);
+        }
+    }
+}

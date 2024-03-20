@@ -1,5 +1,9 @@
 .posts-list {
     padding: 0;
+
+    section &:last-child {
+        margin-bottom: 40px;
+    }
 }
 
 .post-preview {

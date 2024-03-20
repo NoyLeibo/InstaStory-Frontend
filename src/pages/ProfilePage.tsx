@@ -45,7 +45,7 @@ export function ProfilePage() {
     return (
         <main className="main-container-profile">
             <header className="controller-logo-responsive">
-                <img src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
+                <img onClick={() => navigate('/')} src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
             </header>
             <ProfileIndex userPosts={userPosts} userDetails={userDetails} />
         </main>

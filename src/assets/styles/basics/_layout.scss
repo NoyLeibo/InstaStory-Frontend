@@ -1,18 +1,21 @@
-.main-container {
-    display: grid;
-    grid-template-columns: 244px 1fr;
-    justify-content: center;
-    gap: 20px;
-    grid-template-areas: "userController homeIndex";
+@media (max-width > calc(777px)) {
 
-}
+    .main-container {
+        display: grid;
+        grid-template-columns: 244px 1fr;
+        justify-content: center;
+        gap: 20px;
+        grid-template-areas: "userController homeIndex";
 
-.main-container-profile {
-    display: grid;
-    grid-template-columns: 244px 1fr;
-    justify-content: center;
-    gap: 20px;
-    grid-template-areas: "userController profileIndex";
+    }
+
+    .main-container-profile {
+        display: grid;
+        grid-template-columns: 244px 1fr;
+        justify-content: center;
+        gap: 20px;
+        grid-template-areas: "userController profileIndex";
+    }
 }
 
 @media (max-width: calc(777px)) {
