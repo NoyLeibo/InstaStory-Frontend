@@ -51,6 +51,8 @@ export function SignUpInputs({ username, setPassword, setUsername, password }: S
             if (await login({ username, password })) navigate('/')
         } catch (error: any) {
             console.error('Signup or login failed:', error.message); // SignUpInputs.tsx:53 Signup or login failed: Request failed with status code 500
+            alert('Username already taken')
+            setRegisterLevel(1)
         }
         if (loggedInUser) navigate('/'); // Navigate to the homepage or dashboard on successful login
     }
