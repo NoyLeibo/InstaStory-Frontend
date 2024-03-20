@@ -156,7 +156,7 @@ export function PostPreview({ index, post, loggedInUser }: PostPreviewProps) {
                 <div className="fs14 bold">{post.likedBy.length ? `${post.likedBy.length} likes` : ''}</div>
             }
             <p className="fs14 comment-not-responsive">
-                <span className="bold pointer">{post.by.username}</span> {displayedText}
+                <span className="bold pointer" onClick={() => onClickUser(post.by._id)}>{post.by.username}</span> {displayedText}
                 {showMoreNeeded && !isExpanded && (
                     <button onClick={toggleExpand} className="show-more-btn pointer">
                         more
@@ -164,7 +164,7 @@ export function PostPreview({ index, post, loggedInUser }: PostPreviewProps) {
                 )}
             </p>
             <p className="fs14 comment-responsive">
-                <span className="bold pointer">{post.by.username}</span> <span className="comment-text">{displayedTextResponsive}</span>
+                <span className="bold pointer" onClick={() => onClickUser(post.by._id)}>{post.by.username}</span> <span className="comment-text">{displayedTextResponsive}</span>
                 {showMoreNeededResponsive && !isExpanded && (
                     <button onClick={toggleExpand} className="show-more-btn pointer">
                         more
