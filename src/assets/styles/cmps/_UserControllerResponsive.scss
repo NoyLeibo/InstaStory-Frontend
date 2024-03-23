@@ -123,18 +123,21 @@
         }
 
         .icon-container-responsive {
-            min-width: 24px;
-            max-width: 24px;
+            min-width: 40px !important;
+            min-height: 40px !important;
         }
     }
 }
 
-.MuiAvatar-img .css-1hy9t21 {
+.css-1hy9t21 {
     width: 60% !important;
     height: 60% !important;
+    border-radius: 50% !important;
+
 }
 
-.MuiAvatar-root .MuiAvatar-circular .css-3i9vrz {
-    width: 25px !important;
-    height: 25px !important;
+.css-3i9vrz {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
 }
