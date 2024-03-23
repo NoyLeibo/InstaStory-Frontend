@@ -78,6 +78,10 @@
         margin-top: 45px;
     }
 
+    .logout-btn {
+        margin-right: 10px;
+    }
+
     .controller-logo-responsive {
         display: flex;
         align-items: center;
@@ -88,7 +92,7 @@
         background-color: white;
         z-index: 1000;
         max-height: 4rem;
-        width: 97vw;
+        width: 100vw;
         object-fit: scale-down;
 
         img {
@@ -107,7 +111,7 @@
         bottom: 0;
         min-height: 4rem;
         border-top: 2px solid #efefef;
-        width: 97vw;
+        width: 100vw;
         background-color: white;
         z-index: 1000;
         justify-content: space-evenly;
