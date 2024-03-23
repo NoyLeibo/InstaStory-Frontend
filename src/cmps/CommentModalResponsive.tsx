@@ -31,12 +31,9 @@ export function CommentModalResponsive({ savePost, setIsCommentModalOpen, getIni
     useEffect(() => {
         setIsCommentModalResponsive(true)
         document.body.style.overflow = 'hidden'
-        console.log('responsive!');
         return () => {
-            console.log("Component will unmount");
             setIsCommentModalResponsive(false)
-            // setActiveIcon(lastActiveIcon);
-        };
+        }
     }, [])
 
     async function handleToggleLike() {

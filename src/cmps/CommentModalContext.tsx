@@ -25,7 +25,7 @@ interface CommentModalProviderProps {
 
 // Define the provider component with typed props
 export const CommentModalProvider: React.FC<CommentModalProviderProps> = ({ children }) => {
-    const [isCommentModalResponsive, setIsCommentModalResponsive] = useState<boolean>(true);
+    const [isCommentModalResponsive, setIsCommentModalResponsive] = useState<boolean>(false);
 
     return (
         <CommentModalContext.Provider value={{ isCommentModalResponsive, setIsCommentModalResponsive }}>
