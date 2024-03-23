@@ -10,6 +10,7 @@ import { RootState } from './models/user.model';
 import { ActiveIconProvider, useActiveIcon } from './cmps/ActiveIconContext';
 import { CreateImage } from './cmps/CreateImage';
 import { useEffect } from 'react';
+import { CommentModalProvider, useCommentModal } from './cmps/CommentModalContext';
 
 function AppContent() {
   const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
@@ -17,13 +18,12 @@ function AppContent() {
   const location = useLocation()
   const navigate = useNavigate()
   const currentPath = location.pathname
+  const { isCommentModalResponsive } = useCommentModal();
 
   useEffect(() => {
     if (loggedInUser === null) navigate('/auth')
 
   }, [loggedInUser])
-
-
 
   useEffect(() => {
     if (activeIcon === 'Create') navigate('/')
@@ -32,7 +32,7 @@ function AppContent() {
   return (
     <>
       {!currentPath.startsWith('/auth') && <UserController />}
-      {!currentPath.startsWith('/auth') && <UserControllerResponsive loggedInUser={loggedInUser} />}
+      {!currentPath.startsWith('/auth') && !isCommentModalResponsive && <UserControllerResponsive loggedInUser={loggedInUser} />}
       {/*צריך שלא יתרנדר כשהמודל ברספונסיבי פתוח חשוב לבטל!!!!isCommentModalOpen && window.innerWidth <= 777  צריך להיות FALSE */}
       <Routes>
         {routes.map((route: Routemodel) => (
@@ -52,11 +52,15 @@ function AppContent() {
 const RootCmp: React.FC = () => {
   return (
     <Provider store={store}>
-      <ActiveIconProvider>
-        <Router>
-          <AppContent />
-        </Router>
-      </ActiveIconProvider>
+      <CommentModalProvider>
+        <ActiveIconProvider>
+
+          <Router>
+            <AppContent />
+          </Router>
+
+        </ActiveIconProvider>
+      </CommentModalProvider>
     </Provider>
   );
 }

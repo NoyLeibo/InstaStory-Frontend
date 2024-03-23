@@ -7,6 +7,7 @@ import { eventBus } from "../services/event-bus.service";
 import { Avatar } from "@mui/material";
 import { formatDistanceToNow } from "date-fns";
 import EmojiPicker from "emoji-picker-react";
+import { useCommentModal } from "./CommentModalContext";
 
 interface CommentModalResponsiveProps {
     post: Post;
@@ -24,11 +25,18 @@ export function CommentModalResponsive({ savePost, setIsCommentModalOpen, getIni
     const savedPosts = loggedInUser?.savedPostsIds
     const modalContentRef = useOutsideClick(() => setIsCommentModalOpen(false)) // on click outside func, call to her service
     const emojiContentRef = useOutsideClick(() => setIsEmojiModalOpen(false))
+    const { setIsCommentModalResponsive } = useCommentModal();
+
 
     useEffect(() => {
+        setIsCommentModalResponsive(true)
         document.body.style.overflow = 'hidden'
         console.log('responsive!');
-
+        return () => {
+            console.log("Component will unmount");
+            setIsCommentModalResponsive(false)
+            // setActiveIcon(lastActiveIcon);
+        };
     }, [])
 
     async function handleToggleLike() {
