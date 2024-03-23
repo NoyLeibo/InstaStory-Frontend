@@ -22,7 +22,7 @@ export function ProfileIndex({ userDetails, userPosts }: ProfileIndexProps) {
 
     return (
         <section className="profile-index flex column ">
-            <div className="profile-header flex row">
+            <div className="profile-header align-center flex row">
                 <img src={imageUrl} alt="Profile" className="profile-image pointer" />
                 <div className="profile-bio flex column">
                     <div className="margintop20 fs20">{userDetails.username}</div>

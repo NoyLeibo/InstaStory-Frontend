@@ -22,6 +22,9 @@ function AppContent() {
     if (loggedInUser === null) navigate('/auth')
 
   }, [loggedInUser])
+  useEffect(() => {
+    if (activeIcon === 'Create') navigate('/')
+  }, [activeIcon])
 
   return (
     <>
