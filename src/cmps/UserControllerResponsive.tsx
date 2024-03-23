@@ -27,6 +27,10 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
             setActiveIcon('Profile');
         }
     }, [location]);
+    useEffect(() => {
+        console.log(loggedInUser);
+
+    }, [])
 
     const icons = [
         {
@@ -56,7 +60,7 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
         {
             name: 'Profile',
             src: loggedInUser?.imgUrl || "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png",
-            srcActive: "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png",
+            srcActive: loggedInUser?.imgUrl || "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png",
             alt: 'Profile',
         },
     ]
@@ -82,6 +86,7 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
                         // className='icon-img'
                         src={activeIcon === icon.name ? icon.srcActive : icon.src}
                         alt={icon.alt}
+                        className={icon.name === 'Profile' && activeIcon === 'Profile' ? 'circle-border ' : ''}
                     />
                     <span className='icon-name' style={activeIcon === icon.name ? { fontWeight: 'bold' } : {}}>{icon.name}</span>
                 </div>
