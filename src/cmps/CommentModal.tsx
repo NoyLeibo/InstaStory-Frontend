@@ -75,7 +75,7 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
                         <Avatar src={post.by.imgUrl} />
                         <div className="flex column pointer marginleft8">
                             <span className="bold">{post.by.username}</span>
-                            {post.loc.city && <span>{post.loc.city}</span>}
+                            {post.loc.city ? <span className="underline">{post.loc.city}</span> : <span className="line-through">No location</span>}
                         </div>
                     </div>
                     <div className="comments-modal-middle">
