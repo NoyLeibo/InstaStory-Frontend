@@ -5,6 +5,7 @@ import { ProfileIndex } from '../cmps/ProfileIndex';
 import { RootState, User } from '../models/user.model';
 import { Post } from '../models/posts.model.ts';
 import { useSelector } from 'react-redux';
+import { loadPosts } from '../store/actions/posts.actions.ts';
 
 export function ProfilePage() {
     const { id } = useParams<string>()
@@ -16,6 +17,7 @@ export function ProfilePage() {
 
     useEffect(() => {
         if (loggedInUser === null) navigate('/auth')
+        loadPosts()
     }, [])
 
     useEffect(() => {
@@ -24,19 +26,19 @@ export function ProfilePage() {
             const details = await userService.getById(id);
             setUserDetails(details as User)
         };
-
         fetchUserDetails();
     }, [id]);
 
+    useEffect(() => {
+        console.log(userDetails);
+    }, [userDetails])
 
     useEffect(() => {
-
-        if (Array.isArray(posts)) { // Check if posts is indeed an array
-            const filteredPosts = posts.filter((post: Post) => post.by._id === id);
-            setUserPosts(filteredPosts);
+        if (Array.isArray(posts)) {
+            const filteredPosts = posts.filter((post) => post.by._id === id)
+            setUserPosts(filteredPosts)
         }
-
-    }, []);
+    }, [posts])
 
     if (!userDetails) {
         return <div>Loading...</div>;
@@ -47,7 +49,7 @@ export function ProfilePage() {
             <header className="controller-logo-responsive">
                 <img onClick={() => navigate('/')} src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
             </header>
-            <ProfileIndex userPosts={userPosts} userDetails={userDetails} />
+            <ProfileIndex userPosts={userPosts} setUserDetails={setUserDetails} userDetails={userDetails} />
         </main>
     );
 }

@@ -31,6 +31,8 @@ export async function loadPosts() {
     const posts = await postsService.getPosts()
 
     store.dispatch({ type: SET_POSTS, posts });
+    console.log('posts', posts);
+
   } catch (err) {
     console.log("PostActions: err in loadPosts", err);
   }

@@ -66,12 +66,12 @@ export function SuggestedModal({ allUsers, loggedInUser }: SuggestModalProps) {
             targetUser.followers = updatedFollowers ? updatedFollowers : []
             localLoggedInUser.following = updatedFollowing ? updatedFollowing : []
         }
-        console.log('test1');
+        // console.log('test1');
         // delete targetUser._id
-        console.log(targetUser);
-        await httpService.put("user", targetUser) // שומר ב LocalStorage
+        // console.log(targetUser);
+        await httpService.put("user", targetUser) // שומר ב Database
 
-        console.log('test2');
+        // console.log('test2');
         // delete localLoggedInUser._id
         onLoggedInUserActions(localLoggedInUser)
     }

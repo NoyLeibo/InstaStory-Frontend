@@ -43,6 +43,30 @@
     }
 }
 
+.follow-btn {
+    width: 40%;
+    color: white;
+    height: 30px;
+
+    &:hover {
+        opacity: .8;
+        cursor: pointer
+    }
+}
+
+.unfollow-btn {
+    width: 40%;
+    color: black;
+    background-color: white;
+    height: 30px;
+
+    &:hover {
+        background-color: white;
+        opacity: .7;
+        cursor: pointer
+    }
+}
+
 .profile-post-preview {
     height: 30vh;
     object-fit: cover;

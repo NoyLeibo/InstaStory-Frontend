@@ -80,7 +80,6 @@ export async function savePostAction(loggedInUser: User, post: Post) {
   })
 }
 
-
 export async function onLoggedInUserActions(userToSave: User) {
   await httpService.put("user", userToSave) // שומר ב LocalStorage
   userService.saveLocalUser(userToSave) // שומר ב Session-Storage
