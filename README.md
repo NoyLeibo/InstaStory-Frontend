@@ -12,7 +12,7 @@ Local Storage & Session Storage: Web storage solutions for storing data on the c
 ### *Backend (To be developed):*
 
 Express,
-TypeScript,
+JavaScript,
 MongoDB,
 Node.js.
 
