@@ -3,7 +3,7 @@ InstaStory is a personal project inspired by Instagram, focusing on sharing and 
 
 ## *_🛠️Technologies Used🛠️_*
 ### *Frontend:*
-React.js,
+React,
 TypeScript,
 Redux,
 Local Storage & Session Storage: Web storage solutions for storing data on the client side.
