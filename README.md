@@ -32,5 +32,6 @@ Enhanced Story Features: Including but not limited to commenting, likes, and sto
 Noy Leibovich - [@LinkedIn](https://www.linkedin.com/in/noy-leibovich-66343a1b1/) - Noyleibo70@gmail.com
 
 Project Link: https://github.com/NoyLeibo/InstaStory
-Project Domain: **Soon.**
+
+Project Domain: https://www.myinstastory.com/
 
