@@ -9,7 +9,7 @@ Redux,
 Local Storage & Session Storage: Web storage solutions for storing data on the client side.
 
 
-### *Backend (To be developed):*
+### *Backend:*
 
 Express,
 JavaScript,
