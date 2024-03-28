@@ -1,5 +1,5 @@
 # *_InstaStory_*
-InstaStory is a personal project inspired by Instagram, focusing on sharing and interacting with stories in a vibrant online community. Designed as a playground for improving my coding skills and for my own enjoyment, this project aims to replicate the seamless experience of Instagram's story feature. Users can post, view, and manage stories within a streamlined interface, making storytelling more engaging and accessible.
+InstaStory is a personal project inspired by Instagram, focusing on sharing and interacting with stories in a vibrant online  social network. Designed as a playground for improving my coding skills and for my own enjoyment, this project aims to replicate the seamless experience of Instagram's story feature. Users can post, view, and manage stories within a streamlined interface, making storytelling more engaging and accessible.
 
 ## *_🛠️Technologies Used🛠️_*
 ### *Frontend:*
