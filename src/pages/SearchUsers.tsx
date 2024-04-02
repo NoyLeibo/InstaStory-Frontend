@@ -40,8 +40,8 @@ export function SearchUsers() {
     }
 
     return (
-        <section className="search-bar flex column align-center">
-            <input type="text" className="margintop20" onChange={(e) => setInput(e.target.value)} />
+        <section className="search-bar flex column ">
+            <input type="text" className="margintop20 search-user flex align-center justify-center" onChange={(e) => setInput(e.target.value)} />
             {users && <UsersToShow users={users} />}
         </section>
     )

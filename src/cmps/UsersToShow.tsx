@@ -7,20 +7,21 @@ interface UsersToShowProps {
 
 export function UsersToShow(props: UsersToShowProps) {
     return (
-        <section >
+        <section className="users-to-shown">
             {props.users.map((user, index) => (
-                <div className="flex row space-between flex-grow" key={index}>
-                    < div className="flex row" >
+                <div className="flex row space-between margin8 divider20" key={index}>
+                    < div className="flex row align-center" >
                         <Avatar src={user.imgUrl || undefined} />
-                        <h4>{user.username}</h4>
+                        <h4 className="marginleft8">{user.username}</h4>
                     </div >
-                    <div className="flex column">
+                    <div className="flex column align-center">
                         <h5>{user.followers.length} followers</h5>
-                        <h5>{user.following.length} following</h5>
+                        <h5>{user.following.length} followers</h5>
                     </div>
                 </div >
             ))
             }
-        </ section >
+            <span className="divider"></span>
+        </section >
     );
 }

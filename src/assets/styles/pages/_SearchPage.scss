@@ -3,4 +3,31 @@
     width: 40vw;
     height: 60vh;
     border: 1px solid black;
+    align-items: center;
+}
+
+.users-to-shown {
+    width: 100%;
+
+}
+
+.search-user {
+    padding: 10px 20px;
+    width: 80%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    &::placeholder {
+        color: #aaa;
+    }
 }
