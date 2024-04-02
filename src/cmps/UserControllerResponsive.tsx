@@ -1,10 +1,10 @@
 import Home from '/svg/home.svg'
-import Explore from '/svg/explore.svg'
+import Search from '/svg/search.svg'
 import Notification from '/svg/notification.svg'
 import Create from '/svg/create.svg'
 
 import HomeActive from '/svg/active/home-active.svg'
-import ExploreActive from '/svg/active/explore-active.svg'
+import SearchActive from '/svg/active/search-active.svg'
 import CreateActive from '/svg/active/create-active.svg'
 import NotificationActive from '/svg/active/notification-active.svg'
 import { User } from '../models/user.model'
@@ -26,6 +26,9 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
         if (location.pathname.startsWith('/user')) {
             setActiveIcon('Profile');
         }
+        else if (location.pathname.startsWith('/explore')) {
+            setActiveIcon('Explore');
+        }
     }, [location]);
     useEffect(() => {
         console.log(loggedInUser);
@@ -40,10 +43,10 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
             alt: 'Home',
         },
         {
-            name: 'Explore',
-            src: Explore,
-            srcActive: ExploreActive,
-            alt: 'Explore',
+            name: 'Search',
+            src: Search,
+            srcActive: SearchActive,
+            alt: 'Search',
         },
         {
             name: 'Create',
@@ -68,6 +71,8 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
     const onIconClick = (name: string) => {
         if (name === 'Profile' && loggedInUser?._id) {
             navigate('/user/' + loggedInUser._id);
+        } else if (name === 'Search' && loggedInUser?._id) {
+            navigate('/search');
         } else if (name === 'Home') {
             navigate('/')
         }

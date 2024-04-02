@@ -36,6 +36,9 @@ export function ControlIcons({ handleIconClick, activeIcon, setActiveIcon }: Use
         if (location.pathname.startsWith('/user')) {
             setActiveIcon('Profile');
         }
+        else if (location.pathname.startsWith('/search')) {
+            setActiveIcon('Search');
+        }
     }, [location]);
 
 
@@ -93,12 +96,13 @@ export function ControlIcons({ handleIconClick, activeIcon, setActiveIcon }: Use
     const onIconClick = (name: string) => {
         if (name === 'Profile' && loggedInUser?._id) {
             navigate('/user/' + loggedInUser._id);
+        } else if (name === 'Search' && loggedInUser?._id) {
+            navigate('/search');
         } else if (name === 'Home') {
             navigate('/')
         }
         handleIconClick(name);
     };
-
 
     return (
         <section className="flex column">

@@ -10,15 +10,16 @@ import { logout } from '../store/actions/user.actions';
 
 
 export function UserController() {
-
     const { activeIcon, setActiveIcon } = useActiveIcon();
 
     const handleIconClick = (name: string) => {
         setActiveIcon(name);
     };
+
     function onLogOut() {
         logout()
     }
+
     return (
         <nav className="user-controller flex column space-between">
             <section className="flex column">
