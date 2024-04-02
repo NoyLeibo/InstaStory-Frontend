@@ -33,7 +33,7 @@ export function SignUpLevelTwo({ onUpload, isUploading, imgData, bio, setBio, ha
                 placeholder='* Enter your bio'
                 type="text"
                 minLength={3}
-                maxLength={30}
+                maxLength={50}
                 value={bio}
                 onChange={handleBioChange}
             />
