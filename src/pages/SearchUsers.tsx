@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { RootState, User } from "../models/user.model";
 import { useSelector } from "react-redux";
-import { loadUsers } from "../store/actions/user.actions";
+import { loadUsers, logout } from "../store/actions/user.actions";
 import { UsersToShow } from "../cmps/UsersToShow.tsx";
+import { useNavigate } from "react-router";
 
 export function SearchUsers() {
     const [input, setInput] = useState<string>('');
     const [users, setUsers] = useState<User[] | null>(null);
     const allUsers: any = useSelector((state: RootState) => state.userModule.users)
+    let navigate = useNavigate()
 
     useEffect(() => {
         loadUsers()
@@ -38,9 +40,16 @@ export function SearchUsers() {
         if ((number >= 65 && number <= 90) || (number >= 97 && number <= 122)) return true
         return false
     }
+    function onLogOut() {
+        logout()
+    }
 
     return (
         <section className="search-bar flex column ">
+            <header className="controller-logo-responsive flex space-between">
+                <img onClick={() => navigate('/')} src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
+                <span onClick={() => onLogOut()} className='logout-btn pointer fs16'>Log out</span>
+            </header>
             <input type="text" className="margintop20 search-user flex align-center justify-center" onChange={(e) => setInput(e.target.value)} />
             {users && <UsersToShow users={users} />}
         </section>

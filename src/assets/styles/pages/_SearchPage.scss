@@ -31,3 +31,13 @@
         color: #aaa;
     }
 }
+
+@media (max-width: calc(778px)) {
+
+    .search-bar {
+        position: relative;
+        top: 100px;
+        width: fit-content;
+
+    }
+}
