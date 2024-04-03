@@ -4,6 +4,7 @@
     height: 60vh;
     border: 1px solid black;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .users-to-shown {
@@ -38,6 +39,6 @@
         position: relative;
         top: 100px;
         width: 90vw;
-
+        overflow-x: hidden;
     }
 }

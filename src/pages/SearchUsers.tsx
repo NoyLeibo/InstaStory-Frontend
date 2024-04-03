@@ -45,13 +45,15 @@ export function SearchUsers() {
     }
 
     return (
-        <section className="search-bar flex column ">
+        <section>
             <header className="controller-logo-responsive flex space-between">
                 <img onClick={() => navigate('/')} src="https://res.cloudinary.com/dysh9q6ir/image/upload/v1708864304/logo_vevhsx.png" alt="Logo" />
                 <span onClick={() => onLogOut()} className='logout-btn pointer fs16'>Log out</span>
             </header>
-            <input type="text" className="margintop20 search-user flex align-center justify-center" onChange={(e) => setInput(e.target.value)} />
-            {users && <UsersToShow users={users} />}
+            <div className="search-bar flex column ">
+                <input type="text" className="margintop20 search-user flex align-center justify-center" onChange={(e) => setInput(e.target.value)} />
+                {users && <UsersToShow users={users} />}
+            </div>
         </section>
     )
 }
