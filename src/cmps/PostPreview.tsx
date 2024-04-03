@@ -163,14 +163,14 @@ export function PostPreview({ index, post, loggedInUser }: PostPreviewProps) {
                     </button>
                 )}
             </p> : ''}
-            <p className="fs14 comment-responsive">
+            {displayedText ? <p className="fs14 comment-responsive">
                 <span className="bold pointer" onClick={() => onClickUser(post.by._id)}>{post.by.username}</span> <span className="comment-text">{displayedTextResponsive}</span>
                 {showMoreNeededResponsive && !isExpanded && (
                     <button onClick={toggleExpand} className="show-more-btn pointer">
                         more
                     </button>
                 )}
-            </p>
+            </p> : ''}
 
             {post.comments.length > 0 && <span>
                 <button onClick={() => setIsCommentModalOpen(!isCommentModalOpen)} className="comments-button">
