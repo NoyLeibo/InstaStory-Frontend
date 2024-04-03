@@ -17,16 +17,21 @@ export function HomeIndex({ activeIcon }: HomeIndexPrpos) {
     const allUsers: User[] | any = useSelector((state: RootState) => state.userModule.users)
 
     useEffect(() => {
-        loadPosts()
+        loadPosts(loggedInUser?.following)
         loadUsers()
     }, [])
 
     useEffect(() => {
-        loadPosts()
+        loadPosts(loggedInUser?.following)
     }, [activeIcon])
 
+    if (!posts || posts.length === 0) return (
+        <section className="home-index flex">
+            <span className="flex justify-center align-center no-post-error-msg">No posts, start follow people</span>
+            <SuggestedModal allUsers={allUsers} loggedInUser={loggedInUser} />
+        </section>
+    )
 
-    if (!posts || posts.length === 0) return (<h1>No posts for now</h1>)
     return (
         <section className="home-index flex">
             {/* <StoryIndex /> */}

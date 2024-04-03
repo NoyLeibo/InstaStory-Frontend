@@ -18,7 +18,7 @@ export function ProfilePage() {
 
     useEffect(() => {
         if (loggedInUser === null) navigate('/auth')
-        loadPosts()
+        loadPosts(loggedInUser?.following)
     }, [])
 
     useEffect(() => {

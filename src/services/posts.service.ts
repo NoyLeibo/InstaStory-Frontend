@@ -34,10 +34,10 @@ export const postsService = {
 };
 // window.cs = stayService;
 
-async function getPosts(): Promise<any> {
+async function getPosts(filterBy = {}): Promise<any> {
   // const posts = await storageService.query(STORAGE_KEY, 0, true);
   // return posts;
-  return await httpService.get(BASE_URL) // מוכן לBACK-END
+  return await httpService.get(BASE_URL, filterBy) // מוכן לBACK-END
 }
 
 async function toggleLike(post: Post) {

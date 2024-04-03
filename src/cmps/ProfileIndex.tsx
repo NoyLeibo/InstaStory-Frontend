@@ -72,7 +72,6 @@ export function ProfileIndex({ setUserDetails, userDetails, userPosts }: Profile
         } catch (err) {
             console.error(err)
         }
-
     }
 
     return (
@@ -82,9 +81,9 @@ export function ProfileIndex({ setUserDetails, userDetails, userPosts }: Profile
                 <div className="profile-bio flex column">
                     <div className="margintop20 fs20">{userDetails.username}</div>
                     <div className="flex row fs16 margintop20">
-                        <div>{userPosts.length} posts</div>
-                        <div className="marginleft16">{userDetails.followers.length} followers</div>
-                        <div className="marginleft16">{userDetails.following.length} following</div>
+                        <div className="fs14">{userPosts.length | 0} posts</div>
+                        <div className="fs14 marginleft16">{userDetails.followers.length | 0} followers</div>
+                        <div className="fs14 marginleft16">{userDetails.following.length | 0} following</div>
                     </div>
                     <div className="margintop20 fs14">{userDetails.fullname}</div>
                     <div className="margintop20 fs14">{userDetails.bio ? userDetails.bio : ''}</div>
