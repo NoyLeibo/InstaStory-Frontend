@@ -7,6 +7,7 @@ import useOutsideClick from "../services/onclickoutside.service";
 import EmojiPicker from "emoji-picker-react";
 import { postsService } from "../services/posts.service";
 import { eventBus } from "../services/event-bus.service";
+import { useNavigate } from "react-router";
 
 
 interface CommentModalProps {
@@ -25,6 +26,7 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
     const savedPosts = loggedInUser?.savedPostsIds
     const modalContentRef = useOutsideClick(() => setIsCommentModalOpen(false)) // on click outside func, call to her service
     const emojiContentRef = useOutsideClick(() => setIsEmojiModalOpen(false))
+    const navigate = useNavigate()
 
     useEffect(() => {
         document.body.style.overflow = 'hidden'
@@ -66,6 +68,15 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
         }
     }
 
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    function onClickUsername(userId: string) {
+        navigate('/user/' + userId)
+        refreshPage()
+    }
+
     return (
         <section className="comment-modal-background">
             <div className="comment-modal flex" ref={modalContentRef}>
@@ -74,7 +85,7 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
                     <div className="comments-modal-header fs14 flex align-center">
                         <Avatar src={post.by.imgUrl} />
                         <div className="flex column pointer marginleft8">
-                            <span className="bold">{post.by.username}</span>
+                            <span className="bold pointer" onClick={() => onClickUsername(post.by._id)}>{post.by.username}</span>
                             {post.loc.city ? <span className="underline">{post.loc.city}</span> : <span className="line-through">No location</span>}
                         </div>
                     </div>
@@ -84,7 +95,7 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
                                 <div className="flex align-center fs14 comment">
                                     <Avatar src={post.by.imgUrl} />
                                     <div className="marginleft8 max-width-textmodal">
-                                        <span className="bold">{post.by.username}</span><span>{" "}</span><span className="comment-text">{post.txt}</span>
+                                        <span className="bold pointer" onClick={() => onClickUsername(post.by._id)}>{post.by.username}</span><span>{" "}</span><span className="comment-text">{post.txt}</span>
                                         <div className="fs14">
                                             {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
                                         </div>
@@ -95,7 +106,7 @@ export function CommentModal({ savePost, setIsCommentModalOpen, getInitialIsLike
                             <div key={comment.id} className="flex align-center fs14 comment">
                                 <Avatar src={comment.by.imgUrl} alt={comment.by.username} />
                                 <div className="marginleft8 max-width-textmodal">
-                                    <span className="bold">{comment.by.username}</span><span>{" "}</span><span className="comment-text">{comment.txt}</span>
+                                    <span className="bold pointer" onClick={() => onClickUsername(comment.by._id)}>{comment.by.username}</span><span>{" "}</span><span className="comment-text">{comment.txt}</span>
                                     <div className="fs14">
                                         {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                                     </div>

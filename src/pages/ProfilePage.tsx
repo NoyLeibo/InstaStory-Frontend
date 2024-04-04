@@ -14,12 +14,12 @@ export function ProfilePage() {
     const [userPosts, setUserPosts] = useState<any>(null);
     const posts: Post[] | any = useSelector((state: RootState) => state.postsModule.posts)
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
-    let navigate = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (loggedInUser === null) navigate('/auth')
         else if (id) (loadPosts(id))
-    }, [])
+    }, [id, loggedInUser, navigate])
 
     useEffect(() => {
         if (!id) return
@@ -29,6 +29,7 @@ export function ProfilePage() {
         };
         fetchUserDetails();
     }, [id]);
+
 
     useEffect(() => {
         console.log(userDetails);
@@ -41,13 +42,14 @@ export function ProfilePage() {
         }
         console.log('userPosts', userPosts);
 
-    }, [posts])
+    }, [posts, id]);
+
+    function onLogOut() {
+        logout()
+    }
 
     if (!userDetails) {
         return <div>Loading...</div>;
-    }
-    function onLogOut() {
-        logout()
     }
 
     return (

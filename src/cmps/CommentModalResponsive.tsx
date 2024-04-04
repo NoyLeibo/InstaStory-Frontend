@@ -8,6 +8,7 @@ import { Avatar } from "@mui/material";
 import { formatDistanceToNow } from "date-fns";
 import EmojiPicker from "emoji-picker-react";
 import { useCommentModal } from "./CommentModalContext";
+import { useNavigate } from "react-router";
 
 interface CommentModalResponsiveProps {
     post: Post;
@@ -26,7 +27,7 @@ export function CommentModalResponsive({ savePost, setIsCommentModalOpen, getIni
     const modalContentRef = useOutsideClick(() => setIsCommentModalOpen(false)) // on click outside func, call to her service
     const emojiContentRef = useOutsideClick(() => setIsEmojiModalOpen(false))
     const { setIsCommentModalResponsive } = useCommentModal();
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         setIsCommentModalResponsive(true)
@@ -72,6 +73,15 @@ export function CommentModalResponsive({ savePost, setIsCommentModalOpen, getIni
         }
     }
 
+    function refreshPage() {
+        window.location.reload();
+    }
+
+    function onClickUsername(userId: string) {
+        navigate('/user/' + userId)
+        refreshPage()
+    }
+
     return (
         <section className="comment-modal-background-responsive">
             <div className="comment-modal-responsive flex column" ref={modalContentRef}>
@@ -80,7 +90,7 @@ export function CommentModalResponsive({ savePost, setIsCommentModalOpen, getIni
                     <div className="comments-modal-header fs14 flex align-center">
                         <Avatar src={post.by.imgUrl} />
                         <div className="flex column pointer marginleft8">
-                            <span className="bold">{post.by.username}</span>
+                            <span className="bold pointer" onClick={() => onClickUsername(post.by._id)}>{post.by.username}</span>
                             {post.loc.city ? <span className="underline">{post.loc.city}</span> : <span className="line-through">No location</span>}
                         </div>
                     </div>
@@ -90,7 +100,7 @@ export function CommentModalResponsive({ savePost, setIsCommentModalOpen, getIni
                                 <div className="flex align-center fs14 comment">
                                     <Avatar src={post.by.imgUrl} />
                                     <div className="marginleft8 max-width-textmodal flex column space-between">
-                                        <span className="bold">{post.by.username}</span><span>{" "}</span><span className="comment-text">{post.txt}</span>
+                                        <span className="bold pointer" onClick={() => onClickUsername(post.by._id)}>{post.by.username}</span><span>{" "}</span><span className="comment-text">{post.txt}</span>
                                         <div className="fs14">
                                             {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
                                         </div>
@@ -101,7 +111,7 @@ export function CommentModalResponsive({ savePost, setIsCommentModalOpen, getIni
                             <div key={comment.id} className="flex align-center fs14 comment ">
                                 <Avatar src={comment.by.imgUrl} alt={comment.by.username} />
                                 <div className="marginleft8 max-width-textmodal flex column space-between">
-                                    <div className="bold">{comment.by.username}</div><div>{" "}</div><div className="comment-text">{comment.txt}</div>
+                                    <div className="bold pointer" onClick={() => onClickUsername(comment.by._id)}>{comment.by.username}</div><div>{" "}</div><div className="comment-text">{comment.txt}</div>
                                     <div className="fs14">
                                         {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
                                     </div>
