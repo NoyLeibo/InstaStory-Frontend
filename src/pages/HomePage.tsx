@@ -10,10 +10,11 @@ import { logout } from "../store/actions/user.actions.ts";
 export function HomePage() {
     const loggedInUser = useSelector((state: RootState) => state.userModule.onlineUser);
     let navigate = useNavigate();
-    const { activeIcon } = useActiveIcon();
+    const { activeIcon, setActiveIcon } = useActiveIcon();
 
     useEffect(() => {
         if (loggedInUser === null) navigate('/auth')
+        setActiveIcon('Home')
     }, [])
 
     function onLogOut() {
