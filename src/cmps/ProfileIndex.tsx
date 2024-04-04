@@ -81,10 +81,11 @@ export function ProfileIndex({ setUserDetails, userDetails, userPosts }: Profile
                 <div className="profile-bio flex column">
                     <div className="margintop20 fs20">{userDetails.username}</div>
                     <div className="flex row fs16 margintop20">
-                        <div className="fs14">{userPosts.length | 0} posts</div>
-                        <div className="fs14 marginleft16">{userDetails.followers.length | 0} followers</div>
-                        <div className="fs14 marginleft16">{userDetails.following.length | 0} following</div>
+                        <div className="fs14 ">{(userPosts && Array.isArray(userPosts) ? userPosts.length : 0)} posts</div>
+                        <div className="fs14 marginleft16">{(userDetails.followers && Array.isArray(userDetails.followers) ? userDetails.followers.length : 0)} followers</div>
+                        <div className="fs14 marginleft16">{(userDetails.following && Array.isArray(userDetails.following) ? userDetails.following.length : 0)} following</div>
                     </div>
+
                     <div className="margintop20 fs14">{userDetails.fullname}</div>
                     <div className="margintop20 fs14">{userDetails.bio ? userDetails.bio : ''}</div>
                     {checkIfLoggedInUserProfile() ? '' : <button className={checkIfUserFollow() ? 'unfollow-btn' : 'follow-btn'} onClick={() => userFollowAction()}>{checkIfUserFollow() ? 'Unfollow' : 'Follow'}</button>}

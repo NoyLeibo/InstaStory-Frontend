@@ -17,12 +17,20 @@ export function HomeIndex({ activeIcon }: HomeIndexPrpos) {
     const allUsers: User[] | any = useSelector((state: RootState) => state.userModule.users)
 
     useEffect(() => {
-        loadPosts(loggedInUser?.following)
+        if (loggedInUser) {
+            const usersIds = loggedInUser?.following.map((user) => { return user._id })
+            usersIds.push(loggedInUser?._id)
+            loadPosts(usersIds)
+        }
         loadUsers()
     }, [])
 
     useEffect(() => {
-        loadPosts(loggedInUser?.following)
+        if (loggedInUser) {
+            const usersIds = loggedInUser?.following.map((user) => { return user._id })
+            usersIds.push(loggedInUser?._id)
+            loadPosts(usersIds)
+        }
     }, [activeIcon])
 
     if (!posts || posts.length === 0) return (

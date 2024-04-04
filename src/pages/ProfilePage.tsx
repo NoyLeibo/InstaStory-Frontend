@@ -18,7 +18,7 @@ export function ProfilePage() {
 
     useEffect(() => {
         if (loggedInUser === null) navigate('/auth')
-        loadPosts(loggedInUser?.following)
+        else if (id) (loadPosts(id))
     }, [])
 
     useEffect(() => {
@@ -39,6 +39,8 @@ export function ProfilePage() {
             const filteredPosts = posts.filter((post) => post.by._id === id)
             setUserPosts(filteredPosts)
         }
+        console.log('userPosts', userPosts);
+
     }, [posts])
 
     if (!userDetails) {

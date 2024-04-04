@@ -26,9 +26,11 @@ import { store } from "../store";
 // // Action Creators:
 // export function getActionRemoveStay(stayId) {
 //   const filterBy = store.getState().stayModule.filterBy;
-export async function loadPosts(usersToLoadPost: Array<{ _id: string; fullname: string; username: string; imgUrl: string }> | undefined) {
+export async function loadPosts(usersToLoadPost: string | string[]) {
   try {
     const filterBy = { usersToLoadPost }
+    console.log(filterBy);
+
     const posts = await postsService.getPosts(filterBy)
 
     store.dispatch({ type: SET_POSTS, posts });

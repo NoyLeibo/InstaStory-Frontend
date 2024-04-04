@@ -1,22 +1,22 @@
-import { Post } from "../models/posts.model"
-import { ProfilePostPreview } from "./ProfilePostPreview"
+import { Post } from "../models/posts.model";
+import { ProfilePostPreview } from "./ProfilePostPreview";
 
 interface ProfilePostIndexProps {
-    userPosts: Post[]
+    userPosts: Post[];
 }
 
 export function ProfilePostIndex({ userPosts }: ProfilePostIndexProps) {
     return (
         <section className="flex profile-post-index">
-            {userPosts.length ?
-                (userPosts?.map((post) => (
+            {userPosts && userPosts.length > 0 ? (
+                userPosts.map((post) => (
                     <div key={post._id}>
                         <ProfilePostPreview post={post} />
                     </div>
-                ))) : (
-                    <span>No posts</span>
-                )
-            }
+                ))
+            ) : (
+                <span>No posts</span>
+            )}
         </section>
-    )
+    );
 }
