@@ -17,6 +17,7 @@ export function HomePage() {
         setActiveIcon('Home')
     }, [])
 
+
     function onLogOut() {
         logout()
     }

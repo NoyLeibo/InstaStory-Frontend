@@ -33,7 +33,7 @@ export function LoginInputs({ username, setPassword, setUsername, password }: Lo
             <form className="login-details flex column align-center" onSubmit={handleSubmit}>
                 <input
                     required
-                    placeholder='Username'
+                    placeholder='*Username'
                     type="text"
                     name="username"
                     value={username}
@@ -43,7 +43,7 @@ export function LoginInputs({ username, setPassword, setUsername, password }: Lo
                     autoComplete="username" />
                 <input
                     required
-                    placeholder="Password"
+                    placeholder="*Password"
                     type="password"
                     name="password"
                     minLength={3}

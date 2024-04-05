@@ -42,6 +42,11 @@ export function SignUpInputs({ username, setPassword, setUsername, password }: S
 
     const handleSubmitRegister = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        console.log(Boolean(!bio));
+        console.log(imgData.imgUrl === null);
+
+        if (imgData.imgUrl === null) return alert('upload an image.')
+        else if (!bio) return alert('Fill your bio.')
 
         let newUserDetails: emptyUser = userService.createEmptyUser()
         newUserDetails = { ...newUserDetails, bio, imgUrl: imgData.imgUrl, password, username, email, fullname }
