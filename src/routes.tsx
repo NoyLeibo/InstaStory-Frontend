@@ -3,6 +3,7 @@ import { HomePage } from "./pages/HomePage.tsx";
 import { AuthPage } from "./pages/AuthPage.tsx";
 import { ProfilePage } from "./pages/ProfilePage.tsx";
 import { SearchUsers } from "./pages/SearchUsers.tsx";
+import { ExploreUsers } from "./pages/ExploreUsers.tsx";
 
 const routes: Routemodel[] = [
 
@@ -26,6 +27,11 @@ const routes: Routemodel[] = [
     path: '/search',
     element: <SearchUsers />,
     label: 'Search',
+  },
+  {
+    path: '/explore',
+    element: <ExploreUsers />,
+    label: 'Explore',
   },
 
 ];

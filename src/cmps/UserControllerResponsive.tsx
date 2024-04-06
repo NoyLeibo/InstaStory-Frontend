@@ -1,12 +1,12 @@
 import Home from '/svg/home.svg'
 import Search from '/svg/search.svg'
-import Notification from '/svg/notification.svg'
+import Explore from '/svg/explore.svg'
 import Create from '/svg/create.svg'
 
 import HomeActive from '/svg/active/home-active.svg'
 import SearchActive from '/svg/active/search-active.svg'
 import CreateActive from '/svg/active/create-active.svg'
-import NotificationActive from '/svg/active/notification-active.svg'
+import ExploreActive from '/svg/active/explore-active.svg'
 import { User } from '../models/user.model'
 import { Avatar } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router'
@@ -29,11 +29,10 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
         else if (location.pathname.startsWith('/explore')) {
             setActiveIcon('Explore');
         }
+        else if (location.pathname.startsWith('/search')) {
+            setActiveIcon('Search');
+        }
     }, [location]);
-    useEffect(() => {
-        console.log(loggedInUser);
-
-    }, [])
 
     const icons = [
         {
@@ -55,10 +54,10 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
             alt: 'Create',
         },
         {
-            name: 'Notification',
-            src: Notification,
-            srcActive: NotificationActive,
-            alt: 'Notification',
+            name: 'Explore',
+            src: Explore,
+            srcActive: ExploreActive,
+            alt: 'Explore',
         },
         {
             name: 'Profile',
@@ -73,6 +72,8 @@ export function UserControllerResponsive({ loggedInUser }: UserControllerRespons
             navigate('/user/' + loggedInUser._id);
         } else if (name === 'Search' && loggedInUser?._id) {
             navigate('/search');
+        } else if (name === 'Explore' && loggedInUser?._id) {
+            navigate('/explore');
         } else if (name === 'Home') {
             navigate('/')
         }

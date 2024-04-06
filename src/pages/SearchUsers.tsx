@@ -9,7 +9,7 @@ export function SearchUsers() {
     const [input, setInput] = useState<string>('');
     const [users, setUsers] = useState<User[] | null>(null);
     const allUsers: any = useSelector((state: RootState) => state.userModule.users)
-    let navigate = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         loadUsers()

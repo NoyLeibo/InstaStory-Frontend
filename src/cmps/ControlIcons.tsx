@@ -39,6 +39,9 @@ export function ControlIcons({ handleIconClick, activeIcon, setActiveIcon }: Use
         else if (location.pathname.startsWith('/search')) {
             setActiveIcon('Search');
         }
+        else if (location.pathname.startsWith('/explore')) {
+            setActiveIcon('Explore');
+        }
     }, [location]);
 
 
